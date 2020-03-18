@@ -12,7 +12,7 @@ const moment = require('moment')
 // BUILD ALL REVIEWS FOR A PRODUCT
 //////////////////////////////////
 const createReviews = () => {
-  let reviews = [] // array of objects, each object is a review
+  let reviewsArray = [] // array of objects, each object is a review
   let randomAmount = Math.ceil(Math.random() * 53) // how many reviews a given product will have (up to 53)
 
   //////////////////////////////////
@@ -39,7 +39,7 @@ const createReviews = () => {
       return uniqueIndexArray.splice(randomIndex, 1)[0];
     }
     let aReviewIndex = aReviewIndexFunction(); // randomly picks a unique review index to use for this current review
-    let currentRelativeData = relativeReviewData[aReviewIndex]  // current relative review object
+    let aReviewObject = relativeReviewData[aReviewIndex]  // current relative review object
 
 
     //////////////////////////////////
@@ -54,7 +54,7 @@ const createReviews = () => {
     let typeOfRunnerArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles']  // array to choose a reviewers run distance from
     let typeOfTerrainArray = ['Treadmill / Indoors', 'Road', 'Track']  // array to choose a reviewers terrain from
     // array to choose a product review image from
-    let reviewImage = [
+    let reviewImageArray = [
       'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/B61E1B739A161975A92AB28D7D2B08A9.app1_1579613533843_PZ320.jpeg',
       'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/315E0813E58EBBE72DF341004E24D952.app1_1583775393818_PZ320.jpeg',
       'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/23C5CCC0349927EA9C4FE8077A77D7F0.app1_1574197116929_PZ320.jpeg',
@@ -65,28 +65,28 @@ const createReviews = () => {
     ]
     let aReviewPic = ''; // a variable that has a review product image 10% of the time
     if (Math.random() >= 0.9) {
-      aReviewPic = reviewImage[Math.floor(Math.random() * reviewImage.length)]
+      aReviewPic = reviewImageArray[Math.floor(Math.random() * reviewImageArray.length)]
     }
 
 
     //////////////////////////////////
     // BUILD OUT REVIEW OBJECT
     //////////////////////////////////
-    currentRelativeData.dateWritten = randomDateFormatted
-    currentRelativeData.username = faker.internet.userName()
-    currentRelativeData.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`
-    currentRelativeData.avgRunDistance = typeOfRunnerArray[Math.floor(Math.random() * typeOfRunnerArray.length)]
-    currentRelativeData.terrain = typeOfTerrainArray[Math.floor(Math.random() * typeOfTerrainArray.length)]
-    currentRelativeData.flagged = 0
-    currentRelativeData.upvotes = Math.floor(Math.random() * 3)
-    currentRelativeData.downvotes = (Math.random() >= 0.5) ? (Math.floor(Math.random() * 3)) : 0
-    currentRelativeData.verified = Math.random() >= 0.8;
-    currentRelativeData.image = aReviewPic;
+    aReviewObject.dateWritten = randomDateFormatted
+    aReviewObject.username = faker.internet.userName()
+    aReviewObject.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`
+    aReviewObject.avgRunDistance = typeOfRunnerArray[Math.floor(Math.random() * typeOfRunnerArray.length)]
+    aReviewObject.terrain = typeOfTerrainArray[Math.floor(Math.random() * typeOfTerrainArray.length)]
+    aReviewObject.flagged = 0
+    aReviewObject.upvotes = Math.floor(Math.random() * 3)
+    aReviewObject.downvotes = (Math.random() >= 0.5) ? (Math.floor(Math.random() * 3)) : 0
+    aReviewObject.verified = Math.random() >= 0.8;
+    aReviewObject.image = aReviewPic;
 
-    reviews.push(currentRelativeData)  // push the final built review into the reviews array
+    reviewsArray.push(aReviewObject)  // push the final built review into the reviews array
   }
 
-  return reviews
+  return reviewsArray
 };
 
 
@@ -94,7 +94,7 @@ const createReviews = () => {
 // BUILD ALL PRODUCTS
 //////////////////////////////////
 const createProducts = () => {
-  let productsArr = [] // an array of product objects, this is fed to database
+  let productsArray = [] // an array of product objects, this is fed to database
 
   //////////////////////////////////
   // BUILD A PRODUCT
@@ -104,15 +104,15 @@ const createProducts = () => {
     aSingleProduct.productName = namesData[k]
     aSingleProduct.productId = k
     aSingleProduct.reviews = createReviews()
-    productsArr.push(aSingleProduct) // push the current product into the final array of products
+    productsArray.push(aSingleProduct) // push the current product into the final array of products
   }
 
-  return productsArr
+  return productsArray
 }
 
 const insertMockData = function () {
-  let stuffToInsert = createProducts()
-  Product.insertMany(stuffToInsert)
+  let productsToInsert = createProducts()
+  Product.insertMany(productsToInsert)
   console.log('DB seeded'.green)
 };
 
