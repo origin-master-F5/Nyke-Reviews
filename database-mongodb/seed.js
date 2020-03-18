@@ -74,7 +74,7 @@ const createReviews = () => {
     //////////////////////////////////
     currentRelativeData.dateWritten = randomDateFormatted
     currentRelativeData.username = faker.internet.userName()
-    location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`
+    currentRelativeData.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`
     currentRelativeData.avgRunDistance = typeOfRunnerArray[Math.floor(Math.random() * typeOfRunnerArray.length)]
     currentRelativeData.terrain = typeOfTerrainArray[Math.floor(Math.random() * typeOfTerrainArray.length)]
     currentRelativeData.flagged = 0
