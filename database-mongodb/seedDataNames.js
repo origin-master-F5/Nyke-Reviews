@@ -1,4 +1,4 @@
-var rawData = [
+const rawData = [
   {
     "name": "Nike Air Max 2090\nNike Air Max 2090\nMen's Shoe\n1 Color\n$150",
     "image": "https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/i1-541527e2-64e0-4873-8fb6-bdf7d903bf3b/air-max-2090-mens-shoe-bL8lLT.jpg",
