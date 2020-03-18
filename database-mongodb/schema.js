@@ -2,13 +2,31 @@ const mongoose = require('mongoose');
 
 var productSchema = new mongoose.Schema({
   productName: String,
-  header: String,
-  commentBody: String,
-  rating: Number,
-  size: Number,
-  comfort: Number,
-  durability: Number,
-  createdAt:
+  productId: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  reviews: [
+    {
+      header: String,
+      comment: String,
+      star: Number,
+      size: Number,
+      comfort: Number,
+      durability: Number,
+      dateWritten: String,
+      username: String,
+      location: String,
+      avgRunDistance: String,
+      terrain: String,
+      flagged: { type: Number, default: 0 },
+      upvotes: { type: Number, default: 0 },
+      downvotes: { type: Number, default: 0 },
+      verified: { type: Boolean, default: false },
+      image: String
+    }
+  ]
 });
 
 module.exports = productSchema;
@@ -29,3 +47,4 @@ run terrain: "Treadmill/Indoors"
 flagged: number
 upvotes
 downvotes
+*/
