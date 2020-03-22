@@ -9,22 +9,13 @@ export default class Default extends React.Component {
       extended: false
     }
     this.onClickHandler = this.onClickHandler.bind(this)
-    this.getAverageRating = this.getAverageRating.bind(this)
+    // this.getAverageRating = this.getAverageRating.bind(this)
   }
 
   onClickHandler() {
     this.setState({
       extended: !this.state.extended
     })
-  }
-
-  getAverageRating() {
-    let totalReviewValue = 0
-    for (let i = 0; i < this.props.currentProduct.reviews.length; i++) {
-      totalReviewValue += this.props.currentProduct.reviews[i].star
-    }
-    let avgRate = (totalReviewValue / this.props.currentProduct.reviews.length)
-    return avgRate
   }
 
   render() {
@@ -50,7 +41,7 @@ export default class Default extends React.Component {
               </div>
 
               <div className="default-extended-stars-jr" >
-                <span>{this.getAverageRating()} (turn into stars)</span>
+                <span>{this.props.getAverageRating()} (turn into stars)</span>
               </div>
 
               <div className="default-extended-arrow-jr">
@@ -61,7 +52,7 @@ export default class Default extends React.Component {
 
             <DefaultExtended
               aProduct={this.props.currentProduct}
-              averageRating={this.getAverageRating()}
+              averageRating={this.props.getAverageRating()}
               modalViewHandler={this.props.modalViewHandler}
               modalWriteHandler={this.props.modalWriteHandler}
             />
@@ -77,7 +68,7 @@ export default class Default extends React.Component {
             </div>
 
             <div className="default-stars-jr" >
-              <span>{this.getAverageRating()} (turn into stars)</span>
+              <span>{this.props.getAverageRating()} (turn into stars)</span>
             </div>
 
             <div className="default-arrow-jr" >

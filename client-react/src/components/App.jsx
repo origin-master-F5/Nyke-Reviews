@@ -17,9 +17,10 @@ class App extends React.Component {
     };
 
     this.getAll = this.getAll.bind(this)
-    this.whichModal = this.whichModal.bind(this);
+    // this.whichModal = this.whichModal.bind(this);
     this.modalViewHandler = this.modalViewHandler.bind(this)
     this.modalWriteHandler = this.modalWriteHandler.bind(this)
+    this.getAverageRating = this.getAverageRating.bind(this)
   }
 
   getAll() {
@@ -41,17 +42,38 @@ class App extends React.Component {
     if (this.state.showModalView && this.state.showModalWrite) {
       return (
         <div>
-          <ModalView />
-          <ModalWrite />
+          <ModalView
+            modalViewHandler={this.modalViewHandler}
+            currentProduct={this.state.currentProduct}
+            getAverageRating={this.getAverageRating}
+          />
+          <ModalWrite
+            modalWriteHandler={this.modalWriteHandler}
+            currentProduct={this.state.currentProduct}
+          />
         </div>
       )
     } else if (this.state.showModalView) {
       return (
-        <ModalView />
+        <ModalView
+          modalViewHandler={this.modalViewHandler}
+          currentProduct={this.state.currentProduct}
+          getAverageRating={this.getAverageRating}
+        />
       )
     } else {
       return null;
     }
+  }
+
+  // gets the average rating of all reviews for given product
+  getAverageRating() {
+    let totalReviewValue = 0
+    for (let i = 0; i < this.state.currentProduct.reviews.length; i++) {
+      totalReviewValue += this.state.currentProduct.reviews[i].star
+    }
+    let avgRate = (totalReviewValue / this.state.currentProduct.reviews.length)
+    return avgRate
   }
 
   // toggles the state of modalView. triggers 1 popup
@@ -63,12 +85,18 @@ class App extends React.Component {
 
   //toggles the state of modalWrite and modalView. This triggers both popups.
   modalWriteHandler() {
-    this.setState({
-      showModalWrite: !this.state.showModalWrite,
-      showModalView: !this.state.showModalView
-    })
+    // this conditional allows us to make both modals pop up when we click write review, but only close one on exit press
+    if (this.state.showModalWrite) {
+      this.setState({
+        showModalWrite: !this.state.showModalWrite
+      })
+    } else {
+      this.setState({
+        showModalWrite: !this.state.showModalWrite,
+        showModalView: !this.state.showModalView
+      })
+    }
   }
-
 
   componentDidMount() {
     this.getAll()
@@ -89,6 +117,7 @@ class App extends React.Component {
             isLoading={this.state.loading}
             modalViewHandler={this.modalViewHandler}
             modalWriteHandler={this.modalWriteHandler}
+            getAverageRating={this.getAverageRating}
           />
           {this.whichModal()}
         </div >
