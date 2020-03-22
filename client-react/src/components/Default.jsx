@@ -59,7 +59,12 @@ export default class Default extends React.Component {
 
             </div>
 
-            <DefaultExtended aProduct={this.props.currentProduct} averageRating={this.getAverageRating()} />
+            <DefaultExtended
+              aProduct={this.props.currentProduct}
+              averageRating={this.getAverageRating()}
+              modalViewHandler={this.props.modalViewHandler}
+              modalWriteHandler={this.props.modalWriteHandler}
+            />
 
           </div>
         )

@@ -18,7 +18,7 @@ export default class DefaultExtended extends React.Component {
         <div className="default-extended-sub-stars-jr" >{this.props.averageRating}(turn into stars) {this.props.averageRating} Stars
         </div>
 
-        <div className="default-extended-sub-write-review-jr" >Write a Review</div>
+        <div className="default-extended-sub-write-review-jr" onClick={() => this.props.modalWriteHandler()} >Write a Review</div>
 
         <div>
           {arraySlice.map((aReview) =>
@@ -26,7 +26,7 @@ export default class DefaultExtended extends React.Component {
           )}
         </div>
 
-        <div className="default-extended-sub-more-reviews-jr" >
+        <div className="default-extended-sub-more-reviews-jr" onClick={() => this.props.modalViewHandler()} >
           More Reviews
         </div>
 

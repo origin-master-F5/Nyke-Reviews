@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import Default from './Default.jsx'
+import ModalView from './ModalViewReview.jsx'
+import ModalWrite from './ModalWriteReview.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -9,11 +11,15 @@ class App extends React.Component {
     this.state = {
       view: 'default',
       loading: true,
-      currentProduct: {}
+      currentProduct: {},
+      showModalView: false,
+      showModalWrite: false
     };
 
     this.getAll = this.getAll.bind(this)
-    this.changeView = this.changeView.bind(this);
+    this.whichModal = this.whichModal.bind(this);
+    this.modalViewHandler = this.modalViewHandler.bind(this)
+    this.modalWriteHandler = this.modalWriteHandler.bind(this)
   }
 
   getAll() {
@@ -30,11 +36,39 @@ class App extends React.Component {
       })
   }
 
-  changeView(option) {
-    this.setState({
-      view: option
-    });
+  // determines which modals will be rendered based off their state value
+  whichModal() {
+    if (this.state.showModalView && this.state.showModalWrite) {
+      return (
+        <div>
+          <ModalView />
+          <ModalWrite />
+        </div>
+      )
+    } else if (this.state.showModalView) {
+      return (
+        <ModalView />
+      )
+    } else {
+      return null;
+    }
   }
+
+  // toggles the state of modalView. triggers 1 popup
+  modalViewHandler() {
+    this.setState({
+      showModalView: !this.state.showModalView
+    })
+  }
+
+  //toggles the state of modalWrite and modalView. This triggers both popups.
+  modalWriteHandler() {
+    this.setState({
+      showModalWrite: !this.state.showModalWrite,
+      showModalView: !this.state.showModalView
+    })
+  }
+
 
   componentDidMount() {
     this.getAll()
@@ -50,7 +84,13 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <Default currentProduct={this.state.currentProduct} isLoading={this.state.loading} />
+          <Default
+            currentProduct={this.state.currentProduct}
+            isLoading={this.state.loading}
+            modalViewHandler={this.modalViewHandler}
+            modalWriteHandler={this.modalWriteHandler}
+          />
+          {this.whichModal()}
         </div >
       )
     }
