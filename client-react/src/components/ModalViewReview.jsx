@@ -6,6 +6,9 @@ export default class ModalView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      visibleReviewsCount: 10,
+      reviewsRendering: [],
+      allLoaded: false
       // sortedReviews: []
     }
 
@@ -17,7 +20,7 @@ export default class ModalView extends React.Component {
       totalSize += this.props.currentProduct.reviews[i].size
     }
     let avgSize = (totalSize / this.props.currentProduct.reviews.length)
-    return avgSize
+    return Math.round((avgSize + Number.EPSILON) * 100) / 100
   }
 
   getAverageComfort() {
@@ -26,7 +29,7 @@ export default class ModalView extends React.Component {
       totalComfort += this.props.currentProduct.reviews[i].comfort
     }
     let avgComfort = (totalComfort / this.props.currentProduct.reviews.length)
-    return avgComfort
+    return Math.round((avgComfort + Number.EPSILON) * 100) / 100
   }
 
   getAverageDurability() {
@@ -35,7 +38,7 @@ export default class ModalView extends React.Component {
       totalDurability += this.props.currentProduct.reviews[i].durability
     }
     let avgDurability = (totalDurability / this.props.currentProduct.reviews.length)
-    return avgDurability
+    return Math.round((avgDurability + Number.EPSILON) * 100) / 100
   }
 
   // function to sort by highest rating
@@ -43,13 +46,39 @@ export default class ModalView extends React.Component {
   // most helpful (upvotes)
   // dateWritten (most recent)
 
+  // increments the state of visibleReviewCount by 10 when load more is clicked
+  loadMoreHandler() {
+    this.setState({
+      visibleReviewsCount: this.state.visibleReviewsCount + 10
+    })
+    this.reviewsToBeRendered()
+  }
+
+  // takes props and places reviews into an array in state. number determined by visibleReviewsCount state
+  reviewsToBeRendered() {
+    let arrayOfReviews = []
+    for (let i = 0; i < this.state.visibleReviewsCount; i++) {
+      if (this.props.currentProduct.reviews[i]) {
+        arrayOfReviews.push(this.props.currentProduct.reviews[i])
+      } else {
+        this.setState({
+          allLoaded: true
+        })
+      }
+    }
+    this.setState({
+      reviewsRendering: arrayOfReviews
+    })
+  }
+
+  componentDidMount() {
+    this.reviewsToBeRendered()
+    this.loadMoreHandler()
+  }
 
 
   render() {
-    console.log('logging props on modal view', this.props)
     let reviewsData = this.props.currentProduct.reviews
-    // let
-
 
     return (
       <div className="modal-view-jr">
@@ -115,7 +144,6 @@ export default class ModalView extends React.Component {
           </div>
         </div>
 
-
         {/* // chooses how to render array
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -130,30 +158,12 @@ export default class ModalView extends React.Component {
           <input type="submit" value="Submit" />
         </form> */}
 
-        {reviewsData.map((aReview) => <AViewReview aReviewData={aReview} key={aReview._id} />)}
-
-
+        {this.state.reviewsRendering.map((aReview) => <AViewReview aReviewData={aReview} key={aReview._id} />)}
         {/*
+        // sort by */}
 
 
-        // sort by
-
-
-        // star reviews
-        // header
-        // comment
-        // date
-        // username
-        // verified
-        // I run: - I run on:
-        // upvotes
-        // downvotes
-        //flagged */}
-
-
-        <div>
-          Load More
-      </div>
+        <div className="view-load-more-jr" onClick={() => this.loadMoreHandler()}>{this.state.allLoaded ? '' : 'Load More'}</div>
 
       </div>
     )

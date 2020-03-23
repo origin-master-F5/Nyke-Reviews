@@ -29,7 +29,7 @@ class App extends React.Component {
       .then((response) => {
         this.setState({
           loading: false,
-          currentProduct: response.data[0]
+          currentProduct: response.data[1]
         })
         console.log('change me to a get by name', response.data[0])
       })
@@ -75,7 +75,7 @@ class App extends React.Component {
       totalReviewValue += this.state.currentProduct.reviews[i].star
     }
     let avgRate = (totalReviewValue / this.state.currentProduct.reviews.length)
-    return avgRate
+    return Math.round((avgRate + Number.EPSILON) * 100) / 100
   }
 
   // toggles the state of modalView. triggers 1 popup

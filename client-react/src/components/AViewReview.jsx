@@ -149,20 +149,20 @@ export default class AViewReview extends React.Component {
 
   render() {
     let data = this.props.aReviewData
-    console.log('props on aViewReview', this.props)
+    // console.log('props on aViewReview', this.props)
     return (
 
-      <div>
+      <div className="a-view-review-main-jr">
         <div>
           {this.starCounter()}
           {/* // size comfort durability */}
         </div>
 
-        <div className="" >{data.header}</div>
-        <div className="" >{data.comment}</div>
-        <div className="" >{data.dateWritten} - </div>
-        <div className="" >{data.username} - </div>
-        <div className="" >{data.location}</div>
+        <div className="view-header-jr" >{data.header}</div>
+        <div className="view-comment-jr" >{data.comment}</div>
+        <div className="view-date-jr" >{data.dateWritten} - </div>
+        <div className="view-username-jr" >{data.username} - </div>
+        <div className="view-location-jr" >{data.location}</div>
 
         {this.howFar()}
         -
@@ -196,9 +196,9 @@ export default class AViewReview extends React.Component {
 
         <div onClick={() => this.flagHandler()}>{this.state.flag}</div>
 
+
+
         <br />
-
-
       </div >
     )
   }
