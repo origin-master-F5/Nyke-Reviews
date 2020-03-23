@@ -1,5 +1,7 @@
 import React from 'react';
 import DefaultExtended from './DefaultExtended.jsx'
+import upArrow from './Images/UpArrow.png'
+import downArrow from './Images/DownArrow.png'
 
 export default class Default extends React.Component {
   constructor(props) {
@@ -44,8 +46,8 @@ export default class Default extends React.Component {
                 <span>{this.props.getAverageRating()} (turn into stars)</span>
               </div>
 
-              <div className="default-extended-arrow-jr">
-                <i className="fa fa-angle-up"></i>
+              <div className="default-extended-arrow-container-jr">
+                <img className="default-extended-arrow-jr" src={upArrow}></img>
               </div>
 
             </div>
@@ -71,8 +73,8 @@ export default class Default extends React.Component {
               <span>{this.props.getAverageRating()} (turn into stars)</span>
             </div>
 
-            <div className="default-arrow-jr" >
-              <i className="fa fa-angle-down"></i>
+            <div className="default-arrow-container-jr" >
+              <img className="default-arrow-jr" src={downArrow}></img>
             </div>
 
           </div>

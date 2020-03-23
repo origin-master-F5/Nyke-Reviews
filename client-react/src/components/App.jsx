@@ -4,6 +4,7 @@ import Default from './Default.jsx'
 import ModalView from './ModalViewReview.jsx'
 import ModalWrite from './ModalWriteReview.jsx'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -59,6 +60,7 @@ class App extends React.Component {
           modalViewHandler={this.modalViewHandler}
           currentProduct={this.state.currentProduct}
           getAverageRating={this.getAverageRating}
+          className="modal-view-jr"
         />
       )
     } else {

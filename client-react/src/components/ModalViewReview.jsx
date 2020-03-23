@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import exit from './Images/Exit.png'
+import AViewReview from './AViewReview.jsx'
 
 export default class ModalView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      // sortedReviews: []
     }
+
   }
 
   getAverageSize() {
@@ -35,15 +38,23 @@ export default class ModalView extends React.Component {
     return avgDurability
   }
 
+  // function to sort by highest rating
+  // lowest rating
+  // most helpful (upvotes)
+  // dateWritten (most recent)
+
 
 
   render() {
     console.log('logging props on modal view', this.props)
     let reviewsData = this.props.currentProduct.reviews
+    // let
+
+
     return (
       <div className="modal-view-jr">
-        <div className="modal-view-exit-jr">
-          <i className="fa fa-remove" onClick={() => this.props.modalViewHandler()}></i>
+        <div className="modal-view-exit-container-jr">
+          <img className="modal-view-exit-jr" src={exit} onClick={() => this.props.modalViewHandler()}></img>
         </div>
 
         <div className="modal-view-stars-jr" >
@@ -103,6 +114,24 @@ export default class ModalView extends React.Component {
             Very Durable
           </div>
         </div>
+
+
+        {/* // chooses how to render array
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Pick your favorite flavor:
+          <select value={this.state.value} onChange={this.handleChange}>
+              <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option value="coconut">Coconut</option>
+              <option value="mango">Mango</option>
+            </select>
+          </label>
+          <input type="submit" value="Submit" />
+        </form> */}
+
+        {reviewsData.map((aReview) => <AViewReview aReviewData={aReview} key={aReview._id} />)}
+
 
         {/*
 
