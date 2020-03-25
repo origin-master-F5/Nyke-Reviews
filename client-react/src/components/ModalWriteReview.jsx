@@ -1,5 +1,12 @@
 import React from "react";
 import exit from './Images/Exit.png'
+import moment from 'moment'
+import photoFilled from './Images/PhotoFilled.png'
+import photoUnfilled from './Images/PhotoUnfilled.png'
+import videoFilled from './Images/VideoFilled.png'
+import videoUnfilled from './Images/VideoUnfilled.png'
+import axios from 'axios'
+
 
 export default class ModalWrite extends React.Component {
   constructor(props) {
@@ -7,26 +14,76 @@ export default class ModalWrite extends React.Component {
     this.state = {
       sizeSelectedOption: null,
       comfortSelectedOption: null,
-      durabilitySelectedOption: null
+      durabilitySelectedOption: null,
+      header: null,
+      comment: null,
+      star: null,
+      username: null,
+      city: null,
+      state: null,
+      country: null,
+      avgRunDistance: '3 miles or fewer',
+      terrain: 'Treadmill / Indoors',
+      video: videoUnfilled,
+      photo: photoUnfilled
     }
   }
 
-  sizeSelectHandler(event) {
+  // onHover: sets the image to be filled if it isnt filled already
+  photoHoverHandler() {
     this.setState({
-      sizeSelectedOption: event.target.value
+      photo: photoFilled
+    })
+  }
+  // onUnhover: sets the image to be unfilled if it isnt marked as an upvote
+  photoUnhoverHandler() {
+    this.setState({
+      photo: photoUnfilled
     })
   }
 
-  comfortSelectHandler(event) {
+  videoHoverHandler() {
     this.setState({
-      comfortSelectedOption: event.target.value
+      video: videoFilled
+    })
+  }
+  // onUnhover: sets the image to be unfilled if it isnt marked as an upvote
+  videoUnhoverHandler() {
+    this.setState({
+      video: videoUnfilled
     })
   }
 
-  durabilitySelectHandler(event) {
-    this.setState({
-      durabilitySelectedOption: event.target.value
+  createReviewHandler() {
+    let sizeNumber = Number(this.state.sizeSelectedOption)
+    let comfortNumber = Number(this.state.comfortSelectedOption)
+    let durabilityNumber = Number(this.state.durabilitySelectedOption)
+    let currentDate = moment(new Date()).format('LL')
+    let location = `${this.state.city}, ${this.state.state}, ${this.state.country}`
+
+    axios.post('/api/products/reviews', {
+      parentId: this.props.currentProduct._id,
+      aReview: {
+        header: this.state.header,
+        comment: this.state.comment,
+        star: 5,
+        size: sizeNumber,
+        comfort: comfortNumber,
+        durability: durabilityNumber,
+        dateWritten: currentDate,
+        username: this.state.username,
+        location: location,
+        avgRunDistance: this.state.avgRunDistance,
+        terrain: this.state.terrain,
+        image: ''
+      }
     })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -34,7 +91,11 @@ export default class ModalWrite extends React.Component {
     return (
       <div className="modal-write-jr">
         <div className="modal-write-exit-container-jr">
-          <img className="modal-write-exit-jr" src={exit} onClick={() => this.props.modalWriteHandler()}></img>
+          <img
+            className="modal-write-exit-jr"
+            src={exit}
+            onClick={() => this.props.modalWriteHandler()}
+          ></img>
         </div>
 
         <div className="write-header-jr">WRITE A REVIEW</div>
@@ -54,7 +115,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="0"
-                  onChange={(e) => this.sizeSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    sizeSelectedOption: event.target.value
+                  })}
                   checked={this.state.sizeSelectedOption === '0'}
                 />
         Runs Small
@@ -65,7 +128,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="1"
-                  onChange={(e) => this.sizeSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    sizeSelectedOption: event.target.value
+                  })}
                   checked={this.state.sizeSelectedOption === '1'}
                 />
         Just Right
@@ -76,7 +141,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="2"
-                  onChange={(e) => this.sizeSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    sizeSelectedOption: event.target.value
+                  })}
                   checked={this.state.sizeSelectedOption === '2'}
                 />
         Runs Big
@@ -93,7 +160,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="0"
-                  onChange={(e) => this.comfortSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    comfortSelectedOption: event.target.value
+                  })}
                   checked={this.state.comfortSelectedOption === '0'}
                 />
         Uncomfortable
@@ -104,7 +173,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="1"
-                  onChange={(e) => this.comfortSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    comfortSelectedOption: event.target.value
+                  })}
                   checked={this.state.comfortSelectedOption === '1'}
                 />
         Average
@@ -115,7 +186,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="2"
-                  onChange={(e) => this.comfortSelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    comfortSelectedOption: event.target.value
+                  })}
                   checked={this.state.comfortSelectedOption === '2'}
                 />
         Very Comfortable
@@ -132,7 +205,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="0"
-                  onChange={(e) => this.durabilitySelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    durabilitySelectedOption: event.target.value
+                  })}
                   checked={this.state.durabilitySelectedOption === '0'}
                 />
         Not Durable
@@ -143,7 +218,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="1"
-                  onChange={(e) => this.durabilitySelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    durabilitySelectedOption: event.target.value
+                  })}
                   checked={this.state.durabilitySelectedOption === '1'}
                 />
         Average
@@ -154,7 +231,9 @@ export default class ModalWrite extends React.Component {
                 <input
                   type="radio"
                   value="2"
-                  onChange={(e) => this.durabilitySelectHandler(e)}
+                  onChange={(event) => this.setState({
+                    durabilitySelectedOption: event.target.value
+                  })}
                   checked={this.state.durabilitySelectedOption === '2'}
                 />
         Very Durable
@@ -163,25 +242,141 @@ export default class ModalWrite extends React.Component {
           </form>
         </div>
 
-        <div>Review Title:</div>
 
-        <div>Review:</div>
+
+        <div>
+          <form>
+            <label>
+              Review Title:
+              <input
+                type="text"
+                placeholder="Headline or summary for your review"
+                onChange={(event) => this.setState({
+                  header: event.target.value
+                })}
+              />
+            </label>
+          </form>
+        </div>
+
+        <div>
+          <form>
+            <label>
+              Review:
+              <input
+                type="text"
+                placeholder="Write your review here. It must be at least 5 characters long. Consider whether you would recommend this product and what you like or dislike about it."
+                onChange={(event) => this.setState({
+                  comment: event.target.value
+                })}
+              />
+            </label>
+          </form>
+        </div>
 
         <div>Attach Media</div>
         <div>You can add up to five files.</div>
+        <div
+          className="" >
+          <img
+            onMouseOver={() => this.photoHoverHandler()}
+            onMouseLeave={() => this.photoUnhoverHandler()}
+            className=""
+            src={this.state.photo}
+          ></img>
+        </div>
 
-        <div>Country/Region</div>
-        <div>City</div>
-        <div>State:</div>
-        <div>I run:</div>
-        <div>I run on:</div>
+        <div
+          className="" >
+          <img
+            onMouseOver={() => this.videoHoverHandler()}
+            onMouseLeave={() => this.videoUnhoverHandler()}
+            className=""
+            src={this.state.video}
+          ></img>
+        </div>
+
+        <div>
+          <form>
+            <label>
+              Country/Region:
+              <input
+                type="text"
+                placeholder="Enter your country or region"
+                onChange={(event) => this.setState({
+                  country: event.target.value
+                })}
+              />
+            </label>
+          </form>
+        </div>
+
+        <div>
+          <form>
+            <label>
+              City:
+              <input
+                type="text"
+                placeholder="Enter your city"
+                onChange={(event) => this.setState({
+                  city: event.target.value
+                })}
+              />
+            </label>
+          </form>
+        </div>
+
+        <div>
+          <form>
+            <label>
+              State:
+              <input
+                type="text"
+                placeholder="Enter your state"
+                onChange={(event) => this.setState({
+                  state: event.target.value
+                })}
+              />
+            </label>
+          </form>
+        </div>
+
+
+        <form >
+          <label>
+            I run:
+            <select
+              value={this.state.avgRunDistance}
+              onChange={(event) => this.setState({
+                avgRunDistance: event.target.value
+              })}>
+              <option value="3 miles or fewer">3 miles or fewer</option>
+              <option value="3 - 10 miles">3 - 10 miles</option>
+              <option value="More than 10 miles">More than 10 miles</option>
+            </select>
+          </label>
+        </form>
+
+        <form >
+          <label>
+            I run on:
+            <select
+              value={this.state.terrain}
+              onChange={(event) => this.setState({
+                terrain: event.target.value
+              })}>
+              <option value="Treadmill / Indoors">Treadmill / Indoors</option>
+              <option value="Road">Road</option>
+              <option value="Track">Track</option>
+            </select>
+          </label>
+        </form>
+
         <div>By clicking Submit, I agree to Privacy Policy, Terms of Use, and Terms of Service.</div>
-        <button>Submit</button>
+        <button onClick={() => this.createReviewHandler()}>Submit</button>
 
 
-      </div>
+      </div >
     )
   }
 }
-
-// needs submit button

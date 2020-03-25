@@ -8,7 +8,8 @@ export default class ModalView extends React.Component {
     this.state = {
       visibleReviewsCount: 10,
       reviewsRendering: [],
-      allLoaded: false
+      allLoaded: false,
+      sortBy: 'newest',
       // sortedReviews: []
     }
 
@@ -41,25 +42,57 @@ export default class ModalView extends React.Component {
     return Math.round((avgDurability + Number.EPSILON) * 100) / 100
   }
 
-  // function to sort by highest rating
-  // lowest rating
-  // most helpful (upvotes)
-  // dateWritten (most recent)
-
   // increments the state of visibleReviewCount by 10 when load more is clicked
   loadMoreHandler() {
+    let renderThisMany = this.state.visibleReviewsCount + 10
     this.setState({
-      visibleReviewsCount: this.state.visibleReviewsCount + 10
+      visibleReviewsCount: renderThisMany
     })
-    this.reviewsToBeRendered()
+    this.reviewsToBeRendered(this.state.sortBy, renderThisMany)
   }
 
   // takes props and places reviews into an array in state. number determined by visibleReviewsCount state
-  reviewsToBeRendered() {
+  // also sorts by value passed in or current value of state
+  reviewsToBeRendered(view = this.state.sortBy, renderThisMany = 10) {
+    // set sortBy state for loadmore handler to use
+    this.setState({
+      sortBy: view
+    })
+
+    let unsortedArray = this.props.currentProduct.reviews
+    let sortedArray = []
+
+    // sort arrays
+    // most helpful
+    if (view === 'helpful') {
+      sortedArray = unsortedArray.sort((a, b) => {
+        return b.upvotes - a.upvotes
+      })
+    }
+    // newest
+    if (view === 'newest') {
+      sortedArray = unsortedArray.sort((a, b) => {
+        return new Date(b.dateWritten) - new Date(a.dateWritten)
+      })
+    }
+    // hightest
+    if (view === 'highest') {
+      sortedArray = unsortedArray.sort((a, b) => {
+        return b.star - a.star
+      })
+    }
+    // lowest
+    if (view === 'lowest') {
+      sortedArray = unsortedArray.sort((a, b) => {
+        return a.star - b.star
+      })
+    }
+
     let arrayOfReviews = []
-    for (let i = 0; i < this.state.visibleReviewsCount; i++) {
-      if (this.props.currentProduct.reviews[i]) {
-        arrayOfReviews.push(this.props.currentProduct.reviews[i])
+    // sets how many review objects of the sorted array should be rendered
+    for (let i = 0; i < renderThisMany; i++) {
+      if (sortedArray[i]) {
+        arrayOfReviews.push(sortedArray[i])
       } else {
         this.setState({
           allLoaded: true
@@ -73,17 +106,23 @@ export default class ModalView extends React.Component {
 
   componentDidMount() {
     this.reviewsToBeRendered()
-    this.loadMoreHandler()
+    // this.loadMoreHandler()
+  }
+
+  sortHandleChange(e) {
+    this.reviewsToBeRendered(e.target.value)
   }
 
 
-  render() {
-    let reviewsData = this.props.currentProduct.reviews
 
+  render() {
     return (
       <div className="modal-view-jr">
         <div className="modal-view-exit-container-jr">
-          <img className="modal-view-exit-jr" src={exit} onClick={() => this.props.modalViewHandler()}></img>
+          <img
+            className="modal-view-exit-jr"
+            src={exit} onClick={() => this.props.modalViewHandler()}
+          ></img>
         </div>
 
         <div className="modal-view-stars-jr" >
@@ -96,7 +135,7 @@ export default class ModalView extends React.Component {
 
         <br />
 
-        {/* AVG SIZE COMPONENT */}
+        {/* AVG SIZE */}
         <div className="modal-view-size-main-jr">
           <div>
             Size
@@ -112,7 +151,7 @@ export default class ModalView extends React.Component {
           </div>
         </div>
 
-        {/* AVG COMFORT COMPONENT */}
+        {/* AVG COMFORT */}
         <div className="modal-view-comfort-main-jr">
           <div>
             Comfort
@@ -128,7 +167,7 @@ export default class ModalView extends React.Component {
           </div>
         </div>
 
-        {/* AVG DURABILITY COMPONENT */}
+        {/* AVG DURABILITY */}
         <div className="modal-view-durability-main-jr">
           <div>
             Durability
@@ -144,30 +183,29 @@ export default class ModalView extends React.Component {
           </div>
         </div>
 
-        {/* // chooses how to render array
+        {/* // chooses how to render array */}
         <form onSubmit={this.handleSubmit}>
           <label>
-            Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option value="coconut">Coconut</option>
-              <option value="mango">Mango</option>
+            <select value={this.state.sortBy} onChange={(e) => this.sortHandleChange(e)}>
+              <option value="helpful">Sort By: Most Helpful</option>
+              <option value="newest">Sort By: Newest</option>
+              <option value="highest">Sort By: Highest To Lowest</option>
+              <option value="lowest">Sort By: Lowest To Highest</option>
             </select>
           </label>
-          <input type="submit" value="Submit" />
-        </form> */}
+        </form>
 
-        {this.state.reviewsRendering.map((aReview) => <AViewReview aReviewData={aReview} key={aReview._id} />)}
-        {/*
-        // sort by */}
+        {this.state.reviewsRendering.map((aReview) => <AViewReview aReviewData={aReview} parentId={this.props.currentProduct._id} key={aReview._id} />)}
 
 
-        <div className="view-load-more-jr" onClick={() => this.loadMoreHandler()}>{this.state.allLoaded ? '' : 'Load More'}</div>
+
+        <div
+          className="view-load-more-jr"
+          onClick={() => this.loadMoreHandler()}>{this.state.allLoaded ? '' : 'Load More'}
+        </div>
 
       </div>
     )
   }
 }
 
-// getAverageRating = { this.getAverageRating }

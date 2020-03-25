@@ -5,7 +5,14 @@ const controllers = require('./controllers')
 router
   .route('/products/reviews')
   .get(controllers.getAll)
-//   .post(controller.post)
+  .put(controllers.putVote)
+  .post(controllers.postReview)
+
+router
+  .route('/products/reviews/flag')
+  .put(controllers.putFlag)
+
+
 
 // router
 //   .route('/products/:_id')
