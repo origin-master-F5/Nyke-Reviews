@@ -36,13 +36,11 @@ const models = {
   createReview: (req) => {
     let _id = req.body.parentId
     let aReview = req.body.aReview
-    // console.log('req body', req.body)
+
     return Product.findOne({ _id: _id }).then(function (product) {
-      //modify and save the object received via callback
       product.reviews.push(aReview);
       product.save();
     });
-    // return Product.reviews.push({ reviews: aReview })
   }
 }
 

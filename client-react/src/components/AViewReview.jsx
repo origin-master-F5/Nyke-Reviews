@@ -1,12 +1,11 @@
 import React from 'react'
-import FullStar from './Images/FullStar.png'
-import EmptyStar from './Images/EmptyStar.png'
 import UpvoteFilled from './Images/UpvoteFilled.png'
 import UpvoteUnfilled from './Images/UpvoteUnfilled.png'
 import DownvoteFilled from './Images/DownvoteFilled.png'
 import DownvoteUnfilled from './Images/DownvoteUnfilled.png'
 import Flag from './Images/Flag.png'
 import axios from 'axios'
+import StarCounter from './AReviewStarCounter.jsx'
 
 
 export default class AViewReview extends React.Component {
@@ -20,43 +19,6 @@ export default class AViewReview extends React.Component {
       upvoteCount: null,
       downvoteCount: null
     }
-  }
-
-  starCounter() {
-    let counter = this.props.aReviewData.star
-    let star1 = EmptyStar;
-    let star2 = EmptyStar;
-    let star3 = EmptyStar;
-    let star4 = EmptyStar;
-    let star5 = EmptyStar;
-
-    for (let i = 1; i <= counter; i++) {
-      if (i === 1) {
-        star1 = FullStar
-      }
-      if (i === 2) {
-        star2 = FullStar
-      }
-      if (i === 3) {
-        star3 = FullStar
-      }
-      if (i === 4) {
-        star4 = FullStar
-      }
-      if (i === 5) {
-        star5 = FullStar
-      }
-    }
-
-    return (
-      <div className="a-star-div-jr" >
-        <div className="all-stars-a-review-jr" > <img className="a-view-star-jr" src={star1} ></img> </div>
-        <div className="all-stars-a-review-jr" > <img className="a-view-star-jr" src={star2} ></img> </div>
-        <div className="all-stars-a-review-jr" > <img className="a-view-star-jr" src={star3} ></img> </div>
-        <div className="all-stars-a-review-jr" > <img className="a-view-star-jr" src={star4} ></img> </div>
-        <div className="all-stars-a-review-jr" > <img className="a-view-star-jr" src={star5} ></img> </div>
-      </div>
-    )
   }
 
   howFar() {
@@ -162,9 +124,6 @@ export default class AViewReview extends React.Component {
       });
   }
 
-
-
-
   downVoteHandler() {
     let upvoteValue;
     let downvoteValue;
@@ -257,7 +216,7 @@ export default class AViewReview extends React.Component {
 
       <div className="a-view-review-main-jr">
         <div className="a-view-stars-and-feels-jr">
-          {this.starCounter()}
+          <StarCounter star={this.props.aReviewData.star} />
 
           <div className="a-view-size-container-jr" >
             <div className="a-view-size-header-jr" >Size</div>
