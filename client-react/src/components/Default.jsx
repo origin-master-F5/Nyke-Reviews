@@ -31,8 +31,9 @@ export default class Default extends React.Component {
       )
     } else {
       return (
-        <div onClick={() => this.onClickHandler()}  >
-          <div className="default-main-jr">
+        <div>
+          <div
+            onClick={() => this.onClickHandler()} className="default-main-jr">
             <div className="default-review-count-jr" >
               <span>Reviews ({this.props.currentProduct.reviews.length})</span>
             </div>
