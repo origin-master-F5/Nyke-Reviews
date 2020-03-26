@@ -1,6 +1,5 @@
 import React from 'react';
 import DefaultExtended from './DefaultExtended.jsx'
-import upArrow from './Images/UpArrow.png'
 import downArrow from './Images/DownArrow.png'
 import AverageStar from './AverageStars.jsx'
 
@@ -31,42 +30,9 @@ export default class Default extends React.Component {
         </div>
       )
     } else {
-      // if data has been pulled, this will render
-
-      // if toggled, show full reviews, else show untoggled reviews
-      if (this.state.extended) {
-        return (
-          <div>
-
-            <div onClick={() => this.onClickHandler()} className="default-extended-main-jr">
-
-              <div className="default-extended-review-count-jr" >
-                <span>Reviews ({this.props.currentProduct.reviews.length})</span>
-              </div>
-
-              <div className="default-extended-stars-jr" >
-                <span>{this.props.getAverageRating()} (turn into stars)</span>
-              </div>
-
-              <div className="default-extended-arrow-container-jr">
-                <img className="default-extended-arrow-jr" src={upArrow}></img>
-              </div>
-
-            </div>
-
-            <DefaultExtended
-              aProduct={this.props.currentProduct}
-              averageRating={this.props.getAverageRating()}
-              modalViewHandler={this.props.modalViewHandler}
-              modalWriteHandler={this.props.modalWriteHandler}
-            />
-
-          </div>
-        )
-      } else {
-        return (
-          <div onClick={() => this.onClickHandler()} className="default-main-jr" >
-
+      return (
+        <div onClick={() => this.onClickHandler()}  >
+          <div className="default-main-jr">
             <div className="default-review-count-jr" >
               <span>Reviews ({this.props.currentProduct.reviews.length})</span>
             </div>
@@ -77,12 +43,20 @@ export default class Default extends React.Component {
             </div>
 
             <div className="default-arrow-container-jr" >
-              <img className="default-arrow-jr" src={downArrow}></img>
+              {this.state.extended ? <img className="default-arrow-jr" src={downArrow} style={{ transform: "rotate(180deg)" }}></img> : <img className="default-arrow-jr" src={downArrow}></img>}
             </div>
-
           </div>
-        )
-      }
+
+          {this.state.extended ? <DefaultExtended
+            aProduct={this.props.currentProduct}
+            averageRating={this.props.getAverageRating()}
+            modalViewHandler={this.props.modalViewHandler}
+            modalWriteHandler={this.props.modalWriteHandler}
+            averageRating={this.props.getAverageRating()}
+          /> : null}
+
+        </div>
+      )
     }
   }
 }

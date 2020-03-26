@@ -1,5 +1,6 @@
 import React from 'react'
 import ReviewPreview from './DefaultExtReviews.jsx'
+import AverageStar from './AverageStars.jsx'
 
 export default class DefaultExtended extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ export default class DefaultExtended extends React.Component {
     return (
       <div className="default-extended-sub-jr">
 
-        <div className="default-extended-sub-stars-jr" >{this.props.averageRating}(turn into stars) {this.props.averageRating} Stars
+        <div className="default-extended-sub-stars-jr" >
+          <AverageStar averageRating={this.props.averageRating} />
+          <div>{this.props.averageRating} Stars</div>
         </div>
 
         <div className="default-extended-sub-write-review-jr" onClick={() => this.props.modalWriteHandler()} >Write a Review</div>

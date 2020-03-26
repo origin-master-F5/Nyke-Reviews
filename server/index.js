@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const db = require('../database-mongodb/index').db
 
 const app = express();
-const port = 1232;
+const port = 3003;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

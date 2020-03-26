@@ -1,6 +1,7 @@
 import React from 'react';
 import exit from './Images/Exit.png'
 import AViewReview from './AViewReview.jsx'
+import AverageStar from './AverageStars.jsx'
 
 export default class ModalView extends React.Component {
   constructor(props) {
@@ -10,7 +11,6 @@ export default class ModalView extends React.Component {
       reviewsRendering: [],
       allLoaded: false,
       sortBy: 'newest',
-      // sortedReviews: []
     }
 
   }
@@ -126,7 +126,7 @@ export default class ModalView extends React.Component {
         </div>
 
         <div className="modal-view-stars-jr" >
-          <span>{this.props.getAverageRating()} (turn into stars)</span>
+          <AverageStar averageRating={this.props.getAverageRating()} />
         </div>
 
         <div className="modal-view-count-jr" >

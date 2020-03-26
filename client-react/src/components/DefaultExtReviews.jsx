@@ -1,4 +1,5 @@
 import React from 'react'
+import AverageStar from './AverageStars.jsx'
 
 export default class ReviewPreview extends React.Component {
   constructor(props) {
@@ -38,8 +39,8 @@ export default class ReviewPreview extends React.Component {
           {data.header}
         </div>
 
-        <div className="default-extended-preview-stars-jr" >
-          {data.star} (turn into stars)
+        <div className="default-extended-preview-stars-container-jr" >
+          <AverageStar averageRating={data.star} smallStar={true} />
         </div>
 
         <div className="default-extended-preview-username-jr" >
@@ -55,7 +56,7 @@ export default class ReviewPreview extends React.Component {
           <div onClick={() => this.handleViewMore()} className="default-extended-preview-moreOrLess-jr">{(!this.state.viewingMore) ? 'More' : 'Less'}</div>
         </div>
 
-        <br />
+
 
       </div>
     )

@@ -5,7 +5,7 @@ import DownvoteFilled from './Images/DownvoteFilled.png'
 import DownvoteUnfilled from './Images/DownvoteUnfilled.png'
 import Flag from './Images/Flag.png'
 import axios from 'axios'
-import StarCounter from './AReviewStarCounter.jsx'
+import AverageStar from './AverageStars.jsx'
 
 
 export default class AViewReview extends React.Component {
@@ -211,12 +211,12 @@ export default class AViewReview extends React.Component {
 
   render() {
     let data = this.props.aReviewData
-    // console.log('props on aViewReview', this.props)
+
     return (
 
       <div className="a-view-review-main-jr">
         <div className="a-view-stars-and-feels-jr">
-          <StarCounter star={this.props.aReviewData.star} />
+          <AverageStar averageRating={this.props.aReviewData.star} />
 
           <div className="a-view-size-container-jr" >
             <div className="a-view-size-header-jr" >Size</div>
