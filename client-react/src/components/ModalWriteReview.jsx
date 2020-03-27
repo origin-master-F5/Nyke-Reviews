@@ -6,6 +6,8 @@ import photoUnfilled from './Images/PhotoUnfilled.png'
 import videoFilled from './Images/VideoFilled.png'
 import videoUnfilled from './Images/VideoUnfilled.png'
 import axios from 'axios'
+import faker from 'faker'
+import AverageStar from './AverageStars.jsx'
 
 
 export default class ModalWrite extends React.Component {
@@ -17,15 +19,16 @@ export default class ModalWrite extends React.Component {
       durabilitySelectedOption: null,
       header: null,
       comment: null,
-      star: null,
-      username: null,
+      username: faker.internet.userName(),
       city: null,
       state: null,
       country: null,
       avgRunDistance: '3 miles or fewer',
       terrain: 'Treadmill / Indoors',
       video: videoUnfilled,
-      photo: photoUnfilled
+      photo: photoUnfilled,
+      stars: '',
+      starsSubmitted: '',
     }
   }
 
@@ -54,6 +57,19 @@ export default class ModalWrite extends React.Component {
     })
   }
 
+  // stacey
+  handleStars(num) {
+    this.setState({
+      stars: num
+    })
+  }
+  // stacey
+  submitStars(num) {
+    this.setState({
+      starsSubmitted: num
+    })
+  }
+
   createReviewHandler() {
     let sizeNumber = Number(this.state.sizeSelectedOption)
     let comfortNumber = Number(this.state.comfortSelectedOption)
@@ -66,7 +82,7 @@ export default class ModalWrite extends React.Component {
       aReview: {
         header: this.state.header,
         comment: this.state.comment,
-        star: 5,
+        star: this.state.starsSubmitted,
         size: sizeNumber,
         comfort: comfortNumber,
         durability: durabilityNumber,
@@ -100,6 +116,28 @@ export default class ModalWrite extends React.Component {
 
         <div className="write-header-jr">WRITE A REVIEW</div>
         <div className="write-sub-header-jr">Please share your experience.</div>
+
+        <div className='write-stars-container'>
+          <div className='write-star-jr' onClick={(() => this.submitStars(1))} onMouseEnter={(() => this.handleStars(1))} onMouseLeave={(() => this.handleStars(0))}>
+            {(this.state.stars || this.state.starsSubmitted) >= 1 ? <div className="star-black-filled-jr"> </div > : <div className="star-grey-filled-jr" />}
+          </div>
+
+          <div className='write-star-jr' onClick={(() => this.submitStars(2))} onMouseEnter={(() => this.handleStars(2))} onMouseLeave={(() => this.handleStars(0))}>
+            {(this.state.stars || this.state.starsSubmitted) >= 2 ? <div className="star-black-filled-jr"> </div > : <div className="star-grey-filled-jr" />}
+          </div>
+
+          <div className='write-star-jr' onClick={(() => this.submitStars(3))} onMouseEnter={(() => this.handleStars(3))} onMouseLeave={(() => this.handleStars(0))}>
+            {(this.state.stars || this.state.starsSubmitted) >= 3 ? <div className="star-black-filled-jr"> </div > : <div className="star-grey-filled-jr" />}
+          </div>
+
+          <div className='write-star-jr' onClick={(() => this.submitStars(4))} onMouseEnter={(() => this.handleStars(4))} onMouseLeave={(() => this.handleStars(0))}>
+            {(this.state.stars || this.state.starsSubmitted) >= 4 ? <div className="star-black-filled-jr"> </div > : <div className="star-grey-filled-jr" />}
+          </div>
+
+          <div className='write-star-jr' onClick={(() => this.submitStars(5))} onMouseEnter={(() => this.handleStars(5))} onMouseLeave={(() => this.handleStars(0))}>
+            {(this.state.stars || this.state.starsSubmitted) >= 5 ? <div className="star-black-filled-jr"> </div > : <div className="star-grey-filled-jr" />}
+          </div>
+        </div>
 
         <div className="write-rating-container-jr">
           <span className="write-rating-sub-header-jr" >Overall rating:</span>

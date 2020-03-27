@@ -15,7 +15,7 @@ export default class AViewReview extends React.Component {
       vote: null,
       upvote: UpvoteUnfilled,
       downvote: DownvoteUnfilled,
-      flag: <div className="view-flag-container-jr" ><img className="view-flag-jr" src={Flag} ></img></div>,
+      flag: true,
       upvoteCount: null,
       downvoteCount: null
     }
@@ -24,7 +24,7 @@ export default class AViewReview extends React.Component {
   howFar() {
     if (this.props.aReviewData.avgRunDistance) {
       return (
-        <div>I run: {this.props.aReviewData.avgRunDistance}</div>
+        <span className="a-view-review-subtext-jr" id="a-view-after-jr">I run: {this.props.aReviewData.avgRunDistance}</span>
       )
     }
   }
@@ -32,7 +32,7 @@ export default class AViewReview extends React.Component {
   terrainType() {
     if (this.props.aReviewData.terrain) {
       return (
-        <div>I run on: {this.props.aReviewData.terrain}</div>
+        <span className="a-view-review-subtext-jr" >I run on: {this.props.aReviewData.terrain}</span>
       )
     }
   }
@@ -176,7 +176,7 @@ export default class AViewReview extends React.Component {
 
   flagHandler() {
     this.setState({
-      flag: 'This post has been flagged. Thank you.'
+      flag: false
     })
     axios.put('/api/products/reviews/flag', {
       parentId: `${this.props.parentId}`,
@@ -216,72 +216,88 @@ export default class AViewReview extends React.Component {
 
       <div className="a-view-review-main-jr">
         <div className="a-view-stars-and-feels-jr">
-          <AverageStar averageRating={this.props.aReviewData.star} />
-
-          <div className="a-view-size-container-jr" >
-            <div className="a-view-size-header-jr" >Size</div>
-            <div className="a-view-size-value-jr" >{data.size}turn to slider bar</div>
-            <div className="a-view-size-left-param-jr" >Runs...</div>
-            <div className="a-view-size-right-param-jr" >Runs...</div>
+          <div className="a-view-stars-jr">
+            <AverageStar averageRating={this.props.aReviewData.star} />
           </div>
 
-          <div className="a-view-comfort-container-jr" >
-            <div className="a-view-comfort-header-jr" >Comfort</div>
-            <div className="a-view-comfort-value-jr" >{data.comfort}turn to slider bar</div>
-            <div className="a-view-comfort-left-param-jr" >Unc...</div>
-            <div className="a-view-comfort-middle-param-jr" >Aver...</div>
-            <div className="a-view-comfort-right-param-jr" >Very...</div>
+          <div className="a-view-container-jr" id="a-view-size-no-top-jr">
+            <div className="a-view-header-jr" >Size</div>
+            <div className="a-view-value-jr" >{data.size}turn to slider bar</div>
+            <div className="a-view-params-container-jr">
+              <div className="a-view-left-param-jr" >Runs Small</div>
+              <div style={{ float: "right" }} className="a-view-right-param-jr" >Runs Big</div>
+            </div>
           </div>
 
-          <div className="a-view-durability-container-jr" >
-            <div className="a-view-durability-header-jr" >Durability</div>
-            <div className="a-view-durability-value-jr" >{data.durability}turn to slider bar</div>
-            <div className="a-view-durability-left-param-jr" >Not...</div>
-            <div className="a-view-durability-middle-param-jr" >Aver...</div>
-            <div className="a-view-durability-right-param-jr" >Very...</div>
+          <div className="a-view-container-jr" >
+            <div className="a-view-header-jr" >Comfort</div>
+            <div className="a-view-value-jr" >{data.comfort}turn to slider bar</div>
+            <div className="a-view-params-container-jr" >
+              <div className="a-view-left-param-jr" >Uncomfortable</div>
+              <div style={{ float: "right" }} className="a-view-right-param-jr" >Very Comfortable</div>
+            </div>
           </div>
 
-        </div>
-
-        <div className="view-header-jr" >{data.header}</div>
-        <div className="view-comment-jr" >{data.comment}</div>
-        <div className="view-date-jr" >{data.dateWritten} - </div>
-        <div className="view-username-jr" >{data.username} - </div>
-        <div className="view-location-jr" >{data.location}</div>
-
-        {this.howFar()}
-        -
-        {this.terrainType()}
-
-        <div>
-          <div className="up-vote-div-jr">
-            <img
-              className="up-vote-img-jr"
-              onClick={() => this.upVoteHandler()}
-              onMouseOver={() => this.renderUpvoteHover()}
-              onMouseLeave={() => this.renderUpvoteUnHover()}
-              src={this.state.upvote}
-            ></img>
+          <div className="a-view-container-jr" >
+            <div className="a-view-header-jr" >Durability</div>
+            <div className="a-view-value-jr" >{data.durability}turn to slider bar</div>
+            <div className="a-view-params-container-jr" >
+              <div className="a-view-left-param-jr" >Not Durable</div>
+              <div style={{ float: "right" }} className="a-view-right-param-jr" >Very Durable</div>
+            </div>
           </div>
-          {this.upvoteCounter()}
+
         </div>
 
         <div>
-          <div className="down-vote-div-jr" >
-            <img
-              className="down-vote-img-jr"
-              onClick={() => this.downVoteHandler()}
-              onMouseOver={() => this.renderDownvoteHover()}
-              onMouseLeave={() => this.renderDownvoteUnHover()}
-              src={this.state.downvote}
-            ></img>
+          <div className="view-header-jr" >{data.header}</div>
+          <div className="view-comment-jr" >{data.comment}</div>
+          <div className="a-view-image-container-jr">{data.image ? <img className="a-view-image-jr" src={data.image}></img> : null}</div>
+          <div className="a-view-review-subtext-container-jr">
+            <span className="a-view-review-subtext-jr" id="a-view-after-jr" >{data.dateWritten}</span>
+            <span className="view-username-jr" id="a-view-after-jr" > {data.username}</span>
+            <span className="a-view-review-subtext-jr" >{data.location}</span>
           </div>
-          {this.downvoteCounter()}
+
+          <div>
+            {this.howFar()}
+            {/* <span> - </span> */}
+            {this.terrainType()}
+          </div>
+
+          <div className="a-view-review-toggle-containers-jr" >
+            <span>
+              <div className="up-vote-div-jr">
+                <img
+                  className="up-vote-img-jr"
+                  onClick={() => this.upVoteHandler()}
+                  onMouseOver={() => this.renderUpvoteHover()}
+                  onMouseLeave={() => this.renderUpvoteUnHover()}
+                  src={this.state.upvote}
+                ></img>
+              </div>
+              <span className="a-view-rightpadding-jr">{this.upvoteCounter()}</span>
+            </span>
+
+            <span>
+              <div className="down-vote-div-jr" >
+                <img
+                  className="down-vote-img-jr"
+                  onClick={() => this.downVoteHandler()}
+                  onMouseOver={() => this.renderDownvoteHover()}
+                  onMouseLeave={() => this.renderDownvoteUnHover()}
+                  src={this.state.downvote}
+                ></img>
+              </div>
+              <span className="a-view-rightpadding-jr">{this.downvoteCounter()}</span>
+            </span>
+
+            <span className="a-view-flag-or-text-jr"
+              onClick={() => this.flagHandler()}>
+              {this.state.flag ? <div className="view-flag-container-jr" ><img className="view-flag-jr" src={Flag} ></img></div> : 'This post has been flagged. Thank you.'}
+            </span>
+          </div>
         </div>
-
-        <div onClick={() => this.flagHandler()}>{this.state.flag}</div>
-
-        <br />
       </div >
     )
   }

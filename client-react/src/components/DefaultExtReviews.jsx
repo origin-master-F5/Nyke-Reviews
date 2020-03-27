@@ -21,6 +21,8 @@ export default class ReviewPreview extends React.Component {
       return (
         this.props.aReview.comment
       )
+    } else if (this.props.aReview.comment.length < 121) {
+      return this.props.aReview.comment
     } else {
       let commentPreview = `${this.props.aReview.comment.slice(0, 121)}...`
       return (
@@ -39,21 +41,23 @@ export default class ReviewPreview extends React.Component {
           {data.header}
         </div>
 
-        <div className="default-extended-preview-stars-container-jr" >
-          <AverageStar averageRating={data.star} smallStar={true} />
-        </div>
+        <div className="default-extended-preview-rating-subheader-jr" >
+          <div className="default-extended-preview-stars-container-jr" >
+            <AverageStar averageRating={data.star} smallStar={true} />
+          </div>
 
-        <div className="default-extended-preview-username-jr" >
-          {data.username}
-        </div>
-        -
-        <div className="default-extended-preview-dateWritten-jr" >
-          {data.dateWritten}
+          <div className="default-extended-preview-username-jr" >
+            {data.username} - {data.dateWritten}
+          </div>
         </div>
 
         <div className="default-extended-preview-comment-jr" >
           {this.renderComment()}
-          <div onClick={() => this.handleViewMore()} className="default-extended-preview-moreOrLess-jr">{(!this.state.viewingMore) ? 'More' : 'Less'}</div>
+          <div
+            onClick={() => this.handleViewMore()}
+            className={(this.props.aReview.comment.length > 121) ? ("default-extended-preview-moreOrLess-jr") : ("default-extended-preview-noMoreOrLess")}>
+            {(this.props.aReview.comment.length > 121) ? ((!this.state.viewingMore) ? 'More' : 'Less') : ''}
+          </div>
         </div>
 
 

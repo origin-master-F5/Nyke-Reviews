@@ -130,70 +130,64 @@ export default class ModalView extends React.Component {
         </div>
 
         <div className="modal-view-count-jr" >
-          <span>{this.props.currentProduct.reviews.length} Reviews</span>
+          <span>{this.props.currentProduct.reviews.length} REVIEWS</span>
         </div>
 
-        <br />
+        <div className="modal-view-triple-avg-container-jr">
+          {/* AVG SIZE */}
+          <div className="modal-view-size-main-jr">
+            <div>
+              Size
+          </div>
+            <div className="modal-view-avg-jr">
+              {this.getAverageSize()}(turn to bar)
+          </div>
+            <div className="modal-view-avg-subhead-jr">
+              <span style={{ float: "left" }}>Runs Small</span><span style={{ float: "right" }}>Runs Big</span>
+            </div>
+          </div>
 
-        {/* AVG SIZE */}
-        <div className="modal-view-size-main-jr">
-          <div>
-            Size
+          {/* AVG COMFORT */}
+          <div className="modal-view-comfort-main-jr">
+            <div>
+              Comfort
           </div>
-          <div className="modal-view-size-avg-jr">
-            {this.getAverageSize()}(turn to bar)
+            <div className="modal-view-avg-jr">
+              {this.getAverageComfort()}(turn to bar)
           </div>
-          <div>
-            Runs Small
+            <div className="modal-view-avg-subhead-jr" >
+              <span style={{ float: "left" }}>Uncomfortable</span><span style={{ float: "right" }}>Very Comfortable</span>
+            </div>
           </div>
-          <div>
-            Runs Big
-          </div>
-        </div>
 
-        {/* AVG COMFORT */}
-        <div className="modal-view-comfort-main-jr">
-          <div>
-            Comfort
+          {/* AVG DURABILITY */}
+          <div className="modal-view-durability-main-jr">
+            <div>
+              Durability
           </div>
-          <div className="modal-view-comfort-avg-jr">
-            {this.getAverageComfort()}(turn to bar)
+            <div className="modal-view-avg-jr">
+              {this.getAverageDurability()}(turn to bar)
           </div>
-          <div>
-            Uncomfortable
-          </div>
-          <div>
-            Very Comfortable
-          </div>
-        </div>
-
-        {/* AVG DURABILITY */}
-        <div className="modal-view-durability-main-jr">
-          <div>
-            Durability
-          </div>
-          <div className="modal-view-durability-avg-jr">
-            {this.getAverageDurability()}(turn to bar)
-          </div>
-          <div>
-            Not Durable
-          </div>
-          <div>
-            Very Durable
+            <div className="modal-view-avg-subhead-jr" >
+              <span style={{ float: "left" }}>Not Durable</span><span style={{ float: "right" }}>Very Durable</span>
+            </div>
           </div>
         </div>
 
         {/* // chooses how to render array */}
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <select value={this.state.sortBy} onChange={(e) => this.sortHandleChange(e)}>
-              <option value="helpful">Sort By: Most Helpful</option>
-              <option value="newest">Sort By: Newest</option>
-              <option value="highest">Sort By: Highest To Lowest</option>
-              <option value="lowest">Sort By: Lowest To Highest</option>
-            </select>
-          </label>
-        </form>
+        <div className="modal-view-sorter-jr" >
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <select className="modal-view-dropdown-jr" value={this.state.sortBy} onChange={(e) => this.sortHandleChange(e)}>
+                <option value="helpful">Sort By: Most Helpful</option>
+                <option value="newest">Sort By: Newest</option>
+                <option value="highest">Sort By: Highest To Lowest</option>
+                <option value="lowest">Sort By: Lowest To Highest</option>
+              </select>
+            </label>
+          </form>
+        </div>
+
 
         {this.state.reviewsRendering.map((aReview) => <AViewReview aReviewData={aReview} parentId={this.props.currentProduct._id} key={aReview._id} />)}
 
