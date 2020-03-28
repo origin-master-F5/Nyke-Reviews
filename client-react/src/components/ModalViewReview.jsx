@@ -2,6 +2,7 @@ import React from 'react';
 import exit from './Images/Exit.png'
 import AViewReview from './AViewReview.jsx'
 import AverageStar from './AverageStars.jsx'
+import Bar from './Bar.jsx'
 
 export default class ModalView extends React.Component {
   constructor(props) {
@@ -134,44 +135,11 @@ export default class ModalView extends React.Component {
         </div>
 
         <div className="modal-view-triple-avg-container-jr">
-          {/* AVG SIZE */}
-          <div className="modal-view-size-main-jr">
-            <div>
-              Size
-          </div>
-            <div className="modal-view-avg-jr">
-              {this.getAverageSize()}(turn to bar)
-          </div>
-            <div className="modal-view-avg-subhead-jr">
-              <span style={{ float: "left" }}>Runs Small</span><span style={{ float: "right" }}>Runs Big</span>
-            </div>
-          </div>
+          <Bar title="Size" value={this.getAverageSize()} leftBound="Runs Small" rightBound="Runs Big" />
 
-          {/* AVG COMFORT */}
-          <div className="modal-view-comfort-main-jr">
-            <div>
-              Comfort
-          </div>
-            <div className="modal-view-avg-jr">
-              {this.getAverageComfort()}(turn to bar)
-          </div>
-            <div className="modal-view-avg-subhead-jr" >
-              <span style={{ float: "left" }}>Uncomfortable</span><span style={{ float: "right" }}>Very Comfortable</span>
-            </div>
-          </div>
+          <Bar title="Comfort" value={this.getAverageComfort()} leftBound="Uncomfortable" rightBound="Very Comfortable" />
 
-          {/* AVG DURABILITY */}
-          <div className="modal-view-durability-main-jr">
-            <div>
-              Durability
-          </div>
-            <div className="modal-view-avg-jr">
-              {this.getAverageDurability()}(turn to bar)
-          </div>
-            <div className="modal-view-avg-subhead-jr" >
-              <span style={{ float: "left" }}>Not Durable</span><span style={{ float: "right" }}>Very Durable</span>
-            </div>
-          </div>
+          <Bar title="Durability" value={this.getAverageDurability()} leftBound="Not Durable" rightBound="Very Durable" />
         </div>
 
         {/* // chooses how to render array */}

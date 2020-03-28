@@ -164,7 +164,6 @@
   top: 0;
   width: 100%;
   /* z-index: 1; */
-
   overflow-y: auto;
 }
 
@@ -202,11 +201,6 @@
   column-gap: 100px;
   padding: 0px 0px 60px 0px;
   font-size: 14px;
-  /* padding: 0px 25px; */
-  /* align-items: center;
-  justify-self: center;
-  justify-content: center; */
-  /* justify-items: center; */
 }
 
 .modal-view-sorter-jr {
@@ -226,16 +220,10 @@
   font-size: 16px;
 }
 
-.modal-view-avg-subhead-jr {
-  color: #6D6D6D;
-}
+
 
 /* /////////////    MODAL VIEW SIZE  ///////////// */
 .modal-view-size-main-jr {
-}
-
-.modal-view-avg-jr {
-  padding: 10px 0px;
 }
 
 /* /////////////    MODAL VIEW COMFORT  ///////////// */
@@ -289,7 +277,6 @@
   padding-bottom: 18px;
 }
 
-.all-stars-a-review-jr {}
 
 .a-star-div-jr {
   display: inline-block;
@@ -302,7 +289,6 @@
   height:auto;
 }
 
-.a-view-stars-and-feels-j {}
 
 /*A VIEW REVIEW size container*/
 .a-view-container-jr {
@@ -312,9 +298,6 @@
   font-size: 14px;
 }
 
-/* .a-view-container-jr:first-of-type {
-  padding-top: 0px;
-} */
 
 #a-view-size-no-top-jr {
   padding: 0px 0px 18px 0px;
@@ -327,7 +310,7 @@
 }
 
 .a-view-value-jr {
-  display: block;
+  /* display: block; */
   padding-bottom: 7px;
 }
 
@@ -480,6 +463,7 @@
   width: 60% !important;
   height: 90% !important;
   left: 20% !important;
+  padding: 24px;
 
 }
 
@@ -502,11 +486,20 @@
 }
 
 .write-header-jr {
-
+  padding-top: 107px;
+  font-size: 24px;
+  font-family: "Nike TG", Oswald, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  padding-bottom: 8px;
 }
 
 .write-sub-header-jr {
-
+  padding-bottom: 8px;
+  text-align: center;
+  color: #8D8D8D;
+  font-size: 14px;
 }
 
 .write-star-jr {
@@ -514,8 +507,19 @@ display: inline-block;
 }
 
 .write-rating-container-jr {
-
+  display: grid;
+  grid-template-columns: 283px auto;
+  margin: 50px 0px 0px 0px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid #F1F1F1;
 }
+
+.radio-form-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 24px 0px;
+}
+
 
 .write-rating-sub-header-jr {
 }
@@ -524,28 +528,234 @@ display: inline-block;
   color: red;
 }
 
-.write-size-form-jr {
+.write-form-jr {
+  font-size: 14px;
+  font-weight: normal;
+  color: #111;
+  border-bottom: 1px solid #F1F1F1;
+  padding-bottom: 44px;
+  margin-bottom: 24px;
+}
+
+.write-form-header-jr {
+  font-weight: normal;
+}
+
+.radio {
+  padding: 18px 0px 0px 0px;
+}
+
+.radio-input-jr input[type="radio"]{
+  margin-right:10px;
+}
+.radio-input-jr {
+  color: #8D8D8D;
+  font-size: 12px;
+}
+
+.review-title-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 25px 0px;
+}
+
+.review-title-textarea-jr {
+  width: 95%;
+  height: 50px;
+  padding-left: 25px;
+  /* font-size: 13px; */
+}
+
+.reviews-box-jr {
+
+}
+
+.review-title-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 25px 0px;
+}
+
+.review-title-textarea-jr {
+  width: 95%;
+  height: 45px;
+  padding-left: 25px;
+  padding-top: 0px;
+  font-size: 12px;
+  border-radius: 2px;
+  border: solid 1px rgb(233, 233, 233);
+}
+
+.review-body-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 25px 0px;
+}
+
+.review-body-textarea-jr {
+  width: 95%;
+  height: 100px;
+  padding-left: 25px;
+  padding-top: 30px;
+  /* color: #d7d9dc; */
+  font-size: 12px;
+  border-radius: 2px;
+  border: solid 1px rgb(233, 233, 233);
+  overflow-wrap: break-word;
+}
+
+.post-image-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding-bottom: 44px;
+  border-bottom: 1px solid #F1F1F1;
+  margin-bottom: 64px;
+}
+
+.photo-container-jr {
   display: inline-block;
+  height: 44px;
+  width: 120px;
+  padding-right: 10px;
+  cursor: pointer;
 }
 
-.write-size-form-header-jr {
-  font-weight: bold;
-}
-
-.write-comfort-form-jr {
+.video-container-jr {
   display: inline-block;
+  height: 44px;
+  width: 120px;
+  cursor: pointer;
 }
 
-.write-comfort-form-header-jr {
-  font-weight: bold;
+.photo-jr {
+  width: 100%;
+  height: 100%;
 }
 
-.write-durability-form-jr {
-  display: inline-block;
+.video-jr {
+  width: 100%;
+  height: 100%;
 }
 
-.write-durability-form-header-jr {
-  font-weight: bold;
+.post-image-text-jr {
+  font-size: 14px;
 }
+
+.post-image-subtext-jr {
+  font-size: 14px;
+  color: #909295;
+  padding-top: 4px;
+}
+
+.input-container-jr {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding-bottom: 20px;
+}
+
+.input-area-jr {
+  width: 95%;
+  height: 56px;
+  padding-left: 25px;
+  padding-top: 0px;
+  font-size: 12px;
+  border-radius: 2px;
+  border: solid 1px rgb(233, 233, 233);
+}
+
+.input-dropdown-jr{
+  font-size: 14px;
+  width: 100%;
+  height: 56px;
+  background-color: #FFF;
+  font-weight: 400;
+  text-transform: capitalize;
+  border-radius: 2px;
+  border: solid 1px rgb(233, 233, 233);
+}
+
+.agree-to-terms-jr {
+  text-align: center;
+  font-size: 14px;
+  color: #909295;
+  padding-top: 48px;
+}
+
+.form-submit-jr {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+  color: white;
+  margin: 25px 0px;
+  border: solid 1px black;
+  border-radius: 2px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* body {
+  background: #000;
+  opacity: .7;
+  height: 100% !important;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+} */
+
+.submit-icon-container-jr {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-icon-jr {
+  width: 100%;
+  height: 100%;
+}
+
+.thank-for-review-jr {
+  font-size: 16px;
+  text-align: center;
+  padding: 28px 0px 20px 0px;
+}
+
+.good-to-go-jr {
+  padding-top: 7px;
+  font-size: 14px;
+  font-family: "Nike TG", Oswald, "Helvetica Neue",Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  white-space: nowrap;
+  color: #8D8D8D;
+  text-align: center;
+}
+
+.buy-more-jr {
+  margin-top: 35px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  padding: 15px;
+  width: 50%;
+  display: block;
+  text-align: center;
+  background: #111;
+  border: 1px solid #000;
+  color: #FFF !important;
+  font-family: "Nike TG", Oswald, "Helvetica Neue"  Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  border-radius: 2px;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  height: 65px;
+}
+
 
 

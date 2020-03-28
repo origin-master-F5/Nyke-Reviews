@@ -365,7 +365,7 @@ const relativeReviewData = [
   {
     header: `Unexpected And Extreme Comfort`,
     comment: `I was truly surprised by how comfortable these shoes are to walk in. I manage an automotive shop and im literally on my feet for 12-14hrs everyday. I bought them on a whim and I've never been happier with a purchase. Extreme comfort and excellent durability. The price point was excellent and im really happy to have these in my daily rotation`,
-    star: 1,
+    star: 5,
     size: 2,
     comfort: 2,
     durability: 2

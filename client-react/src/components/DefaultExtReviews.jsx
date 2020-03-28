@@ -59,9 +59,6 @@ export default class ReviewPreview extends React.Component {
             {(this.props.aReview.comment.length > 121) ? ((!this.state.viewingMore) ? 'More' : 'Less') : ''}
           </div>
         </div>
-
-
-
       </div>
     )
   }

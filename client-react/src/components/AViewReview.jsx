@@ -6,6 +6,7 @@ import DownvoteUnfilled from './Images/DownvoteUnfilled.png'
 import Flag from './Images/Flag.png'
 import axios from 'axios'
 import AverageStar from './AverageStars.jsx'
+import Bar from './Bar.jsx'
 
 
 export default class AViewReview extends React.Component {
@@ -221,15 +222,27 @@ export default class AViewReview extends React.Component {
           </div>
 
           <div className="a-view-container-jr" id="a-view-size-no-top-jr">
+            <Bar title="Size" value={data.size} leftBound="Runs Small" rightBound="Runs Big" />
+          </div>
+
+          <div className="a-view-container-jr" >
+            <Bar title="Comfort" value={data.comfort} leftBound="Uncomfortable" rightBound="Very Comfortable" />
+          </div>
+
+          <div className="a-view-container-jr" >
+            <Bar title="Durability" value={data.durability} leftBound="Not Durable" rightBound="Very Durable" />
+          </div>
+
+          {/* <div className="a-view-container-jr" id="a-view-size-no-top-jr">
             <div className="a-view-header-jr" >Size</div>
             <div className="a-view-value-jr" >{data.size}turn to slider bar</div>
             <div className="a-view-params-container-jr">
               <div className="a-view-left-param-jr" >Runs Small</div>
               <div style={{ float: "right" }} className="a-view-right-param-jr" >Runs Big</div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="a-view-container-jr" >
+          {/* <div className="a-view-container-jr" >
             <div className="a-view-header-jr" >Comfort</div>
             <div className="a-view-value-jr" >{data.comfort}turn to slider bar</div>
             <div className="a-view-params-container-jr" >
@@ -245,7 +258,7 @@ export default class AViewReview extends React.Component {
               <div className="a-view-left-param-jr" >Not Durable</div>
               <div style={{ float: "right" }} className="a-view-right-param-jr" >Very Durable</div>
             </div>
-          </div>
+          </div> */}
 
         </div>
 
