@@ -2,9 +2,10 @@ const express = require('express')
 const models = require('../database-mongodb/models')
 
 const controllers = {
-  getAll: (req, res, next) => {
-    models.getAll()
+  getOne: (req, res, next) => {
+    models.getOne(req)
       .then((data) => {
+        // console.log(data)
         res.status(200).send(data)
       })
       .catch((err) => {

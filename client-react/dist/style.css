@@ -4,14 +4,8 @@
  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* /////////////   DEFAULT EXTENDED (in default file)   ///////////// */
-
-
 
 /* /////////////   DEFAULT EXTENDED SUB  ///////////// */
-.default-extended-sub-jr {
-  /* display: grid; */
-}
 
 .default-extended-sub-stars-jr {
   display: grid;
@@ -31,7 +25,6 @@
 
 .default-extended-sub-more-reviews-jr {
   font-weight: 500;
-  /* text-decoration: underline; */
   cursor: pointer;
   border-bottom: 1px solid black;
   width: 106px;
@@ -55,9 +48,6 @@
   grid-template-columns: 85px auto;
 }
 
-.default-extended-preview-stars-container-jr {
-
-}
 
 .default-extended-preview-stars-jr {
   width: 15px;
@@ -79,15 +69,10 @@
 
 .default-extended-preview-moreOrLess-jr {
   font-weight: 500;
-  /* text-decoration: underline; */
   cursor: pointer;
   border-bottom: 1px solid black;
   width: 40px;
   padding-bottom: 1px;
-}
-
-.default-extended-preview-noMoreOrLess {
-
 }
 
 /* /////////////   DEFAULT MAIN   ///////////// */
@@ -103,9 +88,6 @@
 .default-review-count-jr {
   font-weight: 500;
   font-size: 20px;
-}
-
-.default-stars-jr {
 }
 
 .default-arrow-container-jr {
@@ -143,9 +125,6 @@
   height: 20px;
 }
 
-.partial-star-jr {
-}
-
 #smallstar {
   width: 15px;
   height: 15px;
@@ -180,7 +159,6 @@
   animation: slide-up 0.3s;
 }
 
-
 @keyframes slide-up {
     0% {
         opacity: 1;
@@ -191,19 +169,6 @@
         transform: translateY(0);
     }
   }
-
-
-   /* animation: slide-down 0.5s;
-    @keyframes slide-down {
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-        100% {
-        opacity: 0;
-        transform: translateY(1000px);
-    }
-  } */
 
 .modal-view-obscure-jr {
   /* display: none; Hidden by default */
@@ -217,10 +182,6 @@
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.6);
 }
-
-
-
-
 
 .modal-view-top-bar-container-jr {
   width: 100%;
@@ -297,7 +258,6 @@
   top: 0;
 }
 
-
 .modal-view-stars-jr{
   padding: 206px 0px 0px 0px;
   text-align: center;
@@ -337,23 +297,6 @@
   font-size: 16px;
 }
 
-
-
-/* /////////////    MODAL VIEW SIZE  ///////////// */
-.modal-view-size-main-jr {
-}
-
-/* /////////////    MODAL VIEW COMFORT  ///////////// */
-.modal-view-comfort-main-jr {
-}
-
-/* /////////////    MODAL VIEW DURABILITY  ///////////// */
-.modal-view-durability-main-jr {
-  /* justify-items: center; */
-}
-
-
-
 .modal-view-dropdown-jr {
     display: block;
     font-size: 14px;
@@ -375,7 +318,6 @@
 
 
 /* /////////////    A VIEW REVIEW  ///////////// */
-
 .a-view-review-main-jr {
   border-bottom: 1px solid lightgrey;
   display: grid;
@@ -406,7 +348,6 @@
   height:auto;
 }
 
-
 /*A VIEW REVIEW size container*/
 .a-view-container-jr {
   padding: 18px 0px;
@@ -414,7 +355,6 @@
   font-weight: normal;
   font-size: 14px;
 }
-
 
 #a-view-size-no-top-jr {
   padding: 0px 0px 18px 0px;
@@ -427,13 +367,7 @@
 }
 
 .a-view-value-jr {
-  /* display: block; */
   padding-bottom: 7px;
-}
-
-.a-view-params-container-jr {
-  /* padding-bottom: 7px; */
-  /* display: block; */
 }
 
 .a-view-left-param-jr {
@@ -453,7 +387,6 @@
   color: #6D6D6D;
   margin-top: 7px;
 }
-
 
 .view-header-jr {
   font-size: 14px;
@@ -492,7 +425,6 @@
   content: '\2013';
   padding: 0px 8px;
 }
-
 
 .a-view-review-subtext-jr {
   font-size: 12px;
@@ -560,9 +492,7 @@
 }
 
 
-
 /* /////////////    MODAL WRITE   ///////////// */
-
 .modal-write-jr {
   background: white;
   border: 1px solid #ccc;
@@ -581,7 +511,6 @@
   height: 90% !important;
   left: 20% !important;
   padding: 24px;
-
 }
 
 .modal-write-exit-container-jr {
@@ -639,10 +568,6 @@ display: inline-block;
   margin: 24px 0px;
 }
 
-
-.write-rating-sub-header-jr {
-}
-
 .write-red-asterix-jr {
   color: red;
 }
@@ -682,11 +607,6 @@ display: inline-block;
   width: 95%;
   height: 50px;
   padding-left: 25px;
-  /* font-size: 13px; */
-}
-
-.reviews-box-jr {
-
 }
 
 .review-title-container-jr {
@@ -716,7 +636,6 @@ display: inline-block;
   height: 100px;
   padding-left: 25px;
   padding-top: 30px;
-  /* color: #d7d9dc; */
   font-size: 12px;
   border-radius: 2px;
   border: solid 1px rgb(233, 233, 233);
@@ -812,8 +731,6 @@ display: inline-block;
   cursor: pointer;
 }
 
-
-
 .submit-icon-container-jr {
   width: 50px;
   height: 50px;
@@ -864,6 +781,3 @@ display: inline-block;
   cursor: pointer;
   height: 65px;
 }
-
-
-

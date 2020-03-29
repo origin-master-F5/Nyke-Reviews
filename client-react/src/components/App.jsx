@@ -15,10 +15,11 @@ class App extends React.Component {
       currentProduct: {},
       showModalView: false,
       showModalWrite: false,
-      closingReview: false
+      closingReview: false,
+      productId: false
     };
 
-    this.getAll = this.getAll.bind(this)
+    this.getOne = this.getOne.bind(this)
     // this.whichModal = this.whichModal.bind(this);
     this.modalViewHandler = this.modalViewHandler.bind(this)
     this.modalWriteHandler = this.modalWriteHandler.bind(this)
@@ -26,14 +27,13 @@ class App extends React.Component {
     this.closingReviewHandler = this.closingReviewHandler.bind(this)
   }
 
-  getAll() {
-    axios.get('/api/products/reviews')
+  getOne(id = 100) {
+    axios.get(`/api/products/reviews/${id}`)
       .then((response) => {
         this.setState({
           loading: false,
-          currentProduct: response.data[1]
+          currentProduct: response.data[0]
         })
-        console.log('change me to a get by name', response.data[0])
       })
       .catch((error) => {
         console.log(error);
@@ -115,8 +115,18 @@ class App extends React.Component {
     }
   }
 
+
+  urlListner() {
+    window.addEventListener("hashchange", () => {
+      let answer = window.location.hash.split('#')
+      this.getOne(Number(answer[1]))
+    });
+
+  }
+
   componentDidMount() {
-    this.getAll()
+    this.getOne()
+    this.urlListner()
   }
 
   render() {
@@ -146,4 +156,53 @@ class App extends React.Component {
 export default App;
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// componentDidMount() {
+//   this.getShoeSet();
 
+//   function searchForProductWhenHashChanges() {
+//     const pathArray = window.location.pathname.split('/');
+//     console.log(window.location.href)
+//     console.log(pathArray, 'THIS IS THE PATH ARRAY')
+//     //this.getShoeSet(pathArray[pathArray.length - 1])
+//   }
+
+//   window.addEventListener("hashchange", () => {
+//     console.log('THE HASH IS CHANGING', window.location.hash)
+//     let answer = window.location.hash.split('#')
+//     this.getShoeSet(answer[1]);
+//   });
+
+
+// }
+
+// getShoeSet(id) {
+//   if (id === undefined) {
+//     id = 160
+//   }
+
+//   Axios.get(`/api/shoe/${id}`)
+//     .then(response => {
+//       console.log("recieved", response.data.name)
+//       let shoe = response.data
+//       return shoe
+//     })
+
+//     .then(shoe => {
+//       Axios.get(`/api/shoes/${shoe.name}`)
+//         .then(shoeset => {
+//           console.log('recieved an object', shoeset.data)
+//           this.setState({
+//             currentShoe: shoe,
+//             shoeSet: shoeset.data
+//           });
+//         })
+//     })
+
+//     .catch((e) => {
+//       window.alert("Fetch Request For Nike Main Component Failed, SoMeThInGwEnTtErRiBlYwRoNg")
+//       this.setState({
+//         currentShoe: shoeExample,
+//       })
+//     });
+// }

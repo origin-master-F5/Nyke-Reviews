@@ -2,8 +2,10 @@ const Product = require('./index').Product
 const mongoose = require('mongoose')
 
 const models = {
-  getAll: () => {
-    return Product.find({})
+  getOne: (req) => {
+    let productId = req.params.id
+    console.log('params on models', req.params)
+    return Product.find({ productId })
   },
   changeVoteById: (req) => {
     let parentId = req.body.parentId

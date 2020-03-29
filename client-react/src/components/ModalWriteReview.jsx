@@ -161,7 +161,7 @@ export default class ModalWrite extends React.Component {
 
             <div className="write-rating-container-jr">
               <div>
-                <span className="write-rating-sub-header-jr" >Overall rating:</span>
+                <span>Overall rating:</span>
                 <span className="write-red-asterix-jr"> *</span>
               </div>
               <div className='write-stars-container'>
@@ -327,7 +327,7 @@ export default class ModalWrite extends React.Component {
             <div className="review-title-container-jr" >
               <div>Review Title:</div>
               <form>
-                <label className="reviews-box-jr">
+                <label>
                   <input
                     className="review-title-textarea-jr"
                     type="text"
@@ -342,7 +342,7 @@ export default class ModalWrite extends React.Component {
 
             <div className="review-body-container-jr">
               <div>
-                <span className="write-rating-sub-header-jr" >Review</span>
+                <span>Review</span>
                 <span className="write-red-asterix-jr"> *</span>
               </div>
               <form>
@@ -481,7 +481,7 @@ export default class ModalWrite extends React.Component {
               </a>, and <a href="https://www.turntonetworks.com/privacy/" target="_blank">
                 <u>Terms of Service</u>
               </a>.
-        </div>
+             </div>
             <button className="form-submit-jr" onClick={() => this.createReviewHandler()}>Submit</button>
           </div >
         </div>

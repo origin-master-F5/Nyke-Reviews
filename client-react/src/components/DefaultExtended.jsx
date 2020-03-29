@@ -14,7 +14,7 @@ export default class DefaultExtended extends React.Component {
     let arraySlice = this.props.aProduct.reviews.slice(0, 3);
 
     return (
-      <div className="default-extended-sub-jr">
+      <div>
 
         <div className="default-extended-sub-stars-jr" >
           <AverageStar averageRating={this.props.averageRating} />

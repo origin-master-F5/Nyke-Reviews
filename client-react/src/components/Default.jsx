@@ -4,6 +4,7 @@ import downArrow from './Images/DownArrow.png'
 import AverageStar from './AverageStars.jsx'
 
 
+
 export default class Default extends React.Component {
   constructor(props) {
     super(props)
@@ -38,7 +39,7 @@ export default class Default extends React.Component {
               <span>Reviews ({this.props.currentProduct.reviews.length})</span>
             </div>
 
-            <div className="default-stars-jr" >
+            <div>
               <span> <AverageStar averageRating={this.props.getAverageRating()} /></span>
 
             </div>

@@ -42,7 +42,7 @@ export default class ReviewPreview extends React.Component {
         </div>
 
         <div className="default-extended-preview-rating-subheader-jr" >
-          <div className="default-extended-preview-stars-container-jr" >
+          <div>
             <AverageStar averageRating={data.star} smallStar={true} />
           </div>
 
@@ -55,7 +55,7 @@ export default class ReviewPreview extends React.Component {
           {this.renderComment()}
           <div
             onClick={() => this.handleViewMore()}
-            className={(this.props.aReview.comment.length > 121) ? ("default-extended-preview-moreOrLess-jr") : ("default-extended-preview-noMoreOrLess")}>
+            className={(this.props.aReview.comment.length > 121) ? ("default-extended-preview-moreOrLess-jr") : ("")}>
             {(this.props.aReview.comment.length > 121) ? ((!this.state.viewingMore) ? 'More' : 'Less') : ''}
           </div>
         </div>
