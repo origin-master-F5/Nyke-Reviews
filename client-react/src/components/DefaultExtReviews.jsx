@@ -10,9 +10,9 @@ export default class ReviewPreview extends React.Component {
     this.handleViewMore = this.handleViewMore.bind(this)
   }
 
-  handleViewMore() {
+  handleViewMore(bool) {
     this.setState({
-      viewingMore: !this.state.viewingMore
+      viewingMore: bool
     })
   }
 
@@ -63,7 +63,3 @@ export default class ReviewPreview extends React.Component {
     )
   }
 }
-
-// we want handleViewMore to be able to return partial or all comment body
-// on click, handleView more will return either data.comment and Less
-// or DefaultComment component from other page which will render partial info

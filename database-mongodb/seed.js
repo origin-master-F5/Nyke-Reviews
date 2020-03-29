@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const db = require('./index.js').db
 const colors = require('colors')
 const relativeReviewData = require('./seedData')
-const namesData = require('./seedDataNames').namesData
 const faker = require('faker')
 const moment = require('moment')
+const properFormat = require('./NicksData')
 
 
 //////////////////////////////////
@@ -99,10 +99,13 @@ const createProducts = () => {
   //////////////////////////////////
   // BUILD A PRODUCT
   //////////////////////////////////
-  for (let k = 0; k < namesData.length; k++) {
+  for (let k = 0; k < properFormat.length; k++) {
     let aSingleProduct = {} // object with 3 key value pairs, product name, id, and reviews(an array of objects)
-    aSingleProduct.productName = namesData[k]
-    aSingleProduct.productId = k
+    aSingleProduct.productName = properFormat[k].name
+    aSingleProduct.productId = properFormat[k].nikeID
+    aSingleProduct.price = properFormat[k].price
+    aSingleProduct.discountPrice = properFormat[k].discountPrice
+    aSingleProduct.productImage = properFormat[k].image
     aSingleProduct.reviews = createReviews()
     productsArray.push(aSingleProduct) // push the current product into the final array of products
   }

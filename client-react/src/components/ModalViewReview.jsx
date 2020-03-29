@@ -4,6 +4,7 @@ import AViewReview from './AViewReview.jsx'
 import AverageStar from './AverageStars.jsx'
 import Bar from './Bar.jsx'
 
+
 export default class ModalView extends React.Component {
   constructor(props) {
     super(props)
@@ -114,16 +115,33 @@ export default class ModalView extends React.Component {
     this.reviewsToBeRendered(e.target.value)
   }
 
-
+  // this is used to change the closing review state when exiting views. this makes it so pop up animations work properly with create review popup
+  exitHandler() {
+    this.props.modalViewHandler()
+    this.props.closingReviewHandler(false)
+  }
 
   render() {
+    console.log('logging props on moval view', this.props)
     return (
-      <div className="modal-view-jr">
-        <div className="modal-view-exit-container-jr">
-          <img
-            className="modal-view-exit-jr"
-            src={exit} onClick={() => this.props.modalViewHandler()}
-          ></img>
+      <div className={this.props.closingReview ? "modal-view-jr" : "modal-view-animated-jr"} >
+
+        <div className="modal-view-top-bar-container-jr">
+          <div className="product-preview-container-jr" onClick={() => this.exitHandler()} >
+            <div className="modal-view-top-image-container-jr" ><img className="top-image-jr" src={this.props.currentProduct.productImage} ></img></div>
+            <div>
+              <div className="top-bar-name-jr" >{this.props.currentProduct.productName}</div>
+              <div className="top-bar-price-jr" >${this.props.currentProduct.price}</div>
+              <div className="top-bar-discount-price-jr">${this.props.currentProduct.discountPrice}</div>
+            </div>
+          </div>
+
+          <div className="make-click-space-bigger-jr"
+            onClick={() => this.exitHandler()}>
+            <div
+              className="modal-view-exit-jr"
+            ></div>
+          </div>
         </div>
 
         <div className="modal-view-stars-jr" >
@@ -165,8 +183,7 @@ export default class ModalView extends React.Component {
           className="view-load-more-jr"
           onClick={() => this.loadMoreHandler()}>{this.state.allLoaded ? '' : 'Load More'}
         </div>
-
-      </div>
+      </div >
     )
   }
 }

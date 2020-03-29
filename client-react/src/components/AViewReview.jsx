@@ -233,33 +233,6 @@ export default class AViewReview extends React.Component {
             <Bar title="Durability" value={data.durability} leftBound="Not Durable" rightBound="Very Durable" />
           </div>
 
-          {/* <div className="a-view-container-jr" id="a-view-size-no-top-jr">
-            <div className="a-view-header-jr" >Size</div>
-            <div className="a-view-value-jr" >{data.size}turn to slider bar</div>
-            <div className="a-view-params-container-jr">
-              <div className="a-view-left-param-jr" >Runs Small</div>
-              <div style={{ float: "right" }} className="a-view-right-param-jr" >Runs Big</div>
-            </div>
-          </div> */}
-
-          {/* <div className="a-view-container-jr" >
-            <div className="a-view-header-jr" >Comfort</div>
-            <div className="a-view-value-jr" >{data.comfort}turn to slider bar</div>
-            <div className="a-view-params-container-jr" >
-              <div className="a-view-left-param-jr" >Uncomfortable</div>
-              <div style={{ float: "right" }} className="a-view-right-param-jr" >Very Comfortable</div>
-            </div>
-          </div>
-
-          <div className="a-view-container-jr" >
-            <div className="a-view-header-jr" >Durability</div>
-            <div className="a-view-value-jr" >{data.durability}turn to slider bar</div>
-            <div className="a-view-params-container-jr" >
-              <div className="a-view-left-param-jr" >Not Durable</div>
-              <div style={{ float: "right" }} className="a-view-right-param-jr" >Very Durable</div>
-            </div>
-          </div> */}
-
         </div>
 
         <div>
@@ -274,7 +247,6 @@ export default class AViewReview extends React.Component {
 
           <div>
             {this.howFar()}
-            {/* <span> - </span> */}
             {this.terrainType()}
           </div>
 

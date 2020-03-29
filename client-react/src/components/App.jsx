@@ -14,7 +14,8 @@ class App extends React.Component {
       loading: true,
       currentProduct: {},
       showModalView: false,
-      showModalWrite: false
+      showModalWrite: false,
+      closingReview: false
     };
 
     this.getAll = this.getAll.bind(this)
@@ -22,6 +23,7 @@ class App extends React.Component {
     this.modalViewHandler = this.modalViewHandler.bind(this)
     this.modalWriteHandler = this.modalWriteHandler.bind(this)
     this.getAverageRating = this.getAverageRating.bind(this)
+    this.closingReviewHandler = this.closingReviewHandler.bind(this)
   }
 
   getAll() {
@@ -38,6 +40,12 @@ class App extends React.Component {
       })
   }
 
+  closingReviewHandler(bool) {
+    this.setState({
+      closingReview: bool
+    })
+  }
+
   // determines which modals will be rendered based off their state value
   whichModal() {
     if (this.state.showModalView && this.state.showModalWrite) {
@@ -47,10 +55,15 @@ class App extends React.Component {
             modalViewHandler={this.modalViewHandler}
             currentProduct={this.state.currentProduct}
             getAverageRating={this.getAverageRating}
+            closingReview={this.state.closingReview}
+          // className="modal-view-jr"
           />
           <ModalWrite
             modalWriteHandler={this.modalWriteHandler}
+            modalViewHandler={this.modalViewHandler}
             currentProduct={this.state.currentProduct}
+            obscure={this.state.showModalWrite}
+            closingReviewHandler={this.closingReviewHandler}
           />
         </div>
       )
@@ -60,7 +73,9 @@ class App extends React.Component {
           modalViewHandler={this.modalViewHandler}
           currentProduct={this.state.currentProduct}
           getAverageRating={this.getAverageRating}
-          className="modal-view-jr"
+          closingReview={this.state.closingReview}
+          closingReviewHandler={this.closingReviewHandler}
+        // className="modal-view-jr"
         />
       )
     } else {
@@ -130,81 +145,5 @@ class App extends React.Component {
 
 export default App;
 
-// disregard....
-
-// renderView() {
-//   // if (this.state.view === 'default') {
-//   //   return <Default changeView={this.changeView} isLoading={this.state.loading} currentProduct={this.state.currentProduct} />
-//   //   // } else if (this.state.view === 'create') {
-//   //   //   return <Create viewPost={this.changeView} />
-//   //   // } else {
-//   //   //   return <Post postId={this.state.view} />
-//   //   // }
-//   // }
-// }
-
-  // <span className={this.state.view === 'default'
-  // ? 'review-unselected'
-  // : 'review-selected'}
-  // onClick={() => {
-  //   this.setState({ loading: true })
-  //   this.getAll()
-  //   this.changeView('posts')
-  // }}>
-
-
-
-  // {/* <div className="main">
-//   {this.renderView()}
-// </div> */}
-
-// {/* <div className="">
-
-//   <span className={this.state.view === 'create'
-//     ? 'nav-selected'
-//     : 'nav-unselected'}
-//     onClick={() => this.changeView('create')}>
-//     Write a Post
-//           </span>
-// </div> */}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-// class ButtonParent extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       condition: false
-//     }
-//     this.handleClick = this.handleClick.bind(this)
-//   }
-//   handleClick() {
-//     this.setState({
-//       condition: !this.state.condition
-//     })
-//   }
-//   render() {
-//     return (
-//       <ButtonChild
-//         className={this.state.condition ? "button toggled" : "button"}
-//         toggleClassName={this.handleClick}
-//       >
-//         Toggle me!
-//       </ ButtonChild>
-//     )
-//   }
-// }
-
-// class ButtonChild extends React.Component {
-//   render() {
-//     return (
-//       <div
-//         className={this.props.className}
-//         onClick={this.props.toggleClassName}
-//       >
-//         {this.props.children}
-//       </ div>
-//     )
-//   }
-// }
 
 

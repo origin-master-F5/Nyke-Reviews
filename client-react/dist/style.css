@@ -10,7 +10,7 @@
 
 /* /////////////   DEFAULT EXTENDED SUB  ///////////// */
 .default-extended-sub-jr {
-  display: grid;
+  /* display: grid; */
 }
 
 .default-extended-sub-stars-jr {
@@ -156,30 +156,147 @@
 .modal-view-jr {
   background: white;
   border: 1px solid #ccc;
-  transition: 1.1s ease-out;
   display: block;
   height: 100%;
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
-  /* z-index: 1; */
+  z-index: 100;
   overflow-y: auto;
 }
 
-.modal-view-exit-container-jr {
-  margin: 15px;
-  width: 18px;
-  height: 18px;
+.modal-view-animated-jr {
+  background: white;
+  border: 1px solid #ccc;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  overflow-y: auto;
+  animation: slide-up 0.3s;
+}
+
+
+@keyframes slide-up {
+    0% {
+        opacity: 1;
+        transform: translateY(1000px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+
+
+   /* animation: slide-down 0.5s;
+    @keyframes slide-down {
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+        100% {
+        opacity: 0;
+        transform: translateY(1000px);
+    }
+  } */
+
+.modal-view-obscure-jr {
+  /* display: none; Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 200; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.6);
+}
+
+
+
+
+
+.modal-view-top-bar-container-jr {
+  width: 100%;
+  height: 123px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 101;
+  position: fixed;
+  background-color: white;
+}
+
+.product-preview-container-jr {
+  display: grid;
+  grid-template-columns: auto 265px;
+  cursor: pointer;
+  padding: 30px 0px 0px 20px;
+  width: 325px;
+  position: fixed;
+}
+
+.modal-view-top-image-container-jr {
+  width: 60px;
+  height: 60px;
+}
+
+.top-image-jr {
+  width: 100%;
+  height: 100%;
+  filter: brightness(115%);
+}
+
+.top-bar-name-jr {
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.top-bar-price-jr {
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.top-bar-discount-price-jr {
+  color: #8D8D8D;
+  text-decoration: line-through;
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.make-click-space-bigger-jr {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
   position: fixed;
   right: 0;
+  top: 0;
+  margin: 20px;
 }
 
 .modal-view-exit-jr {
-  width:100%;
+  margin: 20px;
+  display: inline-block;
+  clip-path: polygon(8% 3%, 0 11%, 38% 51%, 0 89%, 8% 96%, 47% 59%, 86% 99%, 94% 91%, 55% 51%, 97% 9%, 89% 1%, 47% 44%);
+  background-color: rgb(22, 22, 22);
   height:auto;
   cursor: pointer;
+  opacity: 1;
+  width:15px;
+  height: 15px;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
+
 
 .modal-view-stars-jr{
   padding: 206px 0px 0px 0px;
@@ -242,7 +359,7 @@
     font-size: 14px;
     padding: 0 20px 0 0;
     width: 100%;
-    max-width: 200px;
+    max-width: 210px;
     height: 38px;
     background-repeat: no-repeat;
     background-position: right center;
@@ -451,7 +568,7 @@
   border: 1px solid #ccc;
   overflow-y: auto;
   display: block;
-  z-index: 120002;
+  z-index: 300;
   outline-style: none;
   outline-width: 0px;
   width: 717px;
@@ -469,10 +586,9 @@
 
 .modal-write-exit-container-jr {
   top: 28px;
-  right: 16px;
-  padding: 0;
+  right: 5px;
+  padding: 10px;
   cursor: pointer;
-  display: inline;
   position: absolute;
   width: 25px;
   margin: -15px 0 0 0;
@@ -480,9 +596,12 @@
 }
 
 .modal-write-exit-jr {
-  width:100%;
-  height:auto;
+  width:15px;
+  height:15px;
   cursor: pointer;
+  clip-path: polygon(8% 3%, 0 11%, 38% 51%, 0 89%, 8% 96%, 47% 59%, 86% 99%, 94% 91%, 55% 51%, 97% 9%, 89% 1%, 47% 44%);
+  background-color: rgb(22, 22, 22);
+  position: fixed;
 }
 
 .write-header-jr {
@@ -694,17 +813,6 @@ display: inline-block;
 }
 
 
-/* body {
-  background: #000;
-  opacity: .7;
-  height: 100% !important;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  top: 0;
-  left: 0;
-} */
 
 .submit-icon-container-jr {
   width: 50px;
