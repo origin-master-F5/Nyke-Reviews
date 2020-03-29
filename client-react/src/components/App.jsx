@@ -20,7 +20,6 @@ class App extends React.Component {
     };
 
     this.getOne = this.getOne.bind(this)
-    // this.whichModal = this.whichModal.bind(this);
     this.modalViewHandler = this.modalViewHandler.bind(this)
     this.modalWriteHandler = this.modalWriteHandler.bind(this)
     this.getAverageRating = this.getAverageRating.bind(this)
@@ -121,7 +120,6 @@ class App extends React.Component {
       let answer = window.location.hash.split('#')
       this.getOne(Number(answer[1]))
     });
-
   }
 
   componentDidMount() {
@@ -154,55 +152,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// componentDidMount() {
-//   this.getShoeSet();
-
-//   function searchForProductWhenHashChanges() {
-//     const pathArray = window.location.pathname.split('/');
-//     console.log(window.location.href)
-//     console.log(pathArray, 'THIS IS THE PATH ARRAY')
-//     //this.getShoeSet(pathArray[pathArray.length - 1])
-//   }
-
-//   window.addEventListener("hashchange", () => {
-//     console.log('THE HASH IS CHANGING', window.location.hash)
-//     let answer = window.location.hash.split('#')
-//     this.getShoeSet(answer[1]);
-//   });
-
-
-// }
-
-// getShoeSet(id) {
-//   if (id === undefined) {
-//     id = 160
-//   }
-
-//   Axios.get(`/api/shoe/${id}`)
-//     .then(response => {
-//       console.log("recieved", response.data.name)
-//       let shoe = response.data
-//       return shoe
-//     })
-
-//     .then(shoe => {
-//       Axios.get(`/api/shoes/${shoe.name}`)
-//         .then(shoeset => {
-//           console.log('recieved an object', shoeset.data)
-//           this.setState({
-//             currentShoe: shoe,
-//             shoeSet: shoeset.data
-//           });
-//         })
-//     })
-
-//     .catch((e) => {
-//       window.alert("Fetch Request For Nike Main Component Failed, SoMeThInGwEnTtErRiBlYwRoNg")
-//       this.setState({
-//         currentShoe: shoeExample,
-//       })
-//     });
-// }
