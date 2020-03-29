@@ -10,8 +10,9 @@
  /////////////  DEFAULT EXTENDED SUB  /////////////
 ====================================================
 */
-
 .default-extended-sub-stars-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 100px auto;
   column-gap: 16px;
@@ -19,6 +20,8 @@
 }
 
 .default-extended-sub-write-review-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   border-bottom: 1px solid black;
   width: 113px;
@@ -28,6 +31,8 @@
 }
 
 .default-extended-sub-more-reviews-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   cursor: pointer;
   border-bottom: 1px solid black;
@@ -36,34 +41,44 @@
   margin-bottom: 10px;
 }
 
+
 /*
 ====================================================
 ////////////  DEFAULT EXTENDED PREVIEW  ////////////
 ====================================================
 */
-
 .default-extended-preview-main-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding: 0px 0px 40px 0px;
 }
 
 .default-extended-preview-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   font-size: 16px;
   padding-bottom: 10px;
 }
 
 .default-extended-preview-rating-subheader-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 85px auto;
 }
 
 
 .default-extended-preview-stars-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 15px;
   height: 15px;
 }
 
 .default-extended-preview-username-jr {
+  line-height: normal;
+  box-sizing: content-box;
   color:grey;
   display: inline-block;
   padding-left: 16px;
@@ -71,12 +86,16 @@
 }
 
 .default-extended-preview-comment-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 16px;
   padding-top: 12px;
   line-height:28px;
 }
 
 .default-extended-preview-moreOrLess-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   cursor: pointer;
   border-bottom: 1px solid black;
@@ -90,6 +109,8 @@
 ====================================================
 */
 .default-main-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   padding: 28px 0;
   display: grid;
@@ -99,17 +120,23 @@
 }
 
 .default-review-count-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   font-size: 20px;
 }
 
 .default-arrow-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   justify-self: right;
   width: 25px;
   height: 25px;
 }
 
 .default-arrow-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width:100%;
   height:auto;
 }
@@ -121,6 +148,8 @@
 ====================================================
 */
 .star-black-filled-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -129,6 +158,8 @@
 }
 
 .star-grey-filled-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -137,12 +168,16 @@
 }
 
 .partial-star-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   width: 20px;
   height: 20px;
 }
 
 #smallstar {
+  line-height: normal;
+  box-sizing: content-box;
   width: 15px;
   height: 15px;
 }
@@ -154,6 +189,8 @@
 ====================================================
 */
 .modal-view-jr {
+  line-height: normal;
+  box-sizing: content-box;
   background: white;
   border: 1px solid #ccc;
   display: block;
@@ -167,6 +204,8 @@
 }
 
 .modal-view-animated-jr {
+  line-height: normal;
+  box-sizing: content-box;
   background: white;
   border: 1px solid #ccc;
   display: block;
@@ -192,6 +231,8 @@
   }
 
 .modal-view-obscure-jr {
+  line-height: normal;
+  box-sizing: content-box;
   /* display: none; Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 200; /* Sit on top */
@@ -205,6 +246,8 @@
 }
 
 .modal-view-top-bar-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 123px;
   display: grid;
@@ -215,6 +258,8 @@
 }
 
 .product-preview-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: auto 265px;
   cursor: pointer;
@@ -224,29 +269,39 @@
 }
 
 .modal-view-top-image-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 60px;
   height: 60px;
 }
 
 .top-image-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 100%;
   filter: brightness(115%);
 }
 
 .top-bar-name-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 16px;
   padding-bottom: 10px;
   text-align: center;
 }
 
 .top-bar-price-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 16px;
   padding-bottom: 10px;
   text-align: center;
 }
 
 .top-bar-discount-price-jr {
+  line-height: normal;
+  box-sizing: content-box;
   color: #8D8D8D;
   text-decoration: line-through;
   font-size: 16px;
@@ -255,6 +310,8 @@
 }
 
 .make-click-space-bigger-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -265,6 +322,8 @@
 }
 
 .modal-view-exit-jr {
+  line-height: normal;
+  box-sizing: content-box;
   margin: 20px;
   display: inline-block;
   clip-path: polygon(8% 3%, 0 11%, 38% 51%, 0 89%, 8% 96%, 47% 59%, 86% 99%, 94% 91%, 55% 51%, 97% 9%, 89% 1%, 47% 44%);
@@ -280,17 +339,23 @@
 }
 
 .modal-view-stars-jr{
+  line-height: normal;
+  box-sizing: content-box;
   padding: 206px 0px 0px 0px;
   text-align: center;
 }
 
 .modal-view-count-jr {
+  line-height: normal;
+  box-sizing: content-box;
   text-align: center;
   font-size: 25px;
   padding: 15px 0px 45px 0px;
 }
 
 .modal-view-triple-avg-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 950px;
@@ -302,6 +367,8 @@
 }
 
 .modal-view-sorter-jr {
+  line-height: normal;
+  box-sizing: content-box;
   border-top: solid 1px lightgrey;
   border-bottom: solid 1px lightgrey;
   width: 1000px;
@@ -310,6 +377,8 @@
 }
 
 .view-load-more-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
@@ -319,6 +388,8 @@
 }
 
 .modal-view-dropdown-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: block;
   font-size: 14px;
   padding: 0 20px 0 0;
@@ -344,6 +415,8 @@
 ====================================================
 */
 .a-view-review-main-jr {
+  line-height: normal;
+  box-sizing: content-box;
   border-bottom: 1px solid lightgrey;
   display: grid;
   grid-template-columns: 300px 700px;
@@ -354,26 +427,36 @@
 }
 
 .a-view-stars-and-feels-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-right: 60px;
 }
 
 .a-view-stars-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-bottom: 18px;
 }
 
 
 .a-star-div-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   width: 20px;
   height: 20px;
 }
 
 .a-view-star-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width:100%;
   height:auto;
 }
 
 .a-view-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding: 18px 0px;
   color: #111;
   font-weight: normal;
@@ -381,20 +464,28 @@
 }
 
 #a-view-size-no-top-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding: 0px 0px 18px 0px;
 }
 
 .a-view-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-bottom: 7px;
 }
 
 .a-view-value-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-bottom: 7px;
 }
 
 .a-view-left-param-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   font-size: 12px;
   font-weight: normal;
@@ -404,6 +495,8 @@
 }
 
 .a-view-right-param-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   font-size: 12px;
   font-weight: normal;
@@ -413,6 +506,8 @@
 }
 
 .view-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
   line-height: 1.6;
   color: #111;
@@ -422,6 +517,8 @@
 }
 
 .view-comment-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
   line-height: 1.7;
   color: #111;
@@ -431,41 +528,72 @@
 }
 
 .a-view-image-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   max-height: 128px;
   max-width: 128px;
   padding: 30px 0px;
 }
 
 .a-view-image-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 100%;
 }
 
 .a-view-review-subtext-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: block;
 }
 
 #a-view-after-jr::after {
+  line-height: normal;
+  box-sizing: content-box;
   content: '\2013';
   padding: 0px 8px;
 }
 
 .a-view-review-subtext-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 12px;
   color: #6D6D6D;
   white-space: nowrap;
 }
 
 .view-username-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 12px;
   color: #6D6D6D;
 }
 
+.verified-user-review-jr {
+  line-height: normal;
+  box-sizing: content-box;
+  color: #FA5400 !important;
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.smoosh-to-nothing-jr {
+  line-height: normal;
+  box-sizing: content-box;
+  height: 0px;
+  width: 0px;
+}
+
 .a-view-review-toggle-containers-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding: 16px 0px 0px 0px;
 }
 
 .up-vote-div-jr {
+  line-height: normal;
+  box-sizing: content-box;
   margin: 5px;
   display: inline-block;
   width: 22px;
@@ -473,18 +601,24 @@
 }
 
 .a-view-rightpadding-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-right: 20px;
   color: #8D8D8D;
   font-size: 14px;
 }
 
 .up-vote-img-jr {
+  line-height: normal;
+  box-sizing: content-box;
   cursor: pointer;
   width:100%;
   height:100%;
 }
 
 .down-vote-div-jr {
+  line-height: normal;
+  box-sizing: content-box;
   margin: 5px;
   display: inline-block;
   width: 23px;
@@ -492,16 +626,22 @@
 }
 
 .down-vote-img-jr {
+  line-height: normal;
+  box-sizing: content-box;
   cursor: pointer;
   width:100%;
   height:100%;
 }
 
 .a-view-flag-or-text-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 13px;
 }
 
 .view-flag-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -510,6 +650,8 @@
 }
 
 .view-flag-jr {
+  line-height: normal;
+  box-sizing: content-box;
   cursor: pointer;
   width:100%;
   height:auto;
@@ -522,6 +664,8 @@
 ====================================================
 */
 .modal-write-jr {
+  line-height: normal;
+  box-sizing: content-box;
   background: white;
   border: 1px solid #ccc;
   overflow-y: auto;
@@ -542,6 +686,8 @@
 }
 
 .modal-write-exit-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   top: 28px;
   right: 5px;
   padding: 10px;
@@ -553,6 +699,8 @@
 }
 
 .modal-write-exit-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width:15px;
   height:15px;
   cursor: pointer;
@@ -562,6 +710,8 @@
 }
 
 .write-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-top: 107px;
   font-size: 24px;
   font-family: "Nike TG", Oswald, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -572,6 +722,8 @@
 }
 
 .write-sub-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-bottom: 8px;
   text-align: center;
   color: #8D8D8D;
@@ -579,10 +731,14 @@
 }
 
 .write-star-jr {
+  line-height: normal;
+  box-sizing: content-box;
 display: inline-block;
 }
 
 .write-rating-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 283px auto;
   margin: 50px 0px 0px 0px;
@@ -591,16 +747,22 @@ display: inline-block;
 }
 
 .radio-form-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 24px 0px;
 }
 
 .write-red-asterix-jr {
+  line-height: normal;
+  box-sizing: content-box;
   color: red;
 }
 
 .write-form-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
   font-weight: normal;
   color: #111;
@@ -610,40 +772,56 @@ display: inline-block;
 }
 
 .write-form-header-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-weight: normal;
 }
 
 .radio {
+  line-height: normal;
+  box-sizing: content-box;
   padding: 18px 0px 0px 0px;
 }
 
 .radio-input-jr input[type="radio"]{
+  line-height: normal;
+  box-sizing: content-box;
   margin-right:10px;
 }
 .radio-input-jr {
+  line-height: normal;
+  box-sizing: content-box;
   color: #8D8D8D;
   font-size: 12px;
 }
 
 .review-title-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 25px 0px;
 }
 
 .review-title-textarea-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 95%;
   height: 50px;
   padding-left: 25px;
 }
 
 .review-title-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 25px 0px;
 }
 
 .review-title-textarea-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 95%;
   height: 45px;
   padding-left: 25px;
@@ -654,12 +832,16 @@ display: inline-block;
 }
 
 .review-body-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin: 25px 0px;
 }
 
 .review-body-textarea-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 95%;
   height: 100px;
   padding-left: 25px;
@@ -671,6 +853,8 @@ display: inline-block;
 }
 
 .post-image-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding-bottom: 44px;
@@ -679,6 +863,8 @@ display: inline-block;
 }
 
 .photo-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   height: 44px;
   width: 120px;
@@ -687,6 +873,8 @@ display: inline-block;
 }
 
 .video-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: inline-block;
   height: 44px;
   width: 120px;
@@ -694,32 +882,44 @@ display: inline-block;
 }
 
 .photo-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 100%;
 }
 
 .video-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 100%;
 }
 
 .post-image-text-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
 }
 
 .post-image-subtext-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
   color: #909295;
   padding-top: 4px;
 }
 
 .input-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding-bottom: 20px;
 }
 
 .input-area-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 95%;
   height: 56px;
   padding-left: 25px;
@@ -730,6 +930,8 @@ display: inline-block;
 }
 
 .input-dropdown-jr{
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 14px;
   width: 100%;
   height: 56px;
@@ -741,6 +943,8 @@ display: inline-block;
 }
 
 .agree-to-terms-jr {
+  line-height: normal;
+  box-sizing: content-box;
   text-align: center;
   font-size: 14px;
   color: #909295;
@@ -748,6 +952,8 @@ display: inline-block;
 }
 
 .form-submit-jr {
+  line-height: normal;
+  box-sizing: content-box;
   background-color: black;
   width: 100%;
   height: 50px;
@@ -760,6 +966,8 @@ display: inline-block;
 }
 
 .submit-icon-container-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 50px;
   height: 50px;
   text-align: center;
@@ -769,17 +977,23 @@ display: inline-block;
 }
 
 .submit-icon-jr {
+  line-height: normal;
+  box-sizing: content-box;
   width: 100%;
   height: 100%;
 }
 
 .thank-for-review-jr {
+  line-height: normal;
+  box-sizing: content-box;
   font-size: 16px;
   text-align: center;
   padding: 28px 0px 20px 0px;
 }
 
 .good-to-go-jr {
+  line-height: normal;
+  box-sizing: content-box;
   padding-top: 7px;
   font-size: 14px;
   font-family: "Nike TG", Oswald, "Helvetica Neue",Helvetica, Arial, sans-serif;
@@ -790,6 +1004,8 @@ display: inline-block;
 }
 
 .buy-more-jr {
+  line-height: normal;
+  box-sizing: content-box;
   margin-top: 35px;
   margin-left: auto;
   margin-right: auto;

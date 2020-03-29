@@ -212,7 +212,7 @@ export default class AViewReview extends React.Component {
 
   render() {
     let data = this.props.aReviewData
-
+    console.log('PROPS ON JARED', this.props)
     return (
 
       <div className="a-view-review-main-jr">
@@ -244,6 +244,15 @@ export default class AViewReview extends React.Component {
             <span className="view-username-jr" id="a-view-after-jr" > {data.username}</span>
             <span className="a-view-review-subtext-jr" >{data.location}</span>
           </div>
+
+          {this.props.aReviewData.verified ?
+            <div className="verified-user-review-jr">
+              Verified Purchaser
+            </div>
+            :
+            <div className="smoosh-to-nothing-jr"></div>
+          }
+
 
           <div>
             {this.howFar()}
