@@ -5,7 +5,11 @@
 }
 
 
-/* /////////////   DEFAULT EXTENDED SUB  ///////////// */
+/*
+====================================================
+ /////////////  DEFAULT EXTENDED SUB  /////////////
+====================================================
+*/
 
 .default-extended-sub-stars-jr {
   display: grid;
@@ -29,9 +33,14 @@
   border-bottom: 1px solid black;
   width: 106px;
   padding-bottom: 4px;
+  margin-bottom: 10px;
 }
 
-/* /////////////   DEFAULT EXTENDED PREVIEW ///////////// */
+/*
+====================================================
+////////////  DEFAULT EXTENDED PREVIEW  ////////////
+====================================================
+*/
 
 .default-extended-preview-main-jr {
   padding: 0px 0px 40px 0px;
@@ -75,7 +84,11 @@
   padding-bottom: 1px;
 }
 
-/* /////////////   DEFAULT MAIN   ///////////// */
+/*
+====================================================
+/////////////////  DEFAULT MAIN  ///////////////////
+====================================================
+*/
 .default-main-jr {
   width: 100%;
   padding: 28px 0;
@@ -101,8 +114,12 @@
   height:auto;
 }
 
-/*     DEFAULT MAIN stars   */
 
+/*
+====================================================
+//////////////  DEFAULT MAIN stars  ////////////////
+====================================================
+*/
 .star-black-filled-jr {
   display: inline-block;
   width: 20px;
@@ -130,8 +147,12 @@
   height: 15px;
 }
 
-/* /////////////    MODAL VIEW   ///////////// */
 
+/*
+====================================================
+//////////////////  MODAL VIEW  ////////////////////
+====================================================
+*/
 .modal-view-jr {
   background: white;
   border: 1px solid #ccc;
@@ -298,26 +319,30 @@
 }
 
 .modal-view-dropdown-jr {
-    display: block;
-    font-size: 14px;
-    padding: 0 20px 0 0;
-    width: 100%;
-    max-width: 210px;
-    height: 38px;
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-image: url(data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20xmlns%3D%…72.586z%22%20fill%3D%22%23111%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E);
-    background-size: 13px auto;
-    background-color: #FFF;
-    margin-left: 0;
-    font-weight: 700;
-    text-transform: capitalize;
-    border: none;
-    margin: 20px 0px;
+  display: block;
+  font-size: 14px;
+  padding: 0 20px 0 0;
+  width: 100%;
+  max-width: 210px;
+  height: 38px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: url(data:image/svg+xml%3Csvg%20width%3D%2210%22%20height%3D%227%22%20xmlns%3D%…72586z%22%20fill%3D%22%23111%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E);
+  background-size: 13px auto;
+  background-color: #FFF;
+  margin-left: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+  border: none;
+  margin: 20px 0px;
 }
 
 
-/* /////////////    A VIEW REVIEW  ///////////// */
+/*
+====================================================
+//////////////////  A VIEW REVIEW  /////////////////
+====================================================
+*/
 .a-view-review-main-jr {
   border-bottom: 1px solid lightgrey;
   display: grid;
@@ -348,7 +373,6 @@
   height:auto;
 }
 
-/*A VIEW REVIEW size container*/
 .a-view-container-jr {
   padding: 18px 0px;
   color: #111;
@@ -492,7 +516,11 @@
 }
 
 
-/* /////////////    MODAL WRITE   ///////////// */
+/*
+====================================================
+///////////////////  MODAL WRITE  //////////////////
+====================================================
+*/
 .modal-write-jr {
   background: white;
   border: 1px solid #ccc;

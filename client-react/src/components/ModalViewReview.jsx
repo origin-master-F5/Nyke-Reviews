@@ -1,5 +1,4 @@
 import React from 'react';
-import exit from './Images/Exit.png'
 import AViewReview from './AViewReview.jsx'
 import AverageStar from './AverageStars.jsx'
 import Bar from './Bar.jsx'

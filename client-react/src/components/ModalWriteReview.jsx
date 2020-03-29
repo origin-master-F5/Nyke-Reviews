@@ -1,5 +1,4 @@
 import React from 'react';
-import exit from './Images/Exit.png'
 import moment from 'moment'
 import photoFilled from './Images/PhotoFilled.png'
 import photoUnfilled from './Images/PhotoUnfilled.png'
@@ -124,13 +123,14 @@ export default class ModalWrite extends React.Component {
       return (
         <div className={this.props.obscure ? "modal-view-obscure-jr" : ""}>
           <div className="modal-write-jr">
-            <div className="modal-write-exit-container-jr">
-              <img
+
+            <div className="modal-write-exit-container-jr"
+              onClick={() => this.writeExitHandler()}>
+              <div
                 className="modal-write-exit-jr"
-                src={exit}
-                onClick={() => this.writeExitHandler()}
-              ></img>
+              ></div>
             </div>
+
             <div className="submit-icon-container-jr">
               <img className="submit-icon-jr" src={SubmitIcon}></img>
             </div>
