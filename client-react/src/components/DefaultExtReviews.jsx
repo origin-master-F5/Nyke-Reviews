@@ -10,9 +10,9 @@ export default class ReviewPreview extends React.Component {
     this.handleViewMore = this.handleViewMore.bind(this)
   }
 
-  handleViewMore(bool) {
+  handleViewMore() {
     this.setState({
-      viewingMore: bool
+      viewingMore: !this.state.viewingMore
     })
   }
 
