@@ -24,6 +24,7 @@ class App extends React.Component {
     this.modalWriteHandler = this.modalWriteHandler.bind(this)
     this.getAverageRating = this.getAverageRating.bind(this)
     this.closingReviewHandler = this.closingReviewHandler.bind(this)
+    this.urlListner = this.urlListner.bind(this)
   }
 
   getOne(id = 100) {
@@ -64,6 +65,7 @@ class App extends React.Component {
             obscure={this.state.showModalWrite}
             closingReviewHandler={this.closingReviewHandler}
             getOne={this.getOne}
+            updateReviews={this.getOne}
           />
         </div>
       )

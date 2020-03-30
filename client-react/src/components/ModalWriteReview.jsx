@@ -100,22 +100,28 @@ export default class ModalWrite extends React.Component {
       }
     })
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
+  updateReviewsHandler() {
+    let answer = window.location.hash.split('#')
+    this.props.updateReviews(Number(answer[1]))
+  }
+
   viewHandlers() {
     this.props.modalViewHandler()
     this.props.modalWriteHandler()
     this.props.closingReviewHandler(false)
+    this.updateReviewsHandler()
   }
 
   writeExitHandler() {
     this.props.closingReviewHandler(true)
     this.props.modalWriteHandler()
+    this.updateReviewsHandler()
   }
 
   render() {
