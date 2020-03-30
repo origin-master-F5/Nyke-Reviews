@@ -86,7 +86,6 @@
 }
 
 .default-extended-preview-comment-jr {
-  line-height: normal;
   box-sizing: content-box;
   font-size: 16px;
   padding-top: 12px;
@@ -384,7 +383,7 @@
   cursor: pointer;
   padding: 45px 0px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .modal-view-dropdown-jr {
@@ -506,7 +505,6 @@
 }
 
 .view-header-jr {
-  line-height: normal;
   box-sizing: content-box;
   font-size: 14px;
   line-height: 1.6;
@@ -517,7 +515,6 @@
 }
 
 .view-comment-jr {
-  line-height: normal;
   box-sizing: content-box;
   font-size: 14px;
   line-height: 1.7;
@@ -968,7 +965,7 @@ display: inline-block;
 .submit-icon-container-jr {
   line-height: normal;
   box-sizing: content-box;
-  width: 50px;
+  width: 55px;
   height: 50px;
   text-align: center;
   padding-top: 30px;
@@ -996,7 +993,7 @@ display: inline-block;
   box-sizing: content-box;
   padding-top: 7px;
   font-size: 14px;
-  font-family: "Nike TG", Oswald, "Helvetica Neue",Helvetica, Arial, sans-serif;
+  font-family: "Nike TG", Oswald, "Helvetica Neue",Helvetica, Arial, sans-serif !important;
   font-weight: normal;
   white-space: nowrap;
   color: #8D8D8D;

@@ -63,6 +63,7 @@ class App extends React.Component {
             currentProduct={this.state.currentProduct}
             obscure={this.state.showModalWrite}
             closingReviewHandler={this.closingReviewHandler}
+            getOne={this.getOne}
           />
         </div>
       )

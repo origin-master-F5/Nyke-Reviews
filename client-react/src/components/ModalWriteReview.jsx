@@ -7,7 +7,7 @@ import videoUnfilled from './Images/VideoUnfilled.png'
 import axios from 'axios'
 import faker from 'faker'
 import AverageStar from './AverageStars.jsx'
-import SubmitIcon from './Images/SubmitIcon.png'
+import submitIcon from './Images/SubmitIcon.png'
 
 
 export default class ModalWrite extends React.Component {
@@ -132,8 +132,9 @@ export default class ModalWrite extends React.Component {
             </div>
 
             <div className="submit-icon-container-jr">
-              <img className="submit-icon-jr" src={SubmitIcon}></img>
+              <img className="submit-icon-jr" src={submitIcon}></img>
             </div>
+
             <div className="thank-for-review-jr" >THANKS FOR THE REVIEW.</div>
             <div className="good-to-go-jr" >Your review has been successfully submitted</div>
             <button

@@ -212,7 +212,6 @@ export default class AViewReview extends React.Component {
 
   render() {
     let data = this.props.aReviewData
-    console.log('PROPS ON JARED', this.props)
     return (
 
       <div className="a-view-review-main-jr">
