@@ -129,8 +129,8 @@ export default class ModalView extends React.Component {
             <div className="modal-view-top-image-container-jr" ><img className="top-image-jr" src={this.props.currentProduct.productImage} ></img></div>
             <div>
               <div className="top-bar-name-jr" >{this.props.currentProduct.productName}</div>
-              <div className="top-bar-price-jr" >${this.props.currentProduct.price}</div>
               <div className="top-bar-discount-price-jr">${this.props.currentProduct.discountPrice}</div>
+              <div className="top-bar-price-jr" >${this.props.currentProduct.price}</div>
             </div>
           </div>
 
