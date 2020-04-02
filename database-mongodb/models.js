@@ -2,45 +2,40 @@ const Product = require('./index').Product;
 const mongoose = require('mongoose');
 
 const models = {
-    getOne: (req) => {
-        let productId = req.params.id;
-        console.log('params on models', req.params);
-        return Product.find({ productId });
-    },
-    changeVoteById: (req) => {
-        let parentId = req.body.parentId;
-        let childId = req.body.childId;
-        let newUpvote = req.body.upvoteValue;
-        let newDownvote = req.body.downvoteValue;
-        return Product.findOneAndUpdate({ '_id': parentId, 'reviews._id': childId }, {
-            '$set': {
-                'reviews.$.upvotes': newUpvote,
-                'reviews.$.downvotes': newDownvote
-            }
-        });
-    },
-    incrementFlag: (req) => {
-        let parentId = req.body.parentId;
-        let childId = req.body.childId;
-        let flagValue = req.body.flagValue;
+  getOne: (id) => Product.find(id),
 
-        return Product.findOneAndUpdate({ '_id': parentId, 'reviews._id': childId }, {
-            '$set': {
-                'reviews.$.flagged': flagValue
-            }
-        });
-    },
-    createReview: (req) => {
-        let _id = req.body.parentId;
-        let aReview = req.body.aReview;
+  changeVoteById: (ids, newUpvote, newDownvote) => {
+    return Product.findOneAndUpdate(ids, {
+      '$set': {
+        'reviews.$.upvotes': newUpvote,
+        'reviews.$.downvotes': newDownvote
+      }
+    });
+  },
 
-        return Product.findOne({ _id: _id })
-            .then(function(product) {
-                product.reviews.push(aReview);
-                product.save();
-            })
-            .catch((err) => console.log('this failed -->', err))
-    }
+  incrementFlag: (ids, flagValue) => {
+    return Product.findOneAndUpdate(ids, {
+      '$set': {
+        'reviews.$.flagged': flagValue
+      }
+    });
+  },
+
+  createReview: (id, review) => {
+    return Product.findOne(id)
+      .then((product) => {
+        product.reviews.push(review);
+        product.save();
+      });
+  },
+
+  deleteReview: (parent, review) => {
+    return Product.findOne(parent)
+      .then((product) => {
+        product.reviews.pull(review);
+        product.save();
+      });
+  }
 };
 
 module.exports = models;
