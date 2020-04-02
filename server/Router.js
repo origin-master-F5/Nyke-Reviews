@@ -1,20 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const controllers = require('./controllers')
+const express = require('express');
+const router = express.Router();
+const controllers = require('./controllers');
 
 router
-  .route('/products/reviews')
-
-  .put(controllers.putVote)
-  .post(controllers.postReview)
-
-router
-  .route('/products/reviews/flag')
-  .put(controllers.putFlag)
+    .route('/')
+    .put(controllers.putVote)
+    .post(controllers.postReview);
 
 router
-  .route('/products/reviews/:id')
-  .get(controllers.getOne)
+    .route('/flag')
+    .put(controllers.putFlag);
+
+router
+    .route('/:id')
+    .get(controllers.getOne);
 
 // router
 //   .route('/products/:_id')
@@ -22,5 +21,4 @@ router
 //   .delete(controller.delete)
 
 
-module.exports = router
-
+module.exports = router;

@@ -30,6 +30,7 @@ class App extends React.Component {
   getOne(id = 100) {
     axios.get(`/api/products/reviews/${id}`)
       .then((response) => {
+        console.log(response)
         this.setState({
           loading: false,
           currentProduct: response.data[0]
