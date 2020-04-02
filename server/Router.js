@@ -16,5 +16,4 @@ router
   .route('/:id')
   .get(controllers.getOne);
 
-
 module.exports = router;

@@ -17,7 +17,7 @@ var reviewsSchema = new mongoose.Schema({
   downvotes: { type: Number, default: 0 },
   verified: { type: Boolean, default: false },
   image: { type: String, default: '' }
-})
+});
 
 var productSchema = new mongoose.Schema({
   productName: String,
