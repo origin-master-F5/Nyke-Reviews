@@ -7181,6 +7181,6 @@ const formattedRawData = rawData.map((shoe) => ({
     image: shoe.image
 }));
 
-const properFormat = formattedRawData.concat(generateShoeData(10000));
+const properFormat = generateShoeData(10000);
 
 module.exports = properFormat;

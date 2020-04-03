@@ -139,16 +139,23 @@ var url = 'mongodb://localhost:27017/';
 MongoClient.connect(url, function(err, db) {
   if (err) { throw err; }
   var dbo = db.db('NykeReviews');
-  const start = process.hrtime.bigint();
-
+  
+  const dataStart = process.hrtime.bigint();
   var productsToInsert = createProducts();
+  const dataEnd = process.hrtime.bigint();
+  const bigNum = Number(dataEnd - dataStart);
+  let dataMs = bigNum / 1000000;
+  let dataSecs = Number((dataMs / 1000).toFixed(1)).toFixed(2);
+  console.log(`Data generating took ${dataMs} milliseconds and ${dataSecs} seconds`);
+
+  const seedStart = process.hrtime.bigint();
   dbo.collection('products').deleteMany()
     .then(() => dbo.collection('products').insertMany(productsToInsert))
     .then((res) => {
       console.log('Number of documents inserted: ' + res.insertedCount);
       db.close();
-      const end = process.hrtime.bigint();
-      const bigNum = Number(end - start);
+      const seedEnd = process.hrtime.bigint();
+      const bigNum = Number(seedEnd - seedStart);
       let ms = bigNum / 1000000;
       let secs = Number((ms / 1000).toFixed(1)).toFixed(2);
       return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds`);
