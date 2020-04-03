@@ -113,13 +113,44 @@ const createProducts = () => {
   return productsArray;
 };
 
-const insertMockData = function() {
-  let productsToInsert = createProducts();
-  Product.deleteMany()
-    .then(() => Product.insertMany(productsToInsert))
-    .then(() => console.log('DB seeded'.green))
-    .then(() => db.close());
+// const insertMockData = function() {
+//   const start = process.hrtime.bigint();
+//   let productsToInsert = createProducts();
+//   Product.deleteMany()
+//     .then(() => Product.insertMany(productsToInsert))
+//     .then(() => console.log('DB seeded'.green))
+//     .then(() => db.close())
+//     .then(() => {
+//       const end = process.hrtime.bigint();
+//       const bigNum = Number(end - start);
+//       let ms = bigNum / 1000000;
+//       let secs = ms / 1000;
+//       return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds for 10,000 products`);
+//     });
 
-};
+// };
 
-insertMockData();
+// insertMockData();
+
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/';
+
+MongoClient.connect(url, function(err, db) {
+  if (err) { throw err; }
+  var dbo = db.db('NykeReviews');
+  const start = process.hrtime.bigint();
+
+  var productsToInsert = createProducts();
+  dbo.collection('products').deleteMany();
+  dbo.collection('products').insertMany(productsToInsert, function(err, res) {
+    if (err) { throw err; }
+    console.log('Number of documents inserted: ' + res.insertedCount);
+    db.close();
+    const end = process.hrtime.bigint();
+    const bigNum = Number(end - start);
+    let ms = bigNum / 1000000;
+    let secs = Number((ms / 1000).toFixed(1)).toFixed(2);
+    return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds`);
+  });
+});
