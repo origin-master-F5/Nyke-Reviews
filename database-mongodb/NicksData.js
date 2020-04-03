@@ -7155,6 +7155,14 @@ const rawData = [
 
 ];
 
+const formattedRawData = rawData.map((shoe) => ({
+    name: shoe.name,
+    discountPrice: shoe.discountPrice,
+    price: shoe.price,
+    nikeID: shoe.nikeID,
+    image: shoe.image
+}));
+
 const generateShoeData = (generations) => {
     let generatedData = [];
     let nikeID = 211;
@@ -7173,14 +7181,8 @@ const generateShoeData = (generations) => {
 };
 
 
-const formattedRawData = rawData.map((shoe) => ({
-    name: shoe.name,
-    discountPrice: shoe.discountPrice,
-    price: shoe.price,
-    nikeID: shoe.nikeID,
-    image: shoe.image
-}));
 
-const properFormat = generateShoeData(10000);
+
+const properFormat = generateShoeData(1000);
 
 module.exports = properFormat;

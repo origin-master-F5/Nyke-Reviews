@@ -11,7 +11,8 @@
     "scripts": {
         "start": "nodemon server/index.js",
         "build": "webpack -d --watch",
-        "seed": "node database-mongodb/seed.js"
+        "seed": "node database-mongodb/seed.js",
+        "newSeed": "node database-mongodb/newSeed.js"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.28",
