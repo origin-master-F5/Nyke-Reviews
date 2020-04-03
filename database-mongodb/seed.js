@@ -142,15 +142,16 @@ MongoClient.connect(url, function(err, db) {
   const start = process.hrtime.bigint();
 
   var productsToInsert = createProducts();
-  dbo.collection('products').deleteMany();
-  dbo.collection('products').insertMany(productsToInsert, function(err, res) {
-    if (err) { throw err; }
-    console.log('Number of documents inserted: ' + res.insertedCount);
-    db.close();
-    const end = process.hrtime.bigint();
-    const bigNum = Number(end - start);
-    let ms = bigNum / 1000000;
-    let secs = Number((ms / 1000).toFixed(1)).toFixed(2);
-    return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds`);
-  });
+  dbo.collection('products').deleteMany()
+    .then(() => dbo.collection('products').insertMany(productsToInsert))
+    .then((res) => {
+      console.log('Number of documents inserted: ' + res.insertedCount);
+      db.close();
+      const end = process.hrtime.bigint();
+      const bigNum = Number(end - start);
+      let ms = bigNum / 1000000;
+      let secs = Number((ms / 1000).toFixed(1)).toFixed(2);
+      return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds`);
+    })
+    .catch((err) => console.error(err));
 });
