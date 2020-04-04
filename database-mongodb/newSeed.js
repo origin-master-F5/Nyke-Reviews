@@ -28,17 +28,11 @@ const getBenchmark = (start, end, operation, batchNum) => {
 
 async function seed(set, batch, time) {
   function* generateData(chunks, upperLimit) {
-    const genStart = process.hrtime.bigint();
+    // const genStart = process.hrtime.bigint();
     const total = chunks * upperLimit;
     let nikeID = 100;
       let chunkIncrementor = 0;
       let products = [];
-      let pIndex = 0;
-      // while (chunkIncrementor < chunks) {
-      //   //for escaping the nested for loop, i can use the 
-      //   //pIndex methond again
-      //   chunkIncrementor++
-      // }
       let upperLimitIncrementor = 0;
       while (upperLimitIncrementor < total) {
         let shoe = {};
@@ -77,40 +71,34 @@ async function seed(set, batch, time) {
           reviewIncrementor++
         }
         // shoe.reviews = JSON.stringify(shoe.reviews)
-        if (!products[pIndex]) {
-          products[pIndex] = []
-        }
-        products[pIndex].push(shoe);
-        if (products[pIndex].length === upperLimit) {
-          yield products[pIndex]
-          products[pIndex] = []
+        // if (!products[0]) {
+        //   products[0] = []
+        // }
+        products.push(shoe);
+        if (products.length === upperLimit) {
+          yield products
+          products = []
         }
         upperLimitIncrementor++
       }
-      // yield products;
-      // for (let i = 0; i < products.length; i++) {
-      //   yield products[i];
-      // }
-
-    const genEnd = process.hrtime.bigint();
-    console.log(getBenchmark(genStart, genEnd, 'Data Generating', total))
+    // const genEnd = process.hrtime.bigint();
+    // console.log(getBenchmark(genStart, genEnd, 'Data Generating', total))
   }
-  const seedStart = process.hrtime.bigint();
+  // const seedStart = process.hrtime.bigint();
   let insertCount = 0
   for (let products of generateData(set, batch)) {
     insertCount += products.length;
      await Product.insertMany(products)
-     .catch(err => console.error('Fail-->', err))
     console.log(`inserted so far: ${insertCount}`)
   }
-  const seedEnd = process.hrtime.bigint();
-  console.log(getBenchmark(seedStart, seedEnd, 'Seeding', set * batch))
+  // const seedEnd = process.hrtime.bigint();
+  // console.log(getBenchmark(seedStart, seedEnd, 'Seeding', set * batch))
   totalEnd = process.hrtime.bigint();
   console.log(getBenchmark(time, totalEnd, 'Total', set * batch))
 }
 const totalStart = process.hrtime.bigint();
 Product.deleteMany()
-  .then(() => seed(1000, 1000, totalStart))
+  .then(() => seed(10, 1000, totalStart))
   .then(() => db.close())
 
 
