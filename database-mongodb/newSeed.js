@@ -1,5 +1,4 @@
 const Product = require('./index').Product;
-const mongoose = require('mongoose');
 const db = require('./index.js').db;
 const colors = require('colors');
 const relativeReviewData = require('./seedData');
@@ -31,7 +30,6 @@ async function seed(set, batch, time) {
     // const genStart = process.hrtime.bigint();
     const total = chunks * upperLimit;
     let nikeID = 100;
-      let chunkIncrementor = 0;
       let products = [];
       let upperLimitIncrementor = 0;
       while (upperLimitIncrementor < total) {
@@ -44,7 +42,7 @@ async function seed(set, batch, time) {
         shoe.productImage = faker.image.fashion();
         nikeID++;
         reviewIncrementor = 0;
-        while (reviewIncrementor < randomNum(50)) {
+        while (reviewIncrementor < randomNum(30)) {
           let review = {}
           let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
           let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
@@ -98,8 +96,10 @@ async function seed(set, batch, time) {
 }
 const totalStart = process.hrtime.bigint();
 Product.deleteMany()
-  .then(() => seed(10, 1000, totalStart))
+  .then(() => seed(100, 1000, totalStart))
   .then(() => db.close())
+// seed(100, 1000, totalStart)
+//   .then(() => db.close())
 
 
 
