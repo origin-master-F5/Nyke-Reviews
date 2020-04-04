@@ -96,96 +96,10 @@ MongoClient.connect(url, (err, db) => {
   }
   const totalStart = process.hrtime.bigint();
 
-  nykeDb.collection('products').deleteMany()
-      .then(() => seed(100, 1000, totalStart))
-      .then(() => db.close())
+  // nykeDb.collection('products').deleteMany()
+  //     .then(() => seed(100, 10000, totalStart))
+  //     .then(() => db.close())
+  seed(1000, 10000, totalStart)
+    .then(() => db.close())
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function testFunc(currentData) {
-//     await Product.insertMany(currentData)
-//     console.log(currentData.length);
-// }
-
-
-// async function generateShoeData(generations) {
-//     let generatedData = [];
-//     let nikeID = 100;
-
-//     for (let i = 0; i < generations; i++) {
-//         let shoeObj = {};
-//         shoeObj.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
-//         shoeObj.discountPrice = Math.round(Math.random() * (149 - 100) + 100);
-//         shoeObj.price = Math.round(Math.random() * (250 - 150) + 150);
-//         shoeObj.productId = nikeID;
-//         shoeObj.productImage = 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/39530e3c-2330-48b9-a7a6-72eb0e8c35ae/air-zoom-pegasus-36-flyease-mens-running-shoe-1Fb6sV.jpg';
-//         nikeID++;
-//         generatedData.push(shoeObj);
-//         if (generatedData.length === 1000) {
-//             await testFunc(generatedData)
-//         }
-//     }
-
-
-
-// };
-
-// generateShoeData(generationNum)
-//     .then(() => db.close())
-//     .then(() => {
-//         const end = process.hrtime.bigint();
-//         const bigNum = Number(end - start);
-//         let ms = bigNum / 1000000;
-//         let secs = ms / 1000;
-//         return console.log(`Seeding took ${ms} milliseconds and ${secs} seconds for ${generationNum} products`);
-//     })
