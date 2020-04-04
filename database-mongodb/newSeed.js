@@ -5,7 +5,8 @@ const colors = require('colors');
 const relativeReviewData = require('./seedData');
 const faker = require('faker');
 const moment = require('moment');
-const generationNum = 10000
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017/';
 
 
 const start = process.hrtime.bigint();
@@ -19,13 +20,13 @@ const getBenchmark = (start, end, operation, batchNum) => {
   const bigNum = Number(end - start);
   const ms = bigNum / 1000000;
   const secs = (ms / 1000).toFixed(2);
-  const mins = (secs / 1000).toFixed(3);
+  const mins = (secs / 60).toFixed(3);
   return `${operation} times: ${ms} (ms) / ${secs} (secs) / ${mins} (mins) for ${batchNum} products`;
 }
   // const productData = generateShoeData(generationNum);
 
 
-async function seed(set, batch) {
+async function seed(set, batch, time) {
   function* generateData(chunks, upperLimit) {
     const genStart = process.hrtime.bigint();
     const total = chunks * upperLimit;
@@ -85,20 +86,21 @@ async function seed(set, batch) {
   let insertCount = 0
   for (let products of generateData(set, batch)) {
     insertCount += products.length;
-    await Product.insertMany(products)
+     await Product.insertMany(products)
     console.log(`inserted so far: ${insertCount}`)
   }
   const seedEnd = process.hrtime.bigint();
   console.log(getBenchmark(seedStart, seedEnd, 'Seeding', set * batch))
+  totalEnd = process.hrtime.bigint();
+  console.log(getBenchmark(time, totalEnd, 'Total', set * batch))
 }
 const totalStart = process.hrtime.bigint();
 Product.deleteMany()
-  .then(() => seed(10, 100))
-  .then(() => {
-    totalEnd = process.hrtime.bigint();
-    console.log(getBenchmark(totalStart, totalEnd, 'Together, they took', 10 * 100))
-  })
+  .then(() => seed(1000, 1000, totalStart))
   .then(() => db.close())
+
+
+
 
 
 
