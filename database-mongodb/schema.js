@@ -26,7 +26,7 @@ var productSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  reviews: [reviewsSchema],
+  reviews: String,
   price: Number,
   discountPrice: Number,
   productImage: String

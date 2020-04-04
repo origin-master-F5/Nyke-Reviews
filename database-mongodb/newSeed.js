@@ -11,10 +11,10 @@ const url = 'mongodb://localhost:27017/';
 
 const start = process.hrtime.bigint();
 const randomRange = (max, min) => {
-  Math.ceil(Math.random() * (max - min) + min)
+  return Math.ceil(Math.random() * (max - min) + min)
 }
 const randomNum = (num) => {
-  Math.round(Math.random() * num)
+ return Math.round(Math.random() * num)
 }
 const getBenchmark = (start, end, operation, batchNum) => {
   const bigNum = Number(end - start);
@@ -53,13 +53,13 @@ async function seed(set, batch, time) {
             review.header = faker.lorem.sentence();
             review.comment = faker.lorem.paragraph();
             review.star = randomRange(5, 1);
-            review.size = randomRange(3, 1);
-            review.comfort = randomRange(3, 1);
-            review.durability = randomRange(3, 1);
+            review.size = randomNum(3);
+            review.comfort = randomNum(3);
+            review.durability = randomNum(3);
             let dateUnformatted = faker.date.past(1, '2020-04-01');
             review.dateWritten = moment(dateUnformatted).format('LL');
             review.username = faker.internet.userName();
-            review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, address.countryCode()}`;
+            review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
             review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
             review.terrain = terrainArray[randomNum(terrainArray.length)];
             review.flagged = 0;
@@ -71,6 +71,7 @@ async function seed(set, batch, time) {
             }
             shoe.reviews.push(review);
           }
+          shoe.reviews = JSON.stringify(shoe.reviews)
           products.push(shoe);
           upperLimitIncrementor++
           totalIncrementor++
@@ -87,6 +88,7 @@ async function seed(set, batch, time) {
   for (let products of generateData(set, batch)) {
     insertCount += products.length;
      await Product.insertMany(products)
+     .catch(err => console.error('Fail-->', err))
     console.log(`inserted so far: ${insertCount}`)
   }
   const seedEnd = process.hrtime.bigint();
@@ -96,7 +98,7 @@ async function seed(set, batch, time) {
 }
 const totalStart = process.hrtime.bigint();
 Product.deleteMany()
-  .then(() => seed(1000, 1000, totalStart))
+  .then(() => seed(100, 1000, totalStart))
   .then(() => db.close())
 
 
