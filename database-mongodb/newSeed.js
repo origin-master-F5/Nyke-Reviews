@@ -31,55 +31,67 @@ async function seed(set, batch, time) {
     const genStart = process.hrtime.bigint();
     const total = chunks * upperLimit;
     let nikeID = 100;
-    let totalIncrementor = 0;
-    while (totalIncrementor < total) {
       let chunkIncrementor = 0;
-      while (chunkIncrementor < chunks) {
-        let upperLimitIncrementor = 0;
-        let products = [];
-        while (upperLimitIncrementor < upperLimit) {
-          let shoe = {};
-          shoe.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
-          shoe.productId = nikeID;
-          shoe.reviews = [];
-          shoe.discountPrice = Math.round(Math.random() * (149 - 100) + 100);
-          shoe.price = Math.round(Math.random() * (250 - 150) + 150);
-          shoe.productImage = faker.image.fashion();
-          nikeID++;
-          for (let i = 0; i < (Math.round(Math.random() * 50)); i++) {
-            let review = {}
-            let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
-            let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
-            review.header = faker.lorem.sentence();
-            review.comment = faker.lorem.paragraph();
-            review.star = randomRange(5, 1);
-            review.size = randomNum(3);
-            review.comfort = randomNum(3);
-            review.durability = randomNum(3);
-            let dateUnformatted = faker.date.past(1, '2020-04-01');
-            review.dateWritten = moment(dateUnformatted).format('LL');
-            review.username = faker.internet.userName();
-            review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
-            review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
-            review.terrain = terrainArray[randomNum(terrainArray.length)];
-            review.flagged = 0;
-            review.upvotes = randomNum(10);
-            review.downvotes = randomNum(2);
-            review.verified = Math.random() >= 0.8;
-            if (Math.random() >= 0.9) {
-              review.image = faker.image.fashion();
-            }
-            shoe.reviews.push(review);
+      let products = [];
+      let pIndex = 0;
+      // while (chunkIncrementor < chunks) {
+      //   //for escaping the nested for loop, i can use the 
+      //   //pIndex methond again
+      //   chunkIncrementor++
+      // }
+      let upperLimitIncrementor = 0;
+      while (upperLimitIncrementor < total) {
+        let shoe = {};
+        shoe.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
+        shoe.productId = nikeID;
+        shoe.reviews = [];
+        shoe.discountPrice = Math.round(Math.random() * (149 - 100) + 100);
+        shoe.price = Math.round(Math.random() * (250 - 150) + 150);
+        shoe.productImage = faker.image.fashion();
+        nikeID++;
+        reviewIncrementor = 0;
+        while (reviewIncrementor < randomNum(50)) {
+          let review = {}
+          let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
+          let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
+          review.header = faker.lorem.sentence();
+          review.comment = faker.lorem.paragraph();
+          review.star = randomRange(5, 1);
+          review.size = randomNum(3);
+          review.comfort = randomNum(3);
+          review.durability = randomNum(3);
+          let dateUnformatted = faker.date.past(1, '2020-04-01');
+          review.dateWritten = moment(dateUnformatted).format('LL');
+          review.username = faker.internet.userName();
+          review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
+          review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
+          review.terrain = terrainArray[randomNum(terrainArray.length)];
+          review.flagged = 0;
+          review.upvotes = randomNum(10);
+          review.downvotes = randomNum(2);
+          review.verified = Math.random() >= 0.8;
+          if (Math.random() >= 0.9) {
+            review.image = faker.image.fashion();
           }
-          shoe.reviews = JSON.stringify(shoe.reviews)
-          products.push(shoe);
-          upperLimitIncrementor++
-          totalIncrementor++
+          shoe.reviews.push(review);
+          reviewIncrementor++
         }
-        chunkIncrementor++
-        yield products;
+        // shoe.reviews = JSON.stringify(shoe.reviews)
+        if (!products[pIndex]) {
+          products[pIndex] = []
+        }
+        products[pIndex].push(shoe);
+        if (products[pIndex].length === upperLimit) {
+          yield products[pIndex]
+          products[pIndex] = []
+        }
+        upperLimitIncrementor++
       }
-    }
+      // yield products;
+      // for (let i = 0; i < products.length; i++) {
+      //   yield products[i];
+      // }
+
     const genEnd = process.hrtime.bigint();
     console.log(getBenchmark(genStart, genEnd, 'Data Generating', total))
   }
@@ -98,7 +110,7 @@ async function seed(set, batch, time) {
 }
 const totalStart = process.hrtime.bigint();
 Product.deleteMany()
-  .then(() => seed(100, 1000, totalStart))
+  .then(() => seed(1000, 1000, totalStart))
   .then(() => db.close())
 
 
