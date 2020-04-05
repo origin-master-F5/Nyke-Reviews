@@ -1,4 +1,11 @@
 /* eslint-disable indent */
+
+
+////////////////////////////////////////
+////  Original Owner's Review Data  ////
+////////////////////////////////////////
+
+
 const relativeReviewData = [{
         header: 'Comfortable but sloppy',
         comment: 'These shoes were not what I was expecting.I wear a size 10 in Pegs and 10 in the Vaporfly 4% Flynit so I purchased the React Infinity Run in a size 10. With the Flynit upper on the React Infinities, I was expecting a foot hugging fit and feel similar to the Vaporfly Flynit.That was not the case with React Infinities.The heel stability is frustratingly sloppy.During my first 7 mile run in them this evening, they definitely felt very soft and comfortable, but it also felt like my heel kept slipping out, which bothered me because I couldn\'t stop thinking about it the for the entire run. My heels did not feel locked in at all like they do in the Vaporflys and not as secure as in the Pegs. To make matters worse, Nike did not include the extra pair of eyelets at the top of the lacing system to create the "runner\'s loop" that provides a more secure fit for the hindfoot. The wider toe box also seems to take away from foot hugging purpose of the Flynit. Additionally, the Flynit did not seem to respond all that well when turning through corners. I keep getting a sliding sensation of my feet in the React Infinities during these portions of my run. I do believe a size 10 was correct size for me in these because my toes would have been touching the front of the shoe with a 9.5. I honestly don\'t understand why Flynit was used on these trainers. Flynit is lightweight and makes sense of racing shoes, but why is it needed on everyday training or recovery shoes? Saving a couple ounces just doesn\'t seem worth it on a pair trainers.',
