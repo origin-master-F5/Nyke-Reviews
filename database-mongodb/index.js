@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const productSchema = require('./schema');
+const colors = require('colors');
+
 
 mongoose.connect('mongodb://localhost/NykeReviews', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
