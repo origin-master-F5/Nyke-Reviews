@@ -43,7 +43,7 @@ function* generateData(chunks, upperLimit) {
     shoe.productImage = productImageArray[randomNum(productImageArray.length)];;
     nikeID++;
     reviewIncrementor = 0;
-    while (reviewIncrementor < randomNum(30)) {
+    while (reviewIncrementor < randomNum(20)) {
       let review = {};
       let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
       let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];

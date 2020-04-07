@@ -19,5 +19,5 @@ async function seed(set, batch, time) {
   totalEnd = process.hrtime.bigint();
   console.log(getBenchmark(time, totalEnd, 'Total', set * batch))
 }
-seed(1000, 1000, totalStart)
+seed(10000, 1000, totalStart)
   .then(() => db.close())
