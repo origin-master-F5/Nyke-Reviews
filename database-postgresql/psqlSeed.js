@@ -11,5 +11,6 @@ const seed = async() => {
   await pool.query("INSERT INTO products (productName, productId, price, discountPrice, productImage) VALUES ($1)", [ex], (err, result) => {
     err ? console.error(err) : console.log('success!', result)
   })
-
 }
+
+seed()
