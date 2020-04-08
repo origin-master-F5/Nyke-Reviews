@@ -1,5 +1,6 @@
 const express = require('express');
 const models = require('../database-mongodb/models');
+// const models = require('../database-postgresql/models'); //psql
 
 const controllers = {
   getOne: (req, res) => {
