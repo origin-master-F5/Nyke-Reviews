@@ -4,6 +4,7 @@ const colors = require('colors');
 const path = require('path');
 const morgan = require('morgan');
 const db = require('../database-mongodb/index').db;
+const pool = require('../database-postgresql/index')
 
 const app = express();
 const port = 3003;

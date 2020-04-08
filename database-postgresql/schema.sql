@@ -1,12 +1,14 @@
+DROP DATABASE IF EXISTS NykeReviews;
+
 CREATE DATABASE NykeReviews;
 
 CREATE TABLE products (
   _id BIGSERIAL NOT NULL PRIMARY KEY,
-  productName TEXT,
+  productName VARCHAR(50),
   productId INT NOT NULL,
-  price MONEY,
-  discountPrice MONEY,
-  productImage TEXT,
+  price INT,
+  discountPrice INT,
+  productImage VARCHAR(150),
   UNIQUE(productId)
 );
 
@@ -18,7 +20,7 @@ CREATE TABLE reviews (
   size INT DEFAULT 1,
   comfort INT DEFAULT 1,
   durability INT DEFAULT 1,
-  dateWritten TEXT ,
+  dateWritten VARCHAR(100) ,
   username VARCHAR(50),
   location VARCHAR(150),
   avgRunDistance VARCHAR(20),
