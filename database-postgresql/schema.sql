@@ -1,4 +1,4 @@
-
+CREATE DATABASE NykeReviews;
 
 CREATE TABLE products (
   _id BIGSERIAL NOT NULL PRIMARY KEY,
