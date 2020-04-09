@@ -2,9 +2,10 @@ DROP DATABASE IF EXISTS NykeReviews;
 
 CREATE DATABASE NykeReviews;
 
-CREATE TABLE products (
+CREATE TABLE products
+(
   _id BIGSERIAL NOT NULL PRIMARY KEY,
-  productName VARCHAR(50),
+  productName VARCHAR(50) UNIQUE,
   productId INT NOT NULL,
   price INT,
   discountPrice INT,
@@ -12,7 +13,8 @@ CREATE TABLE products (
   UNIQUE(productId)
 );
 
-CREATE TABLE reviews (
+CREATE TABLE reviews
+(
   _id BIGSERIAL NOT NULL PRIMARY KEY,
   header VARCHAR(100),
   comment TEXT,
@@ -30,7 +32,6 @@ CREATE TABLE reviews (
   downvotes INT DEFAULT 0,
   verified BOOLEAN DEFAULT false,
   image VARCHAR(150),
-  productId BIGINT NOT NULL REFERENCES products (_id),
-  UNIQUE(productId)
+  productId BIGINT NOT NULL REFERENCES products (_id)
 );
 

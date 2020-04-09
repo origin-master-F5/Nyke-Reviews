@@ -9,10 +9,7 @@ async function seed(set, batch, time) {
   let insertCount = 0
   let data = generateData(set, batch)
   for (let products of data) {
-      // products = JSON.parse(products)
       insertCount += products.length;
-      //  await Product.insertMany(products)
-      // await fs.appendFile('./database-mongodb/generatedData.json', JSON.stringify(products, null, 2), (err) => err ? console.error(err) : `${insertCount} written to file`)
       await db.collection('products').insertMany(products)
       console.log(`inserted so far: ${insertCount}`)
   }
