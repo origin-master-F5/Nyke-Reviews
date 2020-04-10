@@ -1,8 +1,4 @@
-const pool = require('./index')
-const fs = require('fs')
-const csv = require('fast-csv')
 const faker = require('faker');
-const moment = require('moment');
 
 const randomRange = (max, min) => {
     return Math.ceil(Math.random() * (max - min) + min);
@@ -11,14 +7,14 @@ const randomNum = (num) => {
     return Math.round(Math.random() * num);
 };
 
-const generateProducts = (batch) => {
+function* generateProducts(limit, batch) {
     let nikeId = 100;
     let products = []
     for (let i = 0; i < batch; i++) {
         let shoe = {};
         shoe.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
-        shoe.productId = nikeID;
-        nikeID++;
+        shoe.productId = nikeId;
+        nikeId++;
         shoe.price = Math.round(Math.random() * (250 - 150) + 150);
         shoe.discountPrice = Math.round(Math.random() * (149 - 100) + 100);
         let productImageArray = [
@@ -35,11 +31,14 @@ const generateProducts = (batch) => {
         ]
         shoe.productImage = productImageArray[randomNum(productImageArray.length)];;
         products.push(shoe)
+        if (products.length >= limit) {
+            yield products
+            products = []
+        }
     }
-    return products;
 }
 
-const generateReviews = (batch, totalReviews) => {
+function* generateReviews(limit, batch, totalReviews) {
     let reviews = [];
     let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
     let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
@@ -52,7 +51,13 @@ const generateReviews = (batch, totalReviews) => {
         'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/D9E4399A1F889304DC17A04FBCFD05DB.app1_1552241016796_PZ320.jpeg',
         'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/422D4488C25EA6FE6A2589A54361D842.app1_1524634291409-1_PZ320.jpeg'
     ];
+    let months = [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+    ]
     for (let i = 0; i < batch * totalReviews; i++) {
+
         let review = {};
         review.header = faker.lorem.sentence();
         review.comment = faker.lorem.paragraph();
@@ -61,7 +66,7 @@ const generateReviews = (batch, totalReviews) => {
         review.comfort = randomNum(2);
         review.durability = randomNum(2);
         let dateUnformatted = faker.date.past(1, '2020-04-01');
-        review.dateWritten = moment(dateUnformatted).format('LL');
+        review.dateWritten = `${months[randomRange(1,12)]} ${randomRange(1,28)}, ${randomRange(2018, 2019)}`;
         review.username = faker.internet.userName();
         review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
         review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
@@ -73,8 +78,13 @@ const generateReviews = (batch, totalReviews) => {
         if (Math.random() >= 0.9) {
             review.image = reviewImageArray[randomNum(reviewImageArray.length)];
         }
-        review.productId = randomRange(100, batch)
+        // review.productId = randomRange(100, batch)
+        review.productId = randomNum(batch)
         reviews.push(review)
+        if (reviews.length >= limit) {
+            yield reviews
+            reviews = []
+        }
     }
 }
 

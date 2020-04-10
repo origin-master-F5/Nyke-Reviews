@@ -1,58 +1,78 @@
-const pool = require('./index')
+// const pool = require('./index')
 const fs = require('fs')
-const csv = require('fast-csv')
+const { generateProducts, generateReviews } = require('./dataGenerator')
+const batch = 10000;
+const limit = 1000;
 
-let ex = {
-    productName: "test shoe 1",
-    productId: 2,
-    price: 200,
-    discountPrice: 150,
-    productImage: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg"
-}
+const getBenchmark = (start, end, operation, batchNum) => {
+    const bigNum = Number(end - start);
+    const ms = bigNum / 1000000;
+    const secs = (ms / 1000).toFixed(2);
+    const mins = (secs / 60).toFixed(3);
+    return `${operation} times: ${ms} (ms) / ${secs} (secs) / ${mins} (mins) for ${batchNum} products`;
+};
 
-let exArr = [
-    ex,
-    {
-        productName: "test shoe 2",
-        productId: 5,
-        price: 250,
-        discountPrice: 150,
-        productImage: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg"
-    },
-    {
-        productName: "test shoe 3",
-        productId: 5,
-        price: 250,
-        discountPrice: 150,
-        productImage: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg"
-    }
-]
 
-let writeProductStream = fs.createWriteStream('database-postgresql/productData.csv');
-let writeReviewStream = fs.createWriteStream('database-postgresql/reviewData.csv');
+
 const seedProducts = async(arr) => {
+    let writeProductStream = fs.createWriteStream('database-postgresql/productData.csv');
+    let writeReviewStream = fs.createWriteStream('database-postgresql/reviewData.csv');
 
+    ////////////////////////////////////////
+    /// create product and review arrays ///
+    ////////////////////////////////////////
+    const generateStart = process.hrtime.bigint();
+    const generateProductStart = process.hrtime.bigint();
+    const products = await generateProducts(limit, batch);
+    const generateProductEnd = process.hrtime.bigint();
+    const productGenTime = getBenchmark(generateProductStart, generateProductEnd, 'Product Data Generation', batch);
 
-    arr.forEach((obj, index) => {
-        let newLine = Object.values(obj);
+    const generateReviewStart = process.hrtime.bigint();
+    const reviews = await generateReviews(limit, batch, 15);
+    const generateReviewEnd = process.hrtime.bigint();
+    const reviewGenTime = getBenchmark(generateReviewStart, generateReviewEnd, 'Review Data Generation', batch);
 
-        writeProductStream.write(newLine.join(',') + '\n', () => {
-            // a line was written to stream
-            console.log('line was written')
+    const generateEnd = process.hrtime.bigint();
+    const dataGenTime = getBenchmark(generateStart, generateEnd, 'Total Data Generation', batch);
+
+    //////////////////////////////////
+    /// write products to csv file ///
+    //////////////////////////////////
+    const writeStart = process.hrtime.bigint();
+    const writeProductStart = process.hrtime.bigint();
+    for (let group of products) {
+        group.forEach(async(obj) => {
+            let newLine = Object.values(obj);
+            await writeProductStream.write(newLine.join(',') + '\n')
         })
-    })
-
+    }
     writeProductStream.end()
-    writeProductStream.on('finish', () => {
-            console.log('finish write stream, moving along')
-        }).on('error', (err) => {
-            console.log(err)
+    writeProductStream
+        .on('finish', () => console.log(getBenchmark(writeProductStart, process.hrtime.bigint(), 'Product Data Writing', batch)))
+        .on('error', (err) => console.log(err))
+
+    /////////////////////////////////
+    /// write reviews to csv file ///
+    /////////////////////////////////
+    const writeReviewStart = process.hrtime.bigint();
+    for (let group of reviews) {
+        group.forEach(async(obj) => {
+            let newLine = Object.values(obj);
+            await writeReviewStream.write(newLine.join(',') + '\n')
         })
-        // await pool.query("INSERT INTO products (productName, productId, price, discountPrice, productImage) VALUES ($1)", [...Object.keys(ex)], (err, result) => {
-        //     err ? console.error(err) : console.log('success!', result)
-        // })
+    }
+    writeReviewStream.end()
+    writeReviewStream
+        .on('finish', () => console.log(getBenchmark(writeReviewStart, process.hrtime.bigint(), 'Review Data Writing', batch)))
+        .on('error', (err) => console.log(err))
+        // console.log(dataGenTime)
+
+
+    // await pool.query("INSERT INTO products (productName, productId, price, discountPrice, productImage) VALUES ($1)", [...Object.keys(ex)], (err, result) => {
+    //     err ? console.error(err) : console.log('success!', result)
+    // })
 
 
 }
 
-seedProducts(exArr)
+seedProducts()
