@@ -5,6 +5,7 @@
 npm
 npm-debug.log
 node_modules/
+database-postgresql/index.js
 
 pids
 *.pid

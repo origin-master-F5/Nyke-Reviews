@@ -1,46 +1,39 @@
-const express = require('express')
-const models = require('../database-mongodb/models')
+const express = require('express');
+const models = require('../database-mongodb/models');
+// const models = require('../database-postgresql/models'); //psql
 
 const controllers = {
-  getOne: (req, res, next) => {
-    models.getOne(req)
-      .then((data) => {
-        // console.log(data)
-        res.status(200).send(data)
-      })
-      .catch((err) => {
-        res.status(500).send(err)
-      })
+  getOne: (req, res) => {
+    let productId = req.params.id;
+    models.getOne({ productId })
+      .then((data) => res.status(200).send(data))
+      .catch((err) => res.status(500).send(err));
   },
-  putVote: (req, res, next) => {
-    models.changeVoteById(req)
-      .then((data) => {
-        res.status(200).send('Posted to Database')
-      })
-      .catch((err) => {
-        res.status(500).send(err)
-      })
+
+  putVote: (req, res) => {
+    models.changeVoteById({ '_id': req.body.parentId, 'reviews._id': req.body.childId }, req.body.upvoteValue, req.body.downvoteValue)
+      .then((data) => res.status(200).send('Posted to Database'))
+      .catch((err) => res.status(500).send(err));
   },
-  putFlag: (req, res, next) => {
-    models.incrementFlag(req)
-      .then((data) => {
-        res.status(200).send('Posted to Database')
-      })
-      .catch((err) => {
-        res.status(500).send(err)
-      })
+
+  putFlag: (req, res) => {
+    models.incrementFlag({ '_id': req.body.parentId, 'reviews._id': req.body.childId }, req.body.flagValue)
+      .then((data) => res.status(200).send('Posted to Database'))
+      .catch((err) => res.status(500).send(err));
   },
-  postReview: (req, res, next) => {
-    // console.log('working in controllers')
-    models.createReview(req)
-      .then((data) => {
-        res.status(200).send('Posted to Database')
-      })
-      .catch((err) => {
-        res.status(500).send(err)
-      })
+
+  postReview: (req, res) => {
+    let _id = req.body.parentId;
+    models.createReview({_id}, req.body.aReview)
+      .then((data) => res.status(200).send('Posted to Database'))
+      .catch((err) => res.status(500).send(err));
+  },
+
+  deleteReview: (req, res) => {
+    models.deleteReview({ '_id': req.body.parentId }, {'_id': req.body.childId })
+      .then((data) => res.status(200).send('Deleted from Database'))
+      .catch((err) => res.status(500).send(err));
   }
-}
+};
 
 module.exports = controllers;
-
