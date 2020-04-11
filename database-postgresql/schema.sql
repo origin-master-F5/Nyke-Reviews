@@ -5,8 +5,8 @@ CREATE DATABASE NykeReviews;
 CREATE TABLE products
 (
   _id BIGSERIAL NOT NULL PRIMARY KEY,
-  productName VARCHAR(50) UNIQUE,
-  productId INT NOT NULL,
+  productName VARCHAR(50),
+  productId INT NOT NULL UNIQUE,
   price INT,
   discountPrice INT,
   productImage VARCHAR(150),
@@ -32,6 +32,6 @@ CREATE TABLE reviews
   downvotes INT DEFAULT 0,
   verified BOOLEAN DEFAULT false,
   image VARCHAR(150),
-  productId BIGINT NOT NULL REFERENCES products (_id)
+  productId BIGINT NOT NULL REFERENCES products (productId)
 );
 

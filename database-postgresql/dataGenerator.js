@@ -1,4 +1,5 @@
 const faker = require('faker');
+const moment = require('moment');
 
 const randomRange = (max, min) => {
     return Math.ceil(Math.random() * (max - min) + min);
@@ -12,7 +13,7 @@ function* generateProducts(limit, batch) {
     let products = []
     for (let i = 0; i < batch; i++) {
         let shoe = {};
-        shoe.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
+        shoe.productName = `Nike ${faker.commerce.productName()}`;
         shoe.productId = nikeId;
         nikeId++;
         shoe.price = Math.round(Math.random() * (250 - 150) + 150);
@@ -29,7 +30,7 @@ function* generateProducts(limit, batch) {
             "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg",
             "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg"
         ]
-        shoe.productImage = productImageArray[randomNum(productImageArray.length)];;
+        shoe.productImage = productImageArray[randomNum(productImageArray.length - 1)];;
         products.push(shoe)
         if (products.length >= limit) {
             yield products
@@ -66,17 +67,17 @@ function* generateReviews(limit, batch, totalReviews) {
         review.comfort = randomNum(2);
         review.durability = randomNum(2);
         let dateUnformatted = faker.date.past(1, '2020-04-01');
-        review.dateWritten = `${months[randomRange(1,12)]} ${randomRange(1,28)}, ${randomRange(2018, 2019)}`;
+        review.dateWritten = `${months[randomNum(11)]} ${randomRange(1,28)}, ${randomRange(2018, 2019)}`;
         review.username = faker.internet.userName();
         review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
-        review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
-        review.terrain = terrainArray[randomNum(terrainArray.length)];
+        review.avgRunDistance = distanceArray[randomNum(distanceArray.length - 1)];
+        review.terrain = terrainArray[randomNum(terrainArray.length - 1)];
         review.flagged = 0;
         review.upvotes = randomNum(10);
         review.downvotes = randomNum(2);
         review.verified = Math.random() >= 0.8;
         if (Math.random() >= 0.9) {
-            review.image = reviewImageArray[randomNum(reviewImageArray.length)];
+            review.image = reviewImageArray[randomNum(reviewImageArray.length - 1)];
         }
         // review.productId = randomRange(100, batch)
         review.productId = randomNum(batch)
