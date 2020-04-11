@@ -52,11 +52,6 @@ function* generateReviews(limit, batch, totalReviews) {
         'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/D9E4399A1F889304DC17A04FBCFD05DB.app1_1552241016796_PZ320.jpeg',
         'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/422D4488C25EA6FE6A2589A54361D842.app1_1524634291409-1_PZ320.jpeg'
     ];
-    let months = [
-        'January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
-    ]
     for (let i = 0; i < batch * totalReviews; i++) {
 
         let review = {};
@@ -67,7 +62,7 @@ function* generateReviews(limit, batch, totalReviews) {
         review.comfort = randomNum(2);
         review.durability = randomNum(2);
         let dateUnformatted = faker.date.past(1, '2020-04-01');
-        review.dateWritten = `${months[randomNum(11)]} ${randomRange(1,28)}, ${randomRange(2018, 2019)}`;
+        review.dateWritten = moment(dateUnformatted).format('LL');
         review.username = faker.internet.userName();
         review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
         review.avgRunDistance = distanceArray[randomNum(distanceArray.length - 1)];
@@ -78,9 +73,10 @@ function* generateReviews(limit, batch, totalReviews) {
         review.verified = Math.random() >= 0.8;
         if (Math.random() >= 0.9) {
             review.image = reviewImageArray[randomNum(reviewImageArray.length - 1)];
+        } else {
+            review.image = ''
         }
-        // review.productId = randomRange(100, batch)
-        review.productId = randomNum(batch)
+        review.productId = randomRange(100, batch)
         reviews.push(review)
         if (reviews.length >= limit) {
             yield reviews

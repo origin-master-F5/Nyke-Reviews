@@ -5,7 +5,7 @@ const moment = require('moment');
 const faker = require('faker');
 const fs = require('fs')
 const filePath = '/Users/Darth Varg/Desktop/projects/nike/Nyke-Reviews/database-postgresql/'
-const batch = 1000;
+const batch = 10000000;
 const limit = 1000;
 const productColumns = 'productName, productId, price, discountPrice, productImage'
 const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, upvotes, downvotes, verified, productId, image'
@@ -192,17 +192,30 @@ const generateDataWriteAndSeed = () => {
 
 
 
-generateDataWriteAndSeed()
+// generateDataWriteAndSeed()
 
 
 
-// const productData = generateProducts(limit, batch)
-// const reviewData = generateReviews(limit, 1000, 15)
+const generateProductStart = process.hrtime.bigint();
+const productData = generateProducts(limit, batch) //REAL CODE
+const generateProductEnd = process.hrtime.bigint();
+console.log(getBenchmark(generateProductStart, generateProductEnd, 'Product Data Gen', batch));
 
-// const seedData = async(data) => {
-//   for (let group of data) {
-//     for (let i = 0; i < group.length; i++) {
 
-//     }
-//   }
-// }
+const generateReviewStart = process.hrtime.bigint();
+const reviewData = generateReviews(limit, batch, 15) //REAL CODE
+const generateReviewEnd = process.hrtime.bigint();
+console.log(getBenchmark(generateReviewStart, generateReviewEnd, 'Review Data Gen', batch * 15));
+
+const seedData = async(data) => {
+    let test = 0;
+    for (let group of data) {
+        test += group.length
+            // for (let i = 0; i < group.length; i++) {
+
+        // }
+        console.log(`inserted so far: ${test}`)
+    }
+}
+
+seedData(productData)
