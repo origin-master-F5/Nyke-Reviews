@@ -5,7 +5,7 @@ const moment = require('moment');
 const faker = require('faker');
 const fs = require('fs')
 const filePath = '/Users/Darth Varg/Desktop/projects/nike/Nyke-Reviews/database-postgresql/'
-const batch = 100000;
+const batch = 1000000;
 const limit = 1000;
 const productColumns = 'productName, productId, price, discountPrice, productImage'
 const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, flagged, upvotes, downvotes, verified, image, productId'
@@ -199,9 +199,6 @@ const generateDataWriteAndSeed = () => {
 const productData = generateProducts(limit, batch)
 const reviewData = generateReviews(limit, batch, 10)
 
-// const seedBothTables = async() => {
-
-// }
 
 const seedData = async(data, table, col, batch) => {
     let insertCount = 0;
@@ -243,3 +240,14 @@ seedData(productData, 'products', productColumns, batch)
                 pool.end()
             })
     })
+
+
+// const format = (arr) => {
+//   let finalString = ''
+//   for (let i = 0; i < arr.length; i++) {
+//     let currString = Object.values(arr[i]).toString()
+//     i === arr.length-1 ? finalString = finalString.concat(`(${currString})`) :
+//     finalString = finalString.concat(`(${currString}),`)
+//   }
+//   return finalString
+// }
