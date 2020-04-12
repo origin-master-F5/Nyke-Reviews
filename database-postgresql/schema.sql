@@ -1,6 +1,7 @@
-DROP DATABASE IF EXISTS NykeReviews;
+DROP DATABASE IF EXISTS nykereviews;
 
-CREATE DATABASE NykeReviews;
+CREATE DATABASE nykereviews;
+\c nykereviews;
 
 CREATE TABLE products
 (
@@ -35,3 +36,4 @@ CREATE TABLE reviews
   productId BIGINT NOT NULL REFERENCES products (productId)
 );
 
+-- /Users/'Darth Varg'/Desktop/projects/nike/Nyke-Reviews/database-postgresql/schema.sql
