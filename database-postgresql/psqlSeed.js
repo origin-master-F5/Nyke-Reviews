@@ -5,10 +5,10 @@ const moment = require('moment');
 const faker = require('faker');
 const fs = require('fs')
 const filePath = '/Users/Darth Varg/Desktop/projects/nike/Nyke-Reviews/database-postgresql/'
-const batch = 10000;
+const batch = 100000;
 const limit = 1000;
 const productColumns = 'productName, productId, price, discountPrice, productImage'
-const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, upvotes, downvotes, verified, productId, image'
+const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, flagged, upvotes, downvotes, verified, image, productId'
 
 
 
@@ -196,38 +196,50 @@ const generateDataWriteAndSeed = () => {
 
 
 
-const productData = generateProducts(limit, batch) //REAL CODE
+const productData = generateProducts(limit, batch)
+const reviewData = generateReviews(limit, batch, 10)
 
+// const seedBothTables = async() => {
 
+// }
 
-const seedReviewStart = process.hrtime.bigint();
-const reviewData = generateReviews(limit, batch, 15) //REAL CODE
-const seedReviewEnd = process.hrtime.bigint();
-console.log(getBenchmark(seedReviewStart, seedReviewEnd, 'Review Data Gen', batch * 15));
-
-const seedData = async(data, table) => {
-    let test = 0;
+const seedData = async(data, table, col, batch) => {
+    let insertCount = 0;
     for (let group of data) {
-        test += group.length
+        insertCount += group.length
         for (let i = 0; i < group.length; i++) {
             let vals = Object.values(group[i]).toString()
             try {
                 await pool.query(
-                    `INSERT INTO ${table}(${productColumns})VALUES(${vals})`
+                    `INSERT INTO ${table}(${col})VALUES(${vals})`
                 )
             } catch (err) {
+                console.log(vals)
                 console.error(`Insertion Error: ${err.message}`.red)
                 return
             }
         }
-        console.log(`inserted so far: ${test}`)
+        // if (insertCount >= batch * 10 .5) {
+        //     console.log(`inserted so far: ${insertCount}`)
+        // }
     }
 }
+
 const seedProductStart = process.hrtime.bigint();
-seedData(productData, 'products')
+console.log('Products Seeding...'.yellow)
+seedData(productData, 'products', productColumns, batch)
     .then(() => {
-        console.log('complete!')
+        console.log('Products Seeded!'.green)
         const seedProductEnd = process.hrtime.bigint();
         console.log(getBenchmark(seedProductStart, seedProductEnd, 'Product Seed', batch));
+
+        const seedReviewStart = process.hrtime.bigint();
+        console.log('Reviews Seeding...'.yellow)
+        seedData(reviewData, 'reviews', reviewColumns, batch)
+            .then(() => {
+                console.log('Reviews Seeded!'.green)
+                const seedReviewEnd = process.hrtime.bigint();
+                console.log(getBenchmark(seedReviewStart, seedReviewEnd, 'Review Seed', batch * 10));
+                pool.end()
+            })
     })
-    // seedData(reviewData)

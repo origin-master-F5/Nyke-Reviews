@@ -55,26 +55,26 @@ function* generateReviews(limit, batch, totalReviews) {
     for (let i = 0; i < batch * totalReviews; i++) {
 
         let review = {};
-        review.header = faker.lorem.sentence();
-        review.comment = faker.lorem.paragraph();
+        review.header = `'${faker.company.bs()}'`;
+        review.comment = `'${faker.lorem.paragraph()}'`;
         review.star = randomRange(5, 1);
         review.size = randomNum(2);
         review.comfort = randomNum(2);
         review.durability = randomNum(2);
         let dateUnformatted = faker.date.past(1, '2020-04-01');
-        review.dateWritten = moment(dateUnformatted).format('LL');
-        review.username = faker.internet.userName();
-        review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
-        review.avgRunDistance = distanceArray[randomNum(distanceArray.length - 1)];
-        review.terrain = terrainArray[randomNum(terrainArray.length - 1)];
+        review.dateWritten = `'${moment(dateUnformatted).format('LL')}'`;
+        review.username = `'${faker.internet.userName()}'`;
+        review.location = `'${faker.address.county()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}'`;
+        review.avgRunDistance = `'${distanceArray[randomNum(distanceArray.length - 1)]}'`;
+        review.terrain = `'${terrainArray[randomNum(terrainArray.length - 1)]}'`;
         review.flagged = 0;
         review.upvotes = randomNum(10);
         review.downvotes = randomNum(2);
         review.verified = Math.random() >= 0.8;
         if (Math.random() >= 0.9) {
-            review.image = reviewImageArray[randomNum(reviewImageArray.length - 1)];
+            review.image = `'${reviewImageArray[randomNum(reviewImageArray.length - 1)]}'`;
         } else {
-            review.image = ''
+            review.image = 'null'
         }
         review.productId = randomRange(100, batch)
         reviews.push(review)
