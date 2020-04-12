@@ -13,7 +13,7 @@ function* generateProducts(limit, batch) {
     let products = []
     for (let i = 0; i < batch; i++) {
         let shoe = {};
-        shoe.productName = `Nike ${faker.commerce.productName()}`;
+        shoe.productName = `'Nike ${faker.commerce.productName()}'`;
         shoe.productId = nikeId;
         nikeId++;
         shoe.price = Math.round(Math.random() * (250 - 150) + 150);
@@ -30,7 +30,7 @@ function* generateProducts(limit, batch) {
             "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg",
             "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg"
         ]
-        shoe.productImage = productImageArray[randomNum(productImageArray.length - 1)];;
+        shoe.productImage = `'${productImageArray[randomNum(productImageArray.length - 1)]}'`;;
         products.push(shoe)
         if (products.length >= limit) {
             yield products
