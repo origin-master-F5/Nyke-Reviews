@@ -251,3 +251,22 @@ seedData(productData, 'products', productColumns, batch)
 //   }
 //   return finalString
 // }
+// let input = [{
+//   string1: `'test1'`,
+//   num1: 1,
+// },{
+//   string2: 'test2',
+//   num2: 2,
+// },{
+//   string3: 'test3',
+//   num3: 3,
+// },{
+//   string4: 'test4',
+//   num4: 4,
+// },{
+//   string5: 'test5',
+//   num5: 5,
+// },{
+//   string6: 'test6',
+//   num6: 6,
+// }]
