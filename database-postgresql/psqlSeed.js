@@ -5,7 +5,7 @@ const moment = require('moment');
 const faker = require('faker');
 const fs = require('fs')
 const filePath = '/Users/Darth Varg/Desktop/projects/nike/Nyke-Reviews/database-postgresql/'
-const batch = 1000000;
+const batch = 10000000;
 const limit = 1000;
 const productColumns = 'productName, productId, price, discountPrice, productImage'
 const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, flagged, upvotes, downvotes, verified, image, productId'
@@ -204,24 +204,30 @@ const seedData = async(data, table, col, batch) => {
     let insertCount = 0;
     for (let group of data) {
         insertCount += group.length
-        for (let i = 0; i < group.length; i++) {
-            let vals = Object.values(group[i]).toString()
-            try {
-                await pool.query(
-                    `INSERT INTO ${table}(${col})VALUES(${vals})`
-                )
-            } catch (err) {
-                console.log(vals)
-                console.error(`Insertion Error: ${err.message}`.red)
-                return
-            }
+        let vals = format(group)
+        try {
+            await pool.query(
+                `INSERT INTO ${table}(${col})VALUES${vals}`
+            )
+        } catch (err) {
+            console.log(vals)
+            console.error(`Insertion Error: ${err.message}`.red)
+            return
         }
-        // if (insertCount >= batch * 10 .5) {
+        // if (insertCount >= batch * .5) {
         //     console.log(`inserted so far: ${insertCount}`)
         // }
     }
 }
-
+const format = (arr) => {
+    let finalString = ''
+    for (let i = 0; i < arr.length; i++) {
+        let currString = Object.values(arr[i]).toString()
+        i === arr.length - 1 ? finalString = finalString.concat(`(${currString})`) :
+            finalString = finalString.concat(`(${currString}),`)
+    }
+    return finalString
+}
 const seedProductStart = process.hrtime.bigint();
 console.log('Products Seeding...'.yellow)
 seedData(productData, 'products', productColumns, batch)
@@ -251,22 +257,3 @@ seedData(productData, 'products', productColumns, batch)
 //   }
 //   return finalString
 // }
-// let input = [{
-//   string1: `'test1'`,
-//   num1: 1,
-// },{
-//   string2: 'test2',
-//   num2: 2,
-// },{
-//   string3: 'test3',
-//   num3: 3,
-// },{
-//   string4: 'test4',
-//   num4: 4,
-// },{
-//   string5: 'test5',
-//   num5: 5,
-// },{
-//   string6: 'test6',
-//   num6: 6,
-// }]
