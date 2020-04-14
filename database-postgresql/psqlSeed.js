@@ -1,8 +1,14 @@
-// const pool = require('./index')
-// const { generateProducts, generateReviews } = require('./dataGenerator')
+const pool = require('./index')
+const { generateProducts, generateReviews } = require('./dataGenerator')
+const colors = require('colors');
+const moment = require('moment');
 const faker = require('faker');
 const fs = require('fs')
-const batch = 10000;
+const filePath = '/Users/Darth Varg/Desktop/projects/nike/Nyke-Reviews/database-postgresql/'
+const batch = 10000000;
+const limit = 1000;
+const productColumns = 'productName, productId, price, discountPrice, productImage'
+const reviewColumns = 'header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, flagged, upvotes, downvotes, verified, image, productId'
 
 
 
@@ -25,12 +31,12 @@ const getBenchmark = (start, end, operation, batchNum) => {
 
 
 
-const seedProducts = async() => {
+const generateDataWriteAndSeed = () => {
 
     //////////////////////////////////
     /// write products to csv file ///
     //////////////////////////////////
-    const productGenerateWriteAndDrain = (stream, batch, encoding, callback) => {
+    const productGenerateWriteAndSeed = (stream, batch, encoding, seed) => {
         let i = batch
         let newLine;
         let nikeId = 100;
@@ -38,13 +44,13 @@ const seedProducts = async() => {
             let ok = true
             do {
                 i--;
-                let shoe = {};
-                shoe.productName = 'Nike Air Zoom Pegasus FlyEase FlyKnit';
+                const shoe = {};
+                shoe.productName = `Nike ${faker.commerce.productName()}`;
                 shoe.productId = nikeId;
                 nikeId++;
                 shoe.price = Math.round(Math.random() * (250 - 150) + 150);
                 shoe.discountPrice = Math.round(Math.random() * (149 - 100) + 100);
-                let productImageArray = [
+                const productImageArray = [
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg",
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg",
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/12178bf0-1f2a-4033-8c41-1672081669f2/react-hyperset-womens-volleyball-shoe-Hp4LWJ.jpg",
@@ -56,10 +62,10 @@ const seedProducts = async() => {
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg",
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg"
                 ]
-                shoe.productImage = productImageArray[randomNum(productImageArray.length)];;
+                shoe.productImage = productImageArray[randomNum(productImageArray.length - 1)];;
                 newLine = Object.values(shoe);
                 if (i === 0) {
-                    stream.write((newLine.join(',') + '\n'), encoding, callback)
+                    stream.write((newLine.join(',') + '\n'), encoding, seed)
                 } else {
                     ok = stream.write((newLine.join(',') + '\n'), encoding)
                 }
@@ -77,29 +83,38 @@ const seedProducts = async() => {
     //////// END BENCHMARKING \\\\\\\\
 
 
-    let writeProductStream = fs.createWriteStream('database-postgresql/productData.csv');
-    productGenerateWriteAndDrain(writeProductStream, batch, 'utf-8', () => {
+    const writeProductStream = fs.createWriteStream('database-postgresql/productData.csv');
+    productGenerateWriteAndSeed(writeProductStream, batch, 'utf-8', async() => {
         writeProductStream.end()
             ////////// BENCHMARKING \\\\\\\\\\
         const generateProductEnd = process.hrtime.bigint();
-        console.log(getBenchmark(generateProductStart, generateProductEnd, 'Product Data Generation / Writing', batch));
+        console.log(getBenchmark(generateProductStart, generateProductEnd, 'Product Data Gen/Writing', batch));
         //////// END BENCHMARKING \\\\\\\\
+
+        const seedProductStart = process.hrtime.bigint();
+
+        console.log('Products Seeding...'.yellow);
+        await pool.query(`COPY products(${productColumns}) FROM '${filePath}productData.csv' DELIMITER ',';`);
+        console.log('Seeded Products!'.green);
+
+        const seedProductEnd = process.hrtime.bigint();
+        console.log(getBenchmark(seedProductStart, seedProductEnd, 'Product Seeding', batch));
     })
 
     /////////////////////////////////
     /// write reviews to csv file ///
     /////////////////////////////////
 
-    const reviewGenerateWriteAndDrain = (stream, batch, maxReviews, encoding, callback) => {
+    const reviewGenerateWriteAndSeed = (stream, batch, maxReviews, encoding, seed) => {
         let i = batch * maxReviews
         let newLine;
         const write = () => {
             let ok = true
             do {
                 i--;
-                let distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
-                let terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
-                let reviewImageArray = [
+                const distanceArray = ['3 miles or fewer', '3 - 10 miles', 'More than 10 miles'];
+                const terrainArray = ['Treadmill / Indoors', 'Road', 'Track'];
+                const reviewImageArray = [
                     'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/B61E1B739A161975A92AB28D7D2B08A9.app1_1579613533843_PZ320.jpeg',
                     'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/315E0813E58EBBE72DF341004E24D952.app1_1583775393818_PZ320.jpeg',
                     'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/23C5CCC0349927EA9C4FE8077A77D7F0.app1_1574197116929_PZ320.jpeg',
@@ -108,36 +123,33 @@ const seedProducts = async() => {
                     'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/D9E4399A1F889304DC17A04FBCFD05DB.app1_1552241016796_PZ320.jpeg',
                     'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/422D4488C25EA6FE6A2589A54361D842.app1_1524634291409-1_PZ320.jpeg'
                 ];
-                let months = [
-                    'January', 'February', 'March', 'April',
-                    'May', 'June', 'July', 'August',
-                    'September', 'October', 'November', 'December'
-                ]
-                let review = {};
-                review.header = faker.lorem.sentence();
+                const review = {};
+                review.header = `${faker.hacker.adjective()} ${faker.hacker.noun()} ${faker.hacker.ingverb()}${ok ? '.' : '!'}`;
                 review.comment = faker.lorem.paragraph();
                 review.star = randomRange(5, 1);
                 review.size = randomNum(2);
                 review.comfort = randomNum(2);
                 review.durability = randomNum(2);
-                // let dateUnformatted = faker.date.past(1, '2020-04-01');
-                review.dateWritten = `${months[randomRange(1,12)]} ${randomRange(1,28)}, ${randomRange(2018, 2019)}`;
+                const dateUnformatted = faker.date.past(1, '2020-04-01');
+                review.dateWritten = moment(dateUnformatted).format('LL');
                 review.username = faker.internet.userName();
                 review.location = `${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.countryCode()}`;
-                review.avgRunDistance = distanceArray[randomNum(distanceArray.length)];
-                review.terrain = terrainArray[randomNum(terrainArray.length)];
+                review.avgRunDistance = distanceArray[randomNum(distanceArray.length - 1)];
+                review.terrain = terrainArray[randomNum(terrainArray.length - 1)];
                 review.upvotes = randomNum(10);
                 review.downvotes = randomNum(2);
                 review.verified = Math.random() >= 0.8;
-                if (Math.random() >= 0.9) {
-                    review.image = reviewImageArray[randomNum(reviewImageArray.length)];
-                }
                 review.productId = randomRange(100, batch)
+                if (Math.random() >= 0.9) {
+                    review.image = reviewImageArray[randomNum(reviewImageArray.length - 1)];
+                } else {
+                    review.image = ''
+                }
                 newLine = Object.values(review);
                 if (i === 0) {
-                    stream.write((newLine.join(',') + '\n'), encoding, callback)
+                    stream.write((newLine.join('+') + '\n'), encoding, seed)
                 } else {
-                    ok = stream.write((newLine.join(',') + '\n'), encoding)
+                    ok = stream.write((newLine.join('+') + '\n'), encoding)
                 }
             } while (i > 0 && ok);
             if (i > 0) {
@@ -146,29 +158,102 @@ const seedProducts = async() => {
         }
         write()
     }
-    let writeReviewStream = fs.createWriteStream('database-postgresql/reviewData.csv');
+    const writeReviewStream = fs.createWriteStream('database-postgresql/reviewData.csv');
     ////////// BENCHMARKING \\\\\\\\\\
     const generateReviewStart = process.hrtime.bigint();
     //////// END BENCHMARKING \\\\\\\\
 
-    reviewGenerateWriteAndDrain(writeReviewStream, batch, 15, 'utf-8', () => {
+    reviewGenerateWriteAndSeed(writeReviewStream, batch, 15, 'utf-8', async() => {
         writeReviewStream.end()
 
         ////////// BENCHMARKING \\\\\\\\\\
         const generateReviewEnd = process.hrtime.bigint();
-        console.log(getBenchmark(generateReviewStart, generateReviewEnd, 'Review Data Generation / Writing', batch));
+        console.log(getBenchmark(generateReviewStart, generateReviewEnd, 'Review Data Gen/Writing', batch));
         const generateEnd = process.hrtime.bigint();
-        console.log(getBenchmark(generateStart, generateEnd, 'Total Data Generation / Writing', batch));
+        console.log(getBenchmark(generateStart, generateEnd, 'Total Data Gen/Writing', batch));
         //////// END BENCHMARKING \\\\\\\\
+
+        const seedReviewStart = process.hrtime.bigint();
+
+
+        console.log('Reviews Seeding...'.yellow);
+        await pool.query(`COPY reviews(${reviewColumns}) FROM '${filePath}reviewData.csv' DELIMITER '+';`);
+        console.log('Seeded Reviews!'.green);
+
+        const seedReviewEnd = process.hrtime.bigint();
+        console.log(getBenchmark(seedReviewStart, seedReviewEnd, 'Review Seeding', batch));
+        pool.end()
+
     })
-
-
-    // await pool.query("INSERT INTO products (productName, productId, price, discountPrice, productImage) VALUES ($1)", [...Object.keys(ex)], (err, result) => {
-    //     err ? console.error(err) : console.log('success!', result)
-    // })
-
-
 
 }
 
-seedProducts()
+
+
+
+
+// generateDataWriteAndSeed()
+
+
+
+const productData = generateProducts(limit, batch)
+const reviewData = generateReviews(limit, batch, 10)
+
+
+const seedData = async(data, table, col, batch) => {
+    let insertCount = 0;
+    for (let group of data) {
+        insertCount += group.length
+        let vals = format(group)
+        try {
+            await pool.query(
+                `INSERT INTO ${table}(${col})VALUES${vals}`
+            )
+        } catch (err) {
+            console.log(vals)
+            console.error(`Insertion Error: ${err.message}`.red)
+            return
+        }
+        // if (insertCount >= batch * .5) {
+        //     console.log(`inserted so far: ${insertCount}`)
+        // }
+    }
+}
+const format = (arr) => {
+    let finalString = ''
+    for (let i = 0; i < arr.length; i++) {
+        let currString = Object.values(arr[i]).toString()
+        i === arr.length - 1 ? finalString = finalString.concat(`(${currString})`) :
+            finalString = finalString.concat(`(${currString}),`)
+    }
+    return finalString
+}
+const seedProductStart = process.hrtime.bigint();
+console.log('Products Seeding...'.yellow)
+seedData(productData, 'products', productColumns, batch)
+    .then(() => {
+        console.log('Products Seeded!'.green)
+        const seedProductEnd = process.hrtime.bigint();
+        console.log(getBenchmark(seedProductStart, seedProductEnd, 'Product Seed', batch));
+
+        const seedReviewStart = process.hrtime.bigint();
+        console.log('Reviews Seeding...'.yellow)
+        seedData(reviewData, 'reviews', reviewColumns, batch)
+            .then(() => {
+                console.log('Reviews Seeded!'.green)
+                const seedReviewEnd = process.hrtime.bigint();
+                console.log(getBenchmark(seedReviewStart, seedReviewEnd, 'Review Seed', batch * 10));
+                pool.end()
+            })
+    })
+
+
+// const format = (arr) => {
+//   let finalString = ''
+//   for (let i = 0; i < arr.length; i++) {
+//     let currString = Object.values(arr[i]).toString()
+//     i === arr.length-1 ? finalString = finalString.concat(`(${currString})`) :
+//     finalString = finalString.concat(`(${currString}),`)
+//   }
+//   return finalString
+// }
