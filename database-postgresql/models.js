@@ -2,7 +2,6 @@ const pool = require('./index')
 
 module.exports = {
     getOne: ({ productId }) => {
-        console.log('LAST 10% OF DB')
         return pool.query(`SELECT * FROM reviews WHERE productid = ${productId}`)
     },
     changeVoteById: (id, upvote, downvote) => {
@@ -17,8 +16,6 @@ module.exports = {
         return pool.query(`INSERT INTO reviews(header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, image)VALUES(${header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, image})WHERE productid = ${id}`)
     },
     deleteReview: (product, review) => {
-            return pool.query(`DELETE * FROM reviews WHERE productid = ${review}`)
-        } //deletes a row
+        return pool.query(`DELETE * FROM reviews WHERE productid = ${review}`)
+    }
 }
-
-// header, comment, star, size, comfort, durability, dateWritten, username, location, avgRunDistance, terrain, flagged, upvotes, downvotes, verified, image, productId
