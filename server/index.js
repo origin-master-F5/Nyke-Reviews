@@ -3,7 +3,7 @@ const Router = require('./router');
 const colors = require('colors');
 const path = require('path');
 const morgan = require('morgan');
-const db = require('../database-mongodb/index').db;
+const { db } = require('../database-mongodb/index');
 // const pool = require('../database-postgresql/index')
 
 const app = express();
