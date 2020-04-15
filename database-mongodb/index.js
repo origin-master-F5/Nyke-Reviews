@@ -1,8 +1,12 @@
-// const mongoose = require('mongoose');
-// const productSchema = require('./schema');
-// const colors = require('colors');
+const mongoose = require('mongoose');
+const productSchema = require('./schema');
+const colors = require('colors');
 
-const mongo = require('mongodb');
+// const mongo = require('mongodb');
+
+// const url = 'mongodb://localhost/NykeReviews'
+
+// const db = mongo.connect(url, () => console.log('Connected to MongoDB'.cyan))
 
 
 mongoose.connect('mongodb://localhost/NykeReviews', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
@@ -19,3 +23,4 @@ module.exports = {
     Product: Product,
     db: db
 };
+module.exports = db
