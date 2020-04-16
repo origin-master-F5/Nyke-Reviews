@@ -1,5 +1,6 @@
+const relic = require('newrelic')
 const express = require('express');
-const Router = require('./router');
+const router = require('./router.js');
 const colors = require('colors');
 const path = require('path');
 const morgan = require('morgan');
@@ -14,6 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../client-react/dist')));
 
-app.use('/api/products/reviews', Router);
+app.use('/api/products/reviews', router);
 
 app.listen(port, () => console.log(`SERVER ON @ ${port}!`.cyan));
