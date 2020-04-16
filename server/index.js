@@ -1,5 +1,5 @@
 const express = require('express');
-const Router = require('./router');
+const Router = require('./router.js');
 const colors = require('colors');
 const path = require('path');
 const morgan = require('morgan');

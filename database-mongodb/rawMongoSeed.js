@@ -7,6 +7,11 @@ const totalStart = process.hrtime.bigint();
 
 async function seed(set, batch, time) {
     let insertCount = 0
+        // await db.createCollection('products', {
+        //   validator: {
+        //     reviews:
+        //   }
+        // })
     let data = generateData(set, batch)
     for (let products of data) {
         insertCount += products.length;
