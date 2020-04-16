@@ -4,8 +4,9 @@
 ## NPM ##
 npm
 npm-debug.log
-node_modules/
 database-postgresql/index.js
+newrelic.js
+node_modules/
 
 pids
 *.pid
