@@ -62,7 +62,7 @@ const generateDataWriteAndSeed = () => {
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg",
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/b6b37945-49c4-4f82-95e8-561147a8a6ac/react-element-55-se-womens-shoe-L5WpdL.jpg"
                 ]
-                shoe.productImage = productImageArray[randomNum(productImageArray.length - 1)];;
+                shoe.productImage = productImageArray[randomNum(productImageArray.length - 1)];
                 newLine = Object.values(shoe);
                 if (i === 0) {
                     stream.write((newLine.join(',') + '\n'), encoding, seed)
