@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var reviewsSchema = new mongoose.Schema({
+    _id: { type: String },
     header: { type: String, default: '' },
     comment: { type: String, default: '' },
     star: { type: Number, default: 3 },

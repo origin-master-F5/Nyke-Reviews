@@ -7,9 +7,10 @@ const colors = require('colors');
 // const url = 'mongodb://localhost/NykeReviews'
 
 // const db = mongo.connect(url, () => console.log('Connected to MongoDB'.cyan))
+const localhost = '127.0.0.1'
 const ec2Mongo = '54.183.153.156'
 
-mongoose.connect(`mongodb://${ec2Mongo}/NykeReviews`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(`mongodb://${localhost}/NykeReviews`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
