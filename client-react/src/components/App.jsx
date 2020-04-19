@@ -67,6 +67,7 @@ class App extends React.Component {
             closingReviewHandler={this.closingReviewHandler}
             getOne={this.getOne}
             updateReviews={this.getOne}
+            reviewCount={this.state.currentProduct.reviews.length}
           />
         </div>
       );

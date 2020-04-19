@@ -85,6 +85,7 @@ export default class ModalWrite extends React.Component {
     axios.post('/api/products/reviews', {
       parentId: this.props.currentProduct._id,
       aReview: {
+        _id: this.props.reviewCount,
         header: this.state.header,
         comment: this.state.comment,
         star: this.state.starsSubmitted,
@@ -125,6 +126,7 @@ export default class ModalWrite extends React.Component {
   }
 
   render() {
+    console.log('review count->', this.props.reviewCount)
     if (this.state.submitted) {
       return (
         <div className={this.props.obscure ? "modal-view-obscure-jr" : ""}>

@@ -25,7 +25,6 @@ const getBenchmark = (start, end, operation, batchNum) => {
 function* generateData(chunks, upperLimit) {
     const total = chunks * upperLimit;
     let nikeId = 100;
-    let reviewId = 0;
     let products = [];
     let productCount = 0;
     while (productCount < total) {
@@ -63,8 +62,7 @@ function* generateData(chunks, upperLimit) {
                 'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/D9E4399A1F889304DC17A04FBCFD05DB.app1_1552241016796_PZ320.jpeg',
                 'https://wac.edgecastcdn.net/001A39/prod/media/78GDJmj4zEDYwwHsite/422D4488C25EA6FE6A2589A54361D842.app1_1524634291409-1_PZ320.jpeg'
             ]
-            review._id = reviewId.toString();
-            reviewId++
+            review._id = reviewCount.toString();
             review.header = faker.company.bs();
             review.comment = faker.lorem.paragraph();
             review.star = randomRange(5, 1);

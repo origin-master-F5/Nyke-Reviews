@@ -121,6 +121,7 @@ export default class ModalView extends React.Component {
   }
 
   render() {
+    console.log('reviews being rendered', this.state.reviewsRendering)
     return (
       <div className={this.props.closingReview ? "modal-view-jr" : "modal-view-animated-jr"} >
 

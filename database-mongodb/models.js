@@ -21,7 +21,7 @@ const models = {
         });
     },
 
-    createReview: (id, review) => {
+    createReview: (id, review) => { //done
         return Product.findOne(id)
             .then((product) => {
                 product.reviews.push(review);
@@ -39,3 +39,10 @@ const models = {
 };
 
 module.exports = models;
+
+
+//for pushing a new review to reviews array
+// db.students.update(
+//   { _id: 1 },
+//   { $push: { scores: 89 } }
+// )
