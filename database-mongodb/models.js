@@ -41,8 +41,13 @@ const models = {
 module.exports = models;
 
 
+//product get request
+// db.products.find(id)
+
+
+
 //for pushing a new review to reviews array
-// db.students.update(
+// db.products.update(
 //   { _id: 1 },
 //   { $push: { scores: 89 } }
 // )
