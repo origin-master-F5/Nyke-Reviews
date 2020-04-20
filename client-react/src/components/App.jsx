@@ -33,7 +33,7 @@ class App extends React.Component {
         console.log(response);
         this.setState({
           loading: false,
-          currentProduct: response.data[0]
+          currentProduct: response.data
         });
       })
       .catch((error) => {

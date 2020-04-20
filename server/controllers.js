@@ -4,7 +4,7 @@ const models = require('../database-mongodb/models'); // mongo
 
 const controllers = {
     getOne: (req, res) => {
-        let productId = req.params.id;
+        let productId = Number(req.params.id);
         models.getOne({ productId })
             .then((data) => res.status(200).send(data))
             .catch((err) => res.status(500).send(err));

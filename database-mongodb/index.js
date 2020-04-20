@@ -14,7 +14,7 @@ const url = `mongodb://${localhost}`
 module.exports = async(method, queryObj) => {
 
     let options = {
-        useNewUrlParser: true,
+        // useNewUrlParser: true,
         useUnifiedTopology: true
     };
     try {
@@ -24,8 +24,8 @@ module.exports = async(method, queryObj) => {
         if (method === 'seed') {
             return await db.insertMany(queryObj)
         } else if (method === 'get') {
-            // console.log('searching', queryObj)
-            return await db.findOne({ _id: ObjectId(queryObj) })
+            console.log('searching', queryObj)
+            return await db.findOne(queryObj)
         } else if (method === 'post') {
             return await db.create({ query })
         } else if (method === 'delete') {

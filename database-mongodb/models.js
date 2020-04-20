@@ -1,13 +1,14 @@
 // const { Product } = require('./index');
 // const mongoose = require('mongoose');
 
-// const db = require('../database-mongodb/index');
+const db = require('../database-mongodb/index');
 
 // const {ObjectId} = require('mongodb');
 
 
 const models = {
-    getOne: (id) => Product.find(id), //done
+    // getOne: (id) => Product.find(id), //done
+    getOne: (id) => db('get', id), //done
 
     changeVoteById: (ids, newUpvote, newDownvote) => { //done
         return Product.findOneAndUpdate(ids, {
