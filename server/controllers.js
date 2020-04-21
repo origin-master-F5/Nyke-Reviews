@@ -4,14 +4,13 @@ const models = require('../database-mongodb/models'); // mongo
 
 const controllers = {
     getOne: (req, res) => {
-        let productId = req.params.id;
+        let productId = Number(req.params.id);
         models.getOne({ productId })
             .then((data) => res.status(200).send(data))
             .catch((err) => res.status(500).send(err));
     },
 
     putVote: (req, res) => {
-        // console.log('data ->', req.body)
         models.changeVoteById({ '_id': req.body.parentId, 'reviews._id': req.body.childId }, req.body.upvoteValue, req.body.downvoteValue)
             .then((data) => res.status(200).send('Updated votes'))
             .catch((err) => res.status(500).send(err));

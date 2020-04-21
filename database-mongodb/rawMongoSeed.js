@@ -7,11 +7,6 @@ const totalStart = process.hrtime.bigint();
 
 async function seed(set, batch, time) {
     let insertCount = 0
-        // await db.createCollection('products', {
-        //   validator: {
-        //     reviews:
-        //   }
-        // })
     let data = generateData(set, batch)
     for (let products of data) {
         insertCount += products.length;
@@ -21,5 +16,5 @@ async function seed(set, batch, time) {
     totalEnd = process.hrtime.bigint();
     console.log(getBenchmark(time, totalEnd, 'Total', set * batch))
 }
-seed(1000, 1000, totalStart)
+seed(1000, 10000, totalStart)
     .then(() => db.close())
