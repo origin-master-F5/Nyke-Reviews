@@ -1,17 +1,12 @@
 // const { Product } = require('./index');
 // const mongoose = require('mongoose');
-
-const db = require('../database-mongodb/index');
-
-// const {ObjectId} = require('mongodb');
-
+const { product } = require('./index');
 
 const models = {
-    // getOne: (id) => Product.find(id), //done
-    getOne: (id) => db('get', id), //done
+    getOne: (id) => product.findOne(id),
 
-    changeVoteById: (ids, newUpvote, newDownvote) => { //done
-        return Product.findOneAndUpdate(ids, {
+    changeVoteById: (ids, newUpvote, newDownvote) => {
+        return product.findOneAndUpdate(ids, {
             '$set': {
                 'reviews.$.upvotes': newUpvote,
                 'reviews.$.downvotes': newDownvote
@@ -20,27 +15,23 @@ const models = {
     },
 
     incrementFlag: (ids, flagValue) => {
-        return Product.findOneAndUpdate(ids, { //done
+        return product.findOneAndUpdate(ids, {
             '$set': {
                 'reviews.$.flagged': flagValue
             }
         });
     },
 
-    createReview: (id, review) => { //done
-        return Product.findOne(id)
-            .then((product) => {
-                product.reviews.push(review);
-                product.save();
-            });
+    createReview: (id, review) => {
+        return product.update(id, {
+            '$push': { reviews: review }
+        })
     },
 
-    deleteReview: (parent, review) => { //done
-        return Product.findOne(parent)
-            .then((product) => {
-                product.reviews.pull(review);
-                product.save();
-            });
+    deleteReview: (parent, review) => {
+        return product.update(id, {
+            '$pull': { reviews: review }
+        })
     }
 };
 

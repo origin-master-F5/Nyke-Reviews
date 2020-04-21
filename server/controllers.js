@@ -11,7 +11,6 @@ const controllers = {
     },
 
     putVote: (req, res) => {
-        // console.log('data ->', req.body)
         models.changeVoteById({ '_id': req.body.parentId, 'reviews._id': req.body.childId }, req.body.upvoteValue, req.body.downvoteValue)
             .then((data) => res.status(200).send('Updated votes'))
             .catch((err) => res.status(500).send(err));
