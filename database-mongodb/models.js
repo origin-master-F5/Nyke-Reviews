@@ -23,8 +23,8 @@ const models = {
     },
 
     createReview: (id, review) => {
-        return product.update(id, {
-            '$push': { reviews: review }
+        return product.findOneAndUpdate(id, {
+            '$push': { "reviews": review }
         })
     },
 

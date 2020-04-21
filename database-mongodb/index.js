@@ -16,6 +16,10 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
     console.log('DATABASE ON'.cyan);
+    db.createCollection('products')
+    db.collection('products').createIndex({ 'productId': 1 })
+        .then(() => console.log('Mongo Indexed!'))
+        .catch(() => console.log('Mongo already Indexed'))
 });
 
 // var Product = mongoose.model('Product', productSchema);
